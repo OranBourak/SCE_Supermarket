@@ -1,4 +1,8 @@
-#pragma once
+#ifndef USER
+#define USER
+
+
+
 
 #define MAX_SIZE 50
 #define PRODUCTS_FILENAME "users_database.dat"
@@ -15,7 +19,7 @@
 #include <string.h>
 
 
-//#include "Cart.h"
+#include "Cart.h"
 
 enum Bool { FALSE, TRUE };
 enum Type { MANAGER, CUSTOMER, CLUB };
@@ -35,3 +39,4 @@ enum Bool isNameTaken(char*);
 enum Bool isPasswordLegal(char*);
 
 
+#endif // !USER

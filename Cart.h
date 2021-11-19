@@ -1,5 +1,8 @@
+#ifndef CART
+#define CART
+
+
 #define _CRT_SECURE_NO_WARNINGS
-#pragma once
 #define MAX_SIZE 50
 #define MAX_Products_In_Cart 10
 
@@ -48,3 +51,4 @@ enum Bool check_product_exsistenc_in_cart(int id);
 
 
 
+#endif // !CART

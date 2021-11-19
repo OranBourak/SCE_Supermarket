@@ -95,14 +95,14 @@ void signUp() {
 	
 	new_user.userType = managerSignUp();
 
-	//if (new_user.userType == CUSTOMER) {//creating a cart for an new customer.
-	//	Cart newCart;
-	//	FILE* cartPtr = fopen(CARTS_FILENAME, "a");
-	//	strcpy(newCart.userName,new_user.userName);
-	//	newCart.productCounter = 0;
-	//	fwrite(&newCart, sizeof(Cart), 1, cartPtr);
-	//	fclose(cartPtr);
-	//}
+	if (new_user.userType == CUSTOMER) {//creating a cart for an new customer.
+		Cart newCart;
+		FILE* cartPtr = fopen(CARTS_FILENAME, "a");
+		strcpy(newCart.userName,new_user.userName);
+		newCart.productCounter = 0;
+		fwrite(&newCart, sizeof(Cart), 1, cartPtr);
+		fclose(cartPtr);
+	}
 
 	fwrite(&new_user, sizeof(User), 1, fpointer);
 

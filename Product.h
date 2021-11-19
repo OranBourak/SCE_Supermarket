@@ -1,8 +1,11 @@
-#pragma once
+#ifndef PRODUCT
+#define PRODUCT
+
+
 
 #define MAX_SIZE 50
 
-#include "User.h"//contains Bool
+
 
 /*Product Categories*/
 enum category {FRUITS,VEGETABLES,DRINKS,MEAT,FARM};
@@ -14,6 +17,8 @@ typedef struct Product{
 	unsigned int quantity;
 	enum category product_category;
 }Product;
+
+#include "User.h"//contains Bool
 
 
 //PRODUCT related functions
@@ -49,3 +54,4 @@ void managerMenu();
 void addProduct();
 void removeProduct();
 void changeProduct();
+#endif // !PRODUCT
