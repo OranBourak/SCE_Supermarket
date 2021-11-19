@@ -10,7 +10,7 @@ void showProducts(){
 	fpointer = fopen("products_data.dat", "r");
 	if (!fpointer) {
 		fpointer = fopen("products_data.dat", "w");
-		//fclose(fpointer);
+		fclose(fpointer);
 		fpointer = fopen("products_data.dat", "r");
 		if (!fpointer) {
 			puts("Cannot open the file");
@@ -18,8 +18,10 @@ void showProducts(){
 		}
 	}
 	while (!feof(fpointer)) {
+		printf("%d\n", ftell(fpointer));
 		fread(&tempProduct, sizeof(Product), 1, fpointer);
-		printProduct(tempProduct)
+		printProduct(&tempProduct);
+		printf("%d\n", ftell(fpointer));
 	}
 	fclose(fpointer);
 }
@@ -42,7 +44,7 @@ void managerMenu(){
 
 void addProduct(){
 	FILE* fpointer;
-	fpointer = fopen("users_data.dat", "a");
+	fpointer = fopen("products_data.dat", "a");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -53,18 +55,22 @@ void addProduct(){
 	
 	puts("Enter product's serial number:");
 	scanf("%d", &(new_product.serialNumber));
+	getchar();
 	
 	puts("Enter product's name:");
 	gets(new_product.productName);
-	
+
 	puts("Enter product's price:");
 	scanf("%lf", &(new_product.productPrice));//check formating
+	getchar();
 
 	puts("Enter product's quantity:");
 	scanf("%u", &(new_product.quantity));
+	getchar();
 
 	puts("Enter product's category:");
 	gets(new_product.category);
+	
 	
 	/*check format
 	do {//password check

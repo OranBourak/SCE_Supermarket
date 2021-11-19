@@ -18,13 +18,19 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="login_and_register.c">
+    <ClCompile Include="user.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+	  <ClCompile Include="product.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataStructures.h">
+    <ClInclude Include="User.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+	  <ClInclude Include="Product.h">
+		  <Filter>Source Files</Filter>
+	  </ClInclude>	  
   </ItemGroup>
 </Project>
