@@ -1,10 +1,9 @@
 #pragma once
+
 #define MAX_SIZE 50
 
+#include "User.h"//contains Bool
 
-
-
-enum Bool { FALSE, TRUE };
 /*Product Categories*/
 enum category
 {

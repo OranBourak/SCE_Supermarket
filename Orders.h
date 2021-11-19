@@ -1,9 +1,11 @@
 #pragma once
+
 #define MAX_SIZE 50
 #define MAX_Products_In_Cart 10
+
+#include "User.h"//contains Bool
 #include "Product.h"
 
-enum Bool { FALSE, TRUE };
 
 enum Status
 {

@@ -1,4 +1,5 @@
 #pragma once
+
 #define MAX_SIZE 50
 
 enum Bool { FALSE, TRUE };

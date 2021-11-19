@@ -33,13 +33,33 @@ void showProducts(){
 void printProduct(Product* p){
 	char pName[MAX_SIZE], pCategory[MAX_SIZE];
 	strcpy(pName, p->productName);
-	strcpy(pCategory, p->category);
 
 	printf("Serial: %d\t", p->serialNumber);
 	printf("Name: %s\t", pName);
 	printf("Price: %.2lf\t", p->productPrice);//check formating
 	printf("Quantity: %d\t", p->quantity);
 	printf("Category: %s\n", pCategory);
+	switch (p->product_category)
+	{
+	case 0:
+		puts("Category: Fruits");
+		break;
+	case 1:
+		puts("Category: Vegetables");
+		break;
+	case 2:
+		puts("Category: Drinks");
+		break;
+	case 3:
+		puts("Category: Meat");
+		break;
+	case 4:
+		puts("Category: Farm");
+		break;
+	default:
+		puts("ERROR");
+		break;
+	}
 }
 
 void customerMenu()
@@ -77,7 +97,8 @@ void addProduct(){
 	getchar();
 
 	puts("Enter product's category:");
-	gets(new_product.category);
+	puts("0.FRUITS 1.VEGETABLES 2.DRINKS 3.MEAT 4.FARM");
+	scanf("%d", &(new_product.product_category));
 	
 	
 	/*check format
