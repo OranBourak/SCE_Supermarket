@@ -5,6 +5,12 @@
 #include "Product.h"
 
 
+#define PRODUCTS_FILENAME "users_database.dat"
+#define USERS_FILENAME "products_database.dat"
+#define ORDERS_FILENAME "orders_database.dat"
+#define CARTS_FILENAME "carts_database.dat"
+
+
 /*Printing all products that contains in the catalog*/
 void showProducts(){
 	Product tempProduct;
@@ -60,6 +66,38 @@ void printProduct(Product* p){
 		puts("ERROR");
 		break;
 	}
+}
+
+Product getProductBySerial(int serialNumber)
+{
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENIN FILE\n");
+		exit(1);
+	}
+	Product temp;
+	while (fread(&temp, sizeof(Product), 1, fpointer))
+		if (temp.serialNumber == serialNumber) {
+			fclose(fpointer);
+			return temp;
+		}
+}
+
+enum Bool isProductExsist(int serialNumber)
+{
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENIN FILE\n");
+		exit(1);
+	}
+	Product temp;
+	while (fread(&temp, sizeof(Product), 1, fpointer))
+		if (temp.serialNumber == serialNumber) {
+			fclose(fpointer);
+			return TRUE;
+		}
+	fclose(fpointer);
+	return FALSE;
 }
 
 void customerMenu()

@@ -21,16 +21,28 @@
     <ClCompile Include="user.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-	  <ClCompile Include="product.c">
+    <ClCompile Include="product.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cart.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Orders.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-	  <ClInclude Include="Product.h">
-		  <Filter>Source Files</Filter>
-	  </ClInclude>	  
+    <ClInclude Include="Product.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Orders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

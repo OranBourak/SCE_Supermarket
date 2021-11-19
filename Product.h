@@ -24,6 +24,20 @@ void showProducts();
 /*Printing pruduct details*/
 void printProduct(Product*);
 
+/// <summary>
+/// Receives serial number and return a Product struct with the product info:
+/// quantity available in stock, product price and category
+/// </summary>
+/// <param name="serialNumber"></param>
+/// <returns></returns>
+Product getProductBySerial(int serialNumber);
+
+/// <summary>
+/// Receives serial number and check if there is a product in the catalog with this serial number
+///if the product exsist return True, otherwise return false.
+/// </summary>
+enum Bool isProductExsist(int serialNumber);
+
 
 //customer only
 void customerMenu();
