@@ -1,11 +1,8 @@
+#include "User.h"
+
 /* Maybe change variable names to be more clear? */
 
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
-#include "User.h"
-#define MANAGER_CODE "qwerty"
-#define PASSWORD_MIN_LENGTH 6
+
 
 
 //start menu, only login or register, no option to exit at this stage(made problems)
@@ -98,6 +95,15 @@ void signUp() {
 	
 	new_user.userType = managerSignUp();
 
+	//if (new_user.userType == CUSTOMER) {//creating a cart for an new customer.
+	//	Cart newCart;
+	//	FILE* cartPtr = fopen(CARTS_FILENAME, "a");
+	//	strcpy(newCart.userName,new_user.userName);
+	//	newCart.productCounter = 0;
+	//	fwrite(&newCart, sizeof(Cart), 1, cartPtr);
+	//	fclose(cartPtr);
+	//}
+
 	fwrite(&new_user, sizeof(User), 1, fpointer);
 
 	fclose(fpointer);
@@ -133,8 +139,7 @@ enum Bool isNameTaken(char* user_name)//works
 	FILE* fpointer = fopen("users_data.dat", "r");
 	User tempUser;
 	
-	while (!feof(fpointer)) {//return 1 when reach to end of file
-		fread(&tempUser, sizeof(User), 1, fpointer);
+	while (fread(&tempUser, sizeof(User), 1, fpointer)) {
 		//printf("TEST tempUser.userName = %s, user_name = %s\n", tempUser.userName, user_name);
 		if (!strcmp(tempUser.userName, user_name)){
 			fclose(fpointer);

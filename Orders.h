@@ -14,13 +14,13 @@ enum Status
 
 struct Order
 {
-	char userName[MAX_SIZE]; //costumer website Username
+	char userName[MAX_SIZE]; //customer website Username
 	enum Status status;//Order's sataus
 	Product  cart_list[MAX_Products_In_Cart]; //add products list and quantity
-	char costumer_full_name[MAX_SIZE];
-	unsigned long int costumer_id;
-	unsigned long int costumer_credit_card;
-	char costumer_address[MAX_SIZE];
+	char customer_full_name[MAX_SIZE];
+	unsigned long int customer_id;
+	unsigned long int customer_credit_card;
+	char customer_address[MAX_SIZE];
 
 }typedef Order;
 

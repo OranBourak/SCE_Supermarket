@@ -7,8 +7,7 @@
 /*Product Categories*/
 enum category {FRUITS,VEGETABLES,DRINKS,MEAT,FARM};
 
-typedef struct
-{
+typedef struct Product{
 	int serialNumber;
 	char productName[MAX_SIZE];
 	double productPrice;

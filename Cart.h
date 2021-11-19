@@ -1,5 +1,5 @@
-#pragma once
 #define _CRT_SECURE_NO_WARNINGS
+#pragma once
 #define MAX_SIZE 50
 #define MAX_Products_In_Cart 10
 
@@ -9,14 +9,12 @@
 #define CARTS_FILENAME "carts_database.dat"
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "User.h"//contains Bool
 #include "Product.h"
 
-typedef struct Cart
-{
-	char userName[MAX_SIZE]; //costumer website Username
+
+
+typedef struct Cart {
+	char userName[MAX_SIZE]; //customer website Username
 	Product productsInCart[MAX_Products_In_Cart];//Products list
 	unsigned int productCounter;//number of products in cart
 
