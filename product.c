@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "Product.h"
 
+
+/*Printing all products that contains in the catalog*/
 void showProducts(){
 	Product tempProduct;
 	FILE* fpointer;
@@ -26,6 +28,8 @@ void showProducts(){
 	fclose(fpointer);
 }
 
+
+/*Printing pruduct details*/
 void printProduct(Product* p){
 	char pName[MAX_SIZE], pCategory[MAX_SIZE];
 	strcpy(pName, p->productName);
@@ -36,6 +40,10 @@ void printProduct(Product* p){
 	printf("Price: %.2lf\t", p->productPrice);//check formating
 	printf("Quantity: %d\t", p->quantity);
 	printf("Category: %s\n", pCategory);
+}
+
+void customerMenu()
+{
 }
 
 void managerMenu(){
