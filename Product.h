@@ -5,10 +5,7 @@
 #include "User.h"//contains Bool
 
 /*Product Categories*/
-enum category
-{
-	FRUITS,VEGETABLES,DRINKS,MEAT,FARM
-};
+enum category {FRUITS,VEGETABLES,DRINKS,MEAT,FARM};
 
 typedef struct
 {

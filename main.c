@@ -5,6 +5,11 @@
 #include "User.h"
 #include "Product.h"
 
+#define PRODUCTS_FILENAME "users_database.dat"
+#define USERS_FILENAME "products_database.dat"
+#define ORDERS_FILENAME "orders_database.dat"
+#define CARTS_FILENAME "carts_database.dat"
+
 
 /*DATABASE NAMES:
 1)users_database.dat
