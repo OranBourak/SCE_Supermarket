@@ -62,5 +62,6 @@ struct Order
 	unsigned long int customer_id;
 	unsigned long int customer_credit_card;
 	char customer_address[MAX_SIZE];
+	unsigned int productInOrder;
 
 }typedef Order;
