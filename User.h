@@ -1,5 +1,6 @@
-#ifndef USER
-#define USER
+#pragma once
+//#ifndef USER
+//#define USER
 
 
 
@@ -39,4 +40,4 @@ enum Bool isNameTaken(char*);
 enum Bool isPasswordLegal(char*);
 
 
-#endif // !USER
+//#endif // !USER

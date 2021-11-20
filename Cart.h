@@ -1,5 +1,6 @@
-#ifndef CART
-#define CART
+#pragma once
+//#ifndef CART
+//#define CART
 
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -51,4 +52,4 @@ enum Bool check_product_exsistenc_in_cart(int id);
 
 
 
-#endif // !CART
+//#endif // !CART

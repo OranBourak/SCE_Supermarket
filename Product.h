@@ -1,10 +1,9 @@
-#ifndef PRODUCT
-#define PRODUCT
-
+#pragma once
+//#ifndef PRODUCT
+//#define PRODUCT
 
 
 #define MAX_SIZE 50
-
 
 
 /*Product Categories*/
@@ -19,6 +18,8 @@ typedef struct Product{
 }Product;
 
 #include "User.h"//contains Bool
+
+
 
 
 //PRODUCT related functions
@@ -54,4 +55,4 @@ void managerMenu();
 void addProduct();
 void removeProduct();
 void changeProduct();
-#endif // !PRODUCT
+//#endif // !PRODUCT
