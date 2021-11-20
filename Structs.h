@@ -1,6 +1,5 @@
 #pragma once
 
-
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_SIZE 50
 #define MAX_Products_In_Cart 10
@@ -14,23 +13,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-
-enum category { FRUITS, VEGETABLES, DRINKS, MEAT, FARM };
 enum Bool { FALSE, TRUE };
 enum Type { MANAGER, CUSTOMER, CLUB };
+enum category { FRUITS, VEGETABLES, DRINKS, MEAT, FARM };
 enum Status{APPENDING, APPROVED, CANCELD};
-
-
 
 typedef struct User {
 	char userName[MAX_SIZE];
 	char password[MAX_SIZE];
 	enum Type userType;
 }User;
-
-
-
 
 typedef struct Product {
 	int serialNumber;
@@ -40,10 +32,6 @@ typedef struct Product {
 	enum category product_category;
 }Product;
 
-
-
-
-
 typedef struct Cart {
 	char userName[MAX_SIZE]; //customer website Username
 	Product productsInCart[MAX_Products_In_Cart];//Products list
@@ -51,9 +39,7 @@ typedef struct Cart {
 
 }Cart;
 
-
-
-typedef struct Order
+struct Order
 {
 	char userName[MAX_SIZE]; //customer website Username
 	enum Status status;//Order's sataus
@@ -62,6 +48,5 @@ typedef struct Order
 	unsigned long int customer_id;
 	unsigned long int customer_credit_card;
 	char customer_address[MAX_SIZE];
-	unsigned int productInOrder;
 
-}Order;
+}typedef Order;
