@@ -1,6 +1,5 @@
 #include "Product.h"
 
-
 /*Printing all products that contains in the catalog*/
 void showProducts(){
 	Product tempProduct;
@@ -10,21 +9,18 @@ void showProducts(){
 		puts("Cannot open the file");
 		exit(1);
 		}
-	
+	puts("_________________________________________CATALOG_________________________________________");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		printProduct(&tempProduct);
 	}
 	fclose(fpointer);
+	puts("_________________________________________________________________________________________");
 }
-
-
-
 
 /*Printing pruduct details*/
 void printProduct(Product* p){
-	char pName[MAX_SIZE], pCategory[MAX_SIZE];
+	char pName[MAX_SIZE];
 	strcpy(pName, p->productName);
-
 	printf("Serial: %d\t", p->serialNumber);
 	printf("Name: %s\t", pName);
 	printf("Price: %.2lf\t", p->productPrice);//check formating
@@ -53,8 +49,7 @@ void printProduct(Product* p){
 	}
 }
 
-Product getProductBySerial(int serialNumber)
-{
+Product getProductBySerial(int serialNumber){//what if serial number dosent exist?
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
@@ -68,8 +63,7 @@ Product getProductBySerial(int serialNumber)
 		}
 }
 
-enum Bool isProductExsist(int serialNumber)
-{
+enum Bool isProductExsist(int serialNumber){
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
@@ -85,12 +79,39 @@ enum Bool isProductExsist(int serialNumber)
 	return FALSE;
 }
 
-void customerMenu()
-{
+void customerCatalogMenu(){
+	showProducts();
 }
 
-void managerMenu(){
-	addProduct();
+void managerCatalogMenu(){
+	int choice;
+	do {
+		showProducts();
+		puts("What do you want to do?");
+		puts("1. Add a product to the catalog.");
+		puts("2. Remove a product from the catalog.");
+		puts("3. Change a product in the catalog.");
+		puts("0. EXIT");
+
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 0:
+			break;
+		case 1:
+			addProduct();
+			break;
+		case 2:
+			removeProductMenu();
+			break;
+		case 3:
+			puts("PRODUCT CHANGED");
+			//changeProduct();
+		default:
+			puts("No such option");
+			break;
+		}
+	} while (choice != 0);
 }
 
 void addProduct(){
@@ -103,7 +124,7 @@ void addProduct(){
 	
 	Product new_product;
 
-	
+	//add checks to all see below
 	puts("Enter product's serial number:");
 	scanf("%d", &(new_product.serialNumber));
 	getchar();
@@ -134,4 +155,64 @@ void addProduct(){
 	fwrite(&new_product, sizeof(Product), 1, fpointer);
 
 	fclose(fpointer);
+}
+
+void removeProductMenu(){
+	int serial;
+	do {
+		puts("Enter a product's serial number to delete, 0 to EXIT");
+		scanf("%d", &serial);
+
+		if (isProductExsist(serial)){
+			removeProduct(serial);
+			puts("Product removed sucssefuly");
+		}
+		else if(serial != 0)
+			puts("A product with this serial number doesn't exist.");
+		
+	} while (serial != 0);
+
+}
+
+void removeProduct(int serial) {
+	//PART 1: getting the number of products in catalog.
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (!fpointer) {
+		fprintf(stderr, "\nERROR OPENIN FILE\n");
+		exit(1);
+	}
+	fseek(fpointer, 0, SEEK_END);
+	int tempCatalogSize = (int)(ftell(fpointer) / sizeof(Product)) - 1;
+
+	//PART 2: create a temp copy of catalog minus the product to delete.
+	Product* tempCatalog = NULL;
+	Product tempProduct;
+	tempCatalog = malloc(tempCatalogSize*sizeof(Product));
+	if (!tempCatalog){
+		fprintf(stderr, "\nERROR ALLOCATING MEMORY\n");
+		exit(1);
+	}
+	
+	fseek(fpointer, 0, SEEK_SET);
+	for (int i=0;fread(&tempProduct, sizeof(Product), 1, fpointer);i++){
+		if (tempProduct.serialNumber == serial){
+			i--;
+			continue;
+		}
+		tempCatalog[i] = tempProduct;
+	}
+	
+	//PART 3 overwriting existing file with new
+	fpointer = fopen(PRODUCTS_FILENAME, "w");
+	if (!fpointer) {
+		fprintf(stderr, "\nERROR OPENIN FILE\n");
+		exit(1);
+	}
+
+	for (int i = 0; i < tempCatalogSize; i++){
+		fwrite(&tempCatalog[i], sizeof(Product), 1, fpointer);
+	}
+
+	fclose(fpointer);
+	free(tempCatalog);
 }

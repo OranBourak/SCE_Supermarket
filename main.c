@@ -1,9 +1,7 @@
-
 #include "User.h"
 //#include "Product.h"
 
 void initFiles(); //initialize all files 
-
 
 int main() {
 	initFiles();
@@ -16,17 +14,12 @@ int main() {
 	
 	enum userType logedUserType = MANAGER;//for tests
 	
-	showProducts();
 	if (logedUserType == MANAGER)
-		managerMenu();
+		managerCatalogMenu();
 	else
-		customerMenu();
-	
-
+		customerCatalogMenu();
 	return 0;
 }
-
-
 
 void initFiles(){
 	FILE* usersFile, * productsFile, * cartsFile, * ordersFile;

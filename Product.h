@@ -1,15 +1,8 @@
 #pragma once
 #include "Structs.h"
 
-
-
-
-
-
-
-
-
 //PRODUCT related functions
+
 /*Printing all products that contains in the catalog*/
 void showProducts();
 
@@ -30,17 +23,16 @@ Product getProductBySerial(int serialNumber);
 /// </summary>
 enum Bool isProductExsist(int serialNumber);
 
-
 //customer only
-void customerMenu();
+void customerCatalogMenu();
 void showByPrice();
 void showByCategory();
 
-
 //manager only
-void managerMenu();
+void managerCatalogMenu();
 void addProduct();
-void removeProduct();
-void changeProduct();
+void removeProductMenu();
+void removeProduct(int);
+enum Bool changeProduct();
 
 

@@ -39,7 +39,6 @@ enum Bool login(User* user) {
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
-		
 	}
 	
 	puts("Please enter user name:");
@@ -101,8 +100,10 @@ void signUp() {
 	}
 
 	fwrite(&new_user, sizeof(User), 1, fpointer);
-
+	
 	fclose(fpointer);
+	
+	puts("User Registered succesfuly");
 }
 
 //assigns user type, customer or manager based on secret code
@@ -111,7 +112,7 @@ enum Type managerSignUp(){//works
 	char managerCode[MAX_SIZE];
 
 	do {
-		puts("Do you wish to sign-up as a manager? y/n:");
+		puts("Do you want to sign-up as a manager? y/n:");
 		scanf("%c", &choice);
 		getchar();//clean enter
 		if (choice == 'y') {
