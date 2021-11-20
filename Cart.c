@@ -27,7 +27,7 @@ void addProductToCart(char* userName, int productSerialNumber, unsigned int quan
 		temp.productsInCart[temp.productCounter].quantity = quantity;//update the quantity in cart
 		temp.productCounter++;
 		fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);// jump back one Cart
-		fwrite(&temp, sizeof(Product), 1, fpointer);//rewrite the cart with the new product included
+		fwrite(&temp, sizeof(Cart), 1, fpointer);//rewrite the cart with the new product included
 		fclose(fpointer);
 	}
 	else{

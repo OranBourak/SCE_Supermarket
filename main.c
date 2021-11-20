@@ -4,6 +4,7 @@
 //#include "Product.h"
 
 void initFiles(); //initialize all files 
+//system("cls")--
 
 
 int main() {
@@ -23,12 +24,13 @@ int main() {
 	//else
 	//	customerMenu();
 	//
-	signUp();
+//	signUp();
 	User temp;
 	login(&temp);
-	addProduct();
-	addProductToCart(temp.userName,1,10);
-	printCartInfo()
+	//addProduct();
+	//addProductToCart(temp.userName,1,10);
+	Cart cart = getCartByUser(temp.userName);
+	printCartInfo(&cart);
 	
 
 	return 0;
