@@ -1,38 +1,23 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define MAX_SIZE 50
-#include <stdio.h>
-#include <stdlib.h>
 #include "Product.h"
-
-
-#define PRODUCTS_FILENAME "users_database.dat"
-#define USERS_FILENAME "products_database.dat"
-#define ORDERS_FILENAME "orders_database.dat"
-#define CARTS_FILENAME "carts_database.dat"
 
 
 /*Printing all products that contains in the catalog*/
 void showProducts(){
 	Product tempProduct;
 	FILE* fpointer;
-	fpointer = fopen("products_data.dat", "r");
+	fpointer = fopen(PRODUCTS_FILENAME, "r");
 	if (!fpointer) {
-		fpointer = fopen("products_data.dat", "w");
-		fclose(fpointer);
-		fpointer = fopen("products_data.dat", "r");
-		if (!fpointer) {
-			puts("Cannot open the file");
-			exit(1);
+		puts("Cannot open the file");
+		exit(1);
 		}
-	}
-	while (!feof(fpointer)) {
-		printf("%d\n", ftell(fpointer));
-		fread(&tempProduct, sizeof(Product), 1, fpointer);
+	
+	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		printProduct(&tempProduct);
-		printf("%d\n", ftell(fpointer));
 	}
 	fclose(fpointer);
 }
+
+
 
 
 /*Printing pruduct details*/
@@ -44,7 +29,7 @@ void printProduct(Product* p){
 	printf("Name: %s\t", pName);
 	printf("Price: %.2lf\t", p->productPrice);//check formating
 	printf("Quantity: %d\t", p->quantity);
-	printf("Category: %s\n", pCategory);
+
 	switch (p->product_category)
 	{
 	case 0:
@@ -110,7 +95,7 @@ void managerMenu(){
 
 void addProduct(){
 	FILE* fpointer;
-	fpointer = fopen("products_data.dat", "a");
+	fpointer = fopen(PRODUCTS_FILENAME, "a");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);

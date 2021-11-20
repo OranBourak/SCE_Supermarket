@@ -35,15 +35,11 @@ enum Bool login(User* user) {
 	FILE* fpointer;
 	User login_data;
 	User comparing_user;
-	fpointer = fopen("users_data.dat", "r");
+	fpointer = fopen(USERS_FILENAME, "r");
 	if (!fpointer) {
-		fpointer = fopen("users_data.dat", "w");//quick solution for login problem when no file exists
-		fclose(fpointer);//not sure that needed
-		fpointer = fopen("users_data.dat", "r");
-		if (!fpointer) {
-			puts("Cannot open the file");
-			exit(1);
-		}
+		puts("Cannot open the file");
+		exit(1);
+		
 	}
 	
 	puts("Please enter user name:");
@@ -76,7 +72,7 @@ enum Bool login(User* user) {
 // adds user signing up to users databse
 void signUp() {
 	FILE* fpointer;
-	fpointer = fopen("users_data.dat", "a");
+	fpointer = fopen(USERS_FILENAME, "a");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -136,7 +132,7 @@ enum Type managerSignUp(){//works
 //check if username taken
 enum Bool isNameTaken(char* user_name)//works
 {
-	FILE* fpointer = fopen("users_data.dat", "r");
+	FILE* fpointer = fopen(USERS_FILENAME, "r");
 	User tempUser;
 	
 	while (fread(&tempUser, sizeof(User), 1, fpointer)) {

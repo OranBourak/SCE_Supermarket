@@ -1,28 +1,7 @@
 #pragma once
-//#ifndef CART
-//#define CART
-
-
-#define _CRT_SECURE_NO_WARNINGS
-#define MAX_SIZE 50
-#define MAX_Products_In_Cart 10
-
-#define PRODUCTS_FILENAME "users_database.dat"
-#define USERS_FILENAME "products_database.dat"
-#define ORDERS_FILENAME "orders_database.dat"
-#define CARTS_FILENAME "carts_database.dat"
-
-
+#include "Structs.h"
 #include "Product.h"
 
-
-
-typedef struct Cart {
-	char userName[MAX_SIZE]; //customer website Username
-	Product productsInCart[MAX_Products_In_Cart];//Products list
-	unsigned int productCounter;//number of products in cart
-
-}Cart;
 
 
 /// <summary>
@@ -52,4 +31,3 @@ enum Bool check_product_exsistenc_in_cart(int id);
 
 
 
-//#endif // !CART
