@@ -11,22 +11,22 @@ void showProducts(){
 		}
 	puts("_________________________________________CATALOG_________________________________________");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
-		printProduct(&tempProduct);
+		printProduct(tempProduct);
 	}
 	fclose(fpointer);
 	puts("_________________________________________________________________________________________");
 }
 
-/*Printing pruduct details*/
-void printProduct(Product* p){
+/*Printing product details*/
+void printProduct(Product p){
 	char pName[MAX_SIZE];
-	strcpy(pName, p->productName);
-	printf("Serial: %d\t", p->serialNumber);
+	strcpy(pName, p.productName);
+	printf("Serial: %d\t", p.serialNumber);
 	printf("Name: %s\t", pName);
-	printf("Price: %.2lf\t", p->productPrice);//check formating
-	printf("Quantity: %d\t", p->quantity);
+	printf("Price: %.2lf\t", p.productPrice);//check formating
+	printf("Quantity: %d\t", p.quantity);
 
-	switch (p->product_category)
+	switch (p.product_category)
 	{
 	case 0:
 		puts("Category: Fruits");

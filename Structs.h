@@ -33,7 +33,7 @@ typedef struct Product {
 }Product;
 
 typedef struct Cart {
-	char userName[MAX_SIZE]; //customer website Username
+	char userName[MAX_SIZE]; //customer website User name
 	Product productsInCart[MAX_Products_In_Cart];//Products list
 	unsigned int productCounter;//number of products in cart
 
@@ -41,8 +41,8 @@ typedef struct Cart {
 
 struct Order
 {
-	char userName[MAX_SIZE]; //customer website Username
-	enum Status status;//Order's sataus
+	char userName[MAX_SIZE]; //customer website User name
+	enum Status status;//Order's status
 	Product  cart_list[MAX_Products_In_Cart]; //add products list and quantity
 	char customer_full_name[MAX_SIZE];
 	unsigned long int customer_id;

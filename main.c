@@ -1,4 +1,5 @@
 #include "User.h"
+#include "Cart.h"
 //#include "Product.h"
 
 void initFiles(); //initialize all files 
@@ -6,18 +7,27 @@ void initFiles(); //initialize all files
 int main() {
 	initFiles();
 	
-	//User logedUser = startMenu();//gives us a user without password
-	//
-	//enum userType logedUserType = logedUser.userType;
-	//char logedUserName[MAX_SIZE];
-	//strcpy(logedUserName, logedUser.userName);
+	User logedUser = startMenu();//gives us a user without password
 	
-	enum userType logedUserType = MANAGER;//for tests
+	enum userType logedUserType = logedUser.userType;
+	char logedUserName[MAX_SIZE];
+	strcpy(logedUserName, logedUser.userName);
+
 	
-	if (logedUserType == MANAGER)
+	//enum userType logedUserType = MANAGER;//for tests
+	
+	/*if (logedUserType == MANAGER)
 		managerCatalogMenu();
 	else
-		customerCatalogMenu();
+		customerCatalogMenu();*/
+	addProductToCart(logedUserName, 1, 5);
+	addProductToCart(logedUserName, 2, 5);
+	Cart temp = getCartByUser(logedUserName);
+	printCartInfo(temp);
+	remove_Product_From_All_Carts(1);
+	temp = getCartByUser(logedUserName);
+	printCartInfo(temp);
+
 	return 0;
 }
 

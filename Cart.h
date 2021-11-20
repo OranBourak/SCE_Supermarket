@@ -4,7 +4,7 @@
 
 
 
-void printCartInfo(Cart* cart);
+void printCartInfo(Cart cart);
 
 /// <summary>
 /// Adding product to cart.
@@ -14,9 +14,13 @@ void printCartInfo(Cart* cart);
 /// <param name="quantity">quantity to add to the cart</param>
 void addProductToCart(char* userName, int productSerialNumber, unsigned int quantity );
 
-
-void remove_Product_From_Cart(int id);
-
+/// <summary>
+/// Remove product from cart by serial number
+/// </summary>
+/// <param name="userName"></param>
+/// <param name="serialNumber"></param>
+void remove_Product_From_Cart(char* userName, int serialNumber);
+void remove_Product_From_All_Carts(int serialNumber);
 /// <summary>
 /// Return user's Cart struct
 /// </summary>
