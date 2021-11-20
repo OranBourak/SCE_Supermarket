@@ -24,13 +24,15 @@ int main() {
 	//else
 	//	customerMenu();
 	//
-//	signUp();
-	User temp;
-	login(&temp);
+
+
+	//signUp();
+	//User temp;
+	//login(&temp);
 	//addProduct();
 	//addProductToCart(temp.userName,1,10);
-	Cart cart = getCartByUser(temp.userName);
-	printCartInfo(&cart);
+	//Cart cart = getCartByUser(temp.userName);
+	//printCartInfo(&cart);
 	
 
 	return 0;
