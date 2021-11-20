@@ -41,3 +41,19 @@ void remove_Product_From_Cart(int id)
 	//dont forget productCounter--;
 
 }
+
+Cart getCartByUser(char* user_name)
+{
+	FILE* fpointer = fopen(CARTS_FILENAME, "r");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+	Cart temp;
+	while (fread(&temp, sizeof(Cart), 1, fpointer)){
+		if (!strcmp(temp.userName, user_name)) {
+			fclose(fpointer);
+			return temp;
+		}
+	}
+}
