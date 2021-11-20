@@ -4,10 +4,6 @@
 
 
 
-/// <summary>
-/// Printing all cart's products.
-/// </summary>
-/// <param name="cart">Pointer to cart</param>
 void printCartInfo(Cart* cart);
 
 /// <summary>
@@ -21,6 +17,12 @@ void addProductToCart(char* userName, int productSerialNumber, unsigned int quan
 
 void remove_Product_From_Cart(int id);
 
+/// <summary>
+/// Return user's Cart struct
+/// </summary>
+/// <param name="userName"></param>
+/// <returns></returns>
+Cart getCartByUser(char* user_name);
 
 enum Bool empty_the_cart(Cart* cart);//empty all product from cart
 enum Bool check_product_exsistenc_in_catalog();

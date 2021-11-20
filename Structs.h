@@ -53,7 +53,7 @@ typedef struct Cart {
 
 
 
-struct Order
+typedef struct Order
 {
 	char userName[MAX_SIZE]; //customer website Username
 	enum Status status;//Order's sataus
@@ -64,4 +64,4 @@ struct Order
 	char customer_address[MAX_SIZE];
 	unsigned int productInOrder;
 
-}typedef Order;
+}Order;
