@@ -1,5 +1,6 @@
 #include "User.h"
 #include "Cart.h"
+#include "Orders.h"
 //#include "Product.h"
 
 void initFiles(); //initialize all files 
@@ -14,12 +15,12 @@ int main() {
 	strcpy(logedUserName, logedUser.userName);
 
 	
-	//enum userType logedUserType = MANAGER;//for tests
+	enum userType logedUserType = MANAGER;//for tests
 	
-	/*if (logedUserType == MANAGER)
+	if (logedUserType == MANAGER)
 		managerCatalogMenu();
 	else
-		customerCatalogMenu();*/
+		customerCatalogMenu();
 	addProductToCart(logedUserName, 1, 5);
 	addProductToCart(logedUserName, 2, 5);
 	Cart temp = getCartByUser(logedUserName);
@@ -27,6 +28,15 @@ int main() {
 	remove_Product_From_All_Carts(1);
 	temp = getCartByUser(logedUserName);
 	printCartInfo(temp);
+	
+	
+
+
+
+	
+	
+
+	
 
 	return 0;
 }
