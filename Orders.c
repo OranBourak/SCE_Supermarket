@@ -7,9 +7,12 @@
 void Create_Order(char* username)
 {
 	FILE* Orders;
-	Cart temp;
-	Order temp1;
+	FILE* carts_file;
+	FILE* fpointerU;
+	Cart cart;
+	Order order;
 	Product orderp;
+	User user;
 
 	Orders = fopen(ORDERS_FILENAME, "r+");
 	if (Orders == NULL)
@@ -17,45 +20,76 @@ void Create_Order(char* username)
 		fprintf(stderr, "\n Error open orders");
 		exit(1);
 	}
-	FILE* User = fopen(USERS_FILENAME, "r+");
-	if (User == NULL) {
-		fprintf(stderr, "\nERROR OPENING FILE\n");
+	carts_file = fopen(CARTS_FILENAME, "r+");
+	if (carts_file == NULL)
+	{
+		fprintf(stderr, "\n Error open orders");
 		exit(1);
 	}
-	while (fread(&temp, sizeof(Cart), 1, User)) {//Find the cart by user name and read the cart to temp parameter.
+	fpointerU = fopen(USERS_FILENAME, "r+");
+	if (fpointerU == NULL)
+	{
+		fprintf(stderr, "\n Error open orders");
+		exit(1);
+	}
+
+	fread(&cart, sizeof(Cart), 1, carts_file);
+
+	while (fread(&cart, sizeof(Cart), 1, fpointerU)) {
 		{
-			if (!strcmp(temp.userName, username))
+			if (!strcmp(cart.userName, username))
 				break;
 		}
 	}
-	FILE* Cart= fopen(CARTS_FILENAME, "r");
-	if (Cart == NULL) {
-		fprintf(stderr, "\nERROR OPENING FILE\n");
-		exit(1);
-	}
+	//FILE* User = fopen(USERS_FILENAME, "r+");
+	//if (User == NULL) {
+	//	fprintf(stderr, "\nERROR OPENING FILE\n");
+	//	exit(1);
+	//}
+	//while (fread(&cart, sizeof(Cart), 1, User)) {//Find the cart by user name and read the cart to temp parameter.
+	//	{
+	//		if (!strcmp(cart.userName, username))
+	//			break;
+	//	}
+	//}
+	//FILE* cart= fopen(CARTS_FILENAME, "r+");
+	//if (cart == NULL) {
+	//	fprintf(stderr, "\nERROR OPENING FILE\n");
+	//	exit(1);
+	//}
 	
-	strcpy(temp1.userName , temp.userName);
-	for (int i = 0; i < temp.productCounter; i++)
+	strcpy(order.userName , cart.userName);
+	for (int i = 0; i < cart.productCounter; i++)
 	{
-		temp1.cart_list[i] = temp.productsInCart[i];
-	}
-	printf("Enter id:\n");
-	fscanf(ORDERS_FILENAME, "%d", temp1.customer_id);
-	printf("Enter full name:\n");
-	fscanf(ORDERS_FILENAME, "%c", temp1.customer_full_name);
-	printf("Enter cradit cart:\n");
-	fscanf(ORDERS_FILENAME, "%d", temp1.customer_credit_card);
-	printf("Enter address:\n");
-	fscanf(ORDERS_FILENAME, "%d", temp1.customer_address);
-	
-	for (int i = 0; i < temp.productCounter; i++)
-	{
-		temp1.orderPrice += temp.productsInCart[i].productPrice;
+		strcpy(order.cart_list[i].productName, cart.productsInCart[i].productName);
+		order.cart_list[i].productPrice = cart.productsInCart[i].productPrice;
+		order.cart_list[i].product_category = cart.productsInCart[i].product_category;
+		order.cart_list[i].quantity = cart.productsInCart[i].quantity;
+		order.cart_list[i].serialNumber = cart.productsInCart[i].serialNumber;
 
 	}
-	temp1.status = APPENDING;
+	int id=0;
+	printf("Enter id:\n");
+	scanf("%d", &id);
+	/*fscanf(ORDERS_FILENAME, "%d", order.customer_id);
+	printf("Enter full name:\n");
+	fscanf(ORDERS_FILENAME, "%c", order.customer_full_name);
+	printf("Enter cradit cart:\n");
+	fscanf(ORDERS_FILENAME, "%d", order.customer_credit_card);
+	printf("Enter address:\n");
+	fscanf(ORDERS_FILENAME, "%d", order.customer_address);*/
+	
+	for (int i = 0; i < cart.productCounter; i++)
+	{
+		order.orderPrice += cart.productsInCart[i].productPrice;
+
+	}
+	order.status = APPENDING;
+	fwrite(&order, sizeof(Order), 1, Orders);
 
 	fclose(Orders);
+	fclose(carts_file);
+	fclose(fpointerU);
 }
 
 
@@ -69,8 +103,12 @@ void Create_Order(char* username)
 	 FILE* fpointerO;
 	 int choice=2;
 	 fpointerU = fopen(USERS_FILENAME, "r+");
-	 fpointerO = fopen(ORDERS_FILENAME, "r+");
 	 if (fpointerU == NULL) {
+		 fprintf(stderr, "\nERROR OPENING FILE\n");
+		 exit(1);
+	 }
+	 fpointerO = fopen(ORDERS_FILENAME, "r+");
+	 if (fpointerO == NULL) {
 		 fprintf(stderr, "\nERROR OPENING FILE\n");
 		 exit(1);
 	 }

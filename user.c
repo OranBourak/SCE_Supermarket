@@ -11,7 +11,7 @@ User startMenu() {
 	User logedUser;
 	enum Bool isLogedIn = FALSE;
 	do {
-		puts("Welcome to SCE_Supermaekt\n1.Login\n2.Sign-up");// no need for \n, because puts() adds it by default
+		puts("Welcome to Sami market\n1.Login\n2.Sign-up");// no need for \n, because puts() adds it by default
 		scanf("%d", &choice);
 		getchar();//clean enter
 		switch (choice)

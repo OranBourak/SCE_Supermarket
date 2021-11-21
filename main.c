@@ -15,27 +15,24 @@ int main() {
 	strcpy(logedUserName, logedUser.userName);
 
 	
-	enum userType logedUserType = MANAGER;//for tests
+	//enum userType logedUserType = MANAGER;//for tests
 	
 	if (logedUserType == MANAGER)
 		managerCatalogMenu();
 	else
 		customerCatalogMenu();
-	addProductToCart(logedUserName, 1, 5);
+	/*addProductToCart(logedUserName, 1, 5);
 	addProductToCart(logedUserName, 2, 5);
 	Cart temp = getCartByUser(logedUserName);
 	printCartInfo(temp);
 	remove_Product_From_All_Carts(1);
 	temp = getCartByUser(logedUserName);
-	printCartInfo(temp);
+	printCartInfo(temp);*/
+	/*addProductToCart("omer", 12, 1);*/
 	
-	
-
-
+	Create_Order("liraz");
 
 	
-	
-
 	
 
 	return 0;

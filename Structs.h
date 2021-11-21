@@ -49,7 +49,7 @@ struct Order
 	unsigned long int customer_credit_card;//12 digits
 	char customer_address[MAX_SIZE];
 	float orderPrice;
-	unsigned long int phoneNumber;// 10 digits excactly
+	unsigned long int phoneNumber;// 10 digits exactly
 	
 
 	
