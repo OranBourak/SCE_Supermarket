@@ -46,7 +46,7 @@ struct Order
 	Product  cart_list[MAX_Products_In_Cart]; //add products list and quantity
 	char customer_full_name[MAX_SIZE];
 	unsigned long int customer_id;
-	unsigned long int customer_credit_card;//12 digits
+	unsigned long int customer_credit_card;//10 digits
 	char customer_address[MAX_SIZE];
 	float orderPrice;
 	unsigned long int phoneNumber;// 10 digits exactly

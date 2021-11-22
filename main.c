@@ -30,7 +30,7 @@ int main() {
 	printCartInfo(temp);*/
 	/*addProductToCart("omer", 12, 1);*/
 	
-	Create_Order("liraz");
+	Create_Order("shimi");
 
 	
 	
@@ -68,7 +68,9 @@ void initFiles(){
 	}
 	else
 		fclose(ordersFile);
-	return;
+
+	
+	return ;
 }
 
 
