@@ -1,3 +1,4 @@
+#define NUM_OF_CATEGORIES 5
 #include "Product.h"
 
 /*Printing all products that contains in the catalog*/
@@ -15,6 +16,26 @@ void showProducts(){
 	}
 	fclose(fpointer);
 	puts("_________________________________________________________________________________________");
+}
+
+void showByCategory(enum category c) {
+
+	Product tempProduct;
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (!fpointer) {
+		puts("Cannot open the file");
+		exit(1);
+	}
+	
+	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
+		if (tempProduct.product_category == c)
+		{
+			printProduct(tempProduct);
+		}
+	}
+	
+	fclose(fpointer);
+	
 }
 
 /*Printing product details*/
@@ -81,6 +102,8 @@ enum Bool isProductExsist(int serialNumber){
 
 void customerCatalogMenu(){
 	showProducts();
+	puts("MEAT:");
+	showByCategory(MEAT);
 }
 
 void managerCatalogMenu(){

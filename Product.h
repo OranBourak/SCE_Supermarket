@@ -26,7 +26,7 @@ enum Bool isProductExsist(int serialNumber);
 //customer only
 void customerCatalogMenu();
 void showByPrice();
-void showByCategory();
+void showByCategory(enum category);
 
 //manager only
 void managerCatalogMenu();
