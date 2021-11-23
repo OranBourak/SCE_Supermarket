@@ -130,3 +130,39 @@ customerMenu(User loged_User) {
 		}
 	} while (choice != EXIT);
 }
+
+
+/// <summary>
+/// view catalog menu for customer
+///Displays the options to the customer and activates the requested function
+/// </summary>
+/// <returns></returns>
+viewCatalogCustomer() {
+	int choice;
+
+	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2, EXIT = 3 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+		puts("Choose one of the following options:");
+		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6) Sign Out.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case SORT_BY_PRICE:
+			break;
+
+		case CHOOSE_CATEGORY:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+}
