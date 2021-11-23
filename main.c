@@ -27,7 +27,7 @@ int main() {
 
 
 	/*ILIYA'S main*/
-	
+	//
 	//User logedUser = startMenu();//gives us a user without password
 	//
 	//enum userType logedUserType = logedUser.userType;
@@ -48,9 +48,9 @@ int main() {
 	//remove_Product_From_All_Carts(1);
 	//temp = getCartByUser(logedUserName);
 	//printCartInfo(temp);*/
-	///*addProductToCart("omer", 12, 1);*/
+	//addProductToCart("omer", 12, 1);
 	//
-	//Create_Order("shimi");
+	//Create_Order("omer");
 
 	
 	
