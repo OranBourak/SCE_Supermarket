@@ -12,7 +12,7 @@ void Create_Order(char* username)
 	Cart cart;
 	Order order;
 	Product orderp;
-	
+	User user;
 
 	Orders = fopen(ORDERS_FILENAME, "r+");
 	if (Orders == NULL)
@@ -36,6 +36,14 @@ void Create_Order(char* username)
 	while (fread(&cart, sizeof(Cart), 1, carts_file)) //copy to cart all the data from cart file
 	{
 		if (!strcmp(cart.userName, username))
+		{
+			fclose(carts_file);
+			break;
+		}
+	}
+	while (fread(&user, sizeof(User), 1, fpointerU)) //test for club member
+	{
+		if (!strcmp(user.userName, username))
 		{
 			fclose(carts_file);
 			break;
@@ -97,10 +105,24 @@ void Create_Order(char* username)
 	}
 	order.phoneNumber = num_check;
 	order.orderPrice = 0;
-	for (int i = 0; i < size; i++)
+	if(user.userType==2)//if user club
 	{
-		order.orderPrice += cart.productsInCart[i].productPrice* cart.productsInCart[i].quantity;
+		float sumReduction = 0;
+		for (int i = 0; i < size; i++)
+		{
+			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
 
+		}
+		sumReduction = 100 / 10 * order.orderPrice;
+		order.orderPrice -= sumReduction;
+	}
+	else//if user not club
+	{
+		for (int i = 0; i < size; i++)
+		{
+			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
+
+		}
 	}
 	order.status = APPENDING;
 
@@ -221,6 +243,7 @@ void Create_Order(char* username)
 	 int i = 0;
 	 strcpy(tempName, order.customer_full_name);
 	 strcpy(tempAddre, order.customer_address);
+	 system("cls");
 	 printf("id: %ld\n", order.customer_id);//print id
 	 printf("Name: %s\n", tempName);//print name
 	 printf("Credit card: %ld\n", order.customer_credit_card);//print card
