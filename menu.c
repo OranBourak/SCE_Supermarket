@@ -68,6 +68,7 @@ managerMenu(User loged_User) {
 		switch (choice) {
 
 		case VIEW_CATALOG:
+			viewCatalogManager();
 			break;
 
 		case UPDATE_INVENTORY:
@@ -98,6 +99,7 @@ managerMenu(User loged_User) {
 customerMenu(User loged_User) {
 	int choice;
 
+
 	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, CLUB_MEMBER = 4, CONTACT_US = 5, EXIT = 6 };
 	do {
 		system("cls");
@@ -109,6 +111,7 @@ customerMenu(User loged_User) {
 		switch (choice) {
 
 		case VIEW_CATALOG:
+			viewCatalogCustomer(loged_User);
 			break;
 
 		case VIEW_CART:
@@ -172,8 +175,9 @@ viewCatalogManager() {
 /// view catalog menu for manager
 ///Displays the options to the customer and activates the requested function
 /// </summary>
+/// <param name="username">Using username in Add product function</param>
 /// <returns></returns>
-viewCatalogCustomer() {
+viewCatalogCustomer(User loged_User) {
 	int choice;
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2,ADD_PRODUCT=3, EXIT = 4 };
