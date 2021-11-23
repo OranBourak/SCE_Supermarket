@@ -329,3 +329,23 @@ void Create_Order(char* username)
 	 }
 	 fclose(fpointer);
  }
+
+ void print_All_order_details()
+ {
+	 {
+		 FILE* fpointer;
+		 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+		 if (fpointer == NULL)
+		 {
+			 fprintf(stderr, "\n Error open orders");
+			 exit(1);
+		 }
+		 Order temp;
+		 printf("All orders:\n");
+		 while (fread(&temp, sizeof(Order), 1, fpointer))
+		 {
+		  print_order(temp);
+		 }
+		 fclose(fpointer);
+	 }
+ }
