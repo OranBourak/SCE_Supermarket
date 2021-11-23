@@ -12,7 +12,7 @@ void print_order_details_Appending();// print the order Appending
 void print_order_details_Approved();// print the order Approved
 void print_order_details_Canceld();// print the order canceld
 void print_All_order_details();// print the all order 
-void all_orders();//the manager see all the orders
+
 
 
 

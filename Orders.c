@@ -244,10 +244,53 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	 printf("Orders awaiting confirmation:");
+	 printf("Orders awaiting confirmation:\n");
 	 while(fread(&temp,sizeof(Order),1,fpointer))
 	 {
 		 if (temp.status == 0)
 			 print_order(temp);
 	 }
+	 fclose(fpointer);
+
+ }
+
+ void print_order_details_Approved()
+ {
+	 FILE* fpointer;
+	 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+	 if (fpointer == NULL)
+	 {
+		 fprintf(stderr, "\n Error open orders");
+		 exit(1);
+	 }
+
+	 Order temp;
+	 printf("Orders are confirmed:\n");
+	 while (fread(&temp, sizeof(Order), 1, fpointer))
+	 {
+		 if (temp.status == 1)
+			 print_order(temp);
+	 }
+	 fclose(fpointer);
+
+ }
+
+ void print_order_details_Canceld()
+ {
+	 FILE* fpointer;
+	 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+	 if (fpointer == NULL)
+	 {
+		 fprintf(stderr, "\n Error open orders");
+		 exit(1);
+	 }
+
+	 Order temp;
+	 printf("Orders are canceled:\n");
+	 while (fread(&temp, sizeof(Order), 1, fpointer))
+	 {
+		 if (temp.status == 2)
+			 print_order(temp);
+	 }
+	 fclose(fpointer);
  }
