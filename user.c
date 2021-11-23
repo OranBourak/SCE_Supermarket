@@ -239,9 +239,9 @@ managerMenu(User loged_User) {
 	enum option{VIEW_CATALOG=1,UPDATE_INVENTORY=2,UPDATE_ORDERS=3,EXIT=4};
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****MANAGER MENU*****\n\n");
-		printf("\nHello %s, How can we help you today?\n", loged_User.userName);
-		puts("(1). View catalog.\n(2). Update inventory.\n(3). Update order's status.\n(4). Sign Out.\n");
+		puts("\t\t\t\t\t*****MANAGER MENU*****\n");
+		printf("Hello %s, How can we help you today?\n\n", loged_User.userName);
+		puts("(1) View catalog.\n(2) Update inventory.\n(3) Update order's status.\n(4) Sign Out.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
@@ -280,9 +280,9 @@ customerMenu(User loged_User) {
 	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3,CLUB_MEMBER=4,CONTACT_US=5,EXIT = 6};
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****CUSTOMER MENU*****\n\n");
-		printf("Hello %s, How can we help you today?\n", loged_User.userName);
-		puts("\n(1). View Catalog.\n(2). View Cart.\n(3). Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6)Sign Out.\n");
+		puts("\t\t\t\t\t*****CUSTOMER MENU*****\n");
+		printf("Hello %s, How can we help you today?\n\n", loged_User.userName);
+		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6) Sign Out.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
