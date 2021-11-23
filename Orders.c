@@ -49,11 +49,11 @@ void Create_Order(char* username)
 			break;
 		}
 	}
-	
+
 	int size = 0;
-	size=  sizeof(cart.productsInCart) / sizeof(Product);
+	size = sizeof(cart.productsInCart) / sizeof(Product);
 	order.counter_cart_list = size;
-	strcpy(order.userName , cart.userName);
+	strcpy(order.userName, cart.userName);
 	for (int i = 0; i < size; i++) //copy the products from cart to the order
 	{
 		strcpy(order.cart_list[i].productName, cart.productsInCart[i].productName);
@@ -63,47 +63,52 @@ void Create_Order(char* username)
 		order.cart_list[i].serialNumber = cart.productsInCart[i].serialNumber;
 
 	}
-	char name[MAX_SIZE];
-	int num_check=0;
+	char nameAddress[MAX_SIZE];
+	char num_check[MAX_SIZE];
+	int check = 0;
 	printf("Enter full name:\n");
 	gets(order.customer_full_name);
 	printf("Enter id with 10 digits only:\n");
-	scanf_s("%d", &num_check);
-
-	while (check_validation(num_check)==FALSE)
+	scanf_s("%s", &num_check);
+	check = atoi(num_check);
+	while (check_validation(check)==FALSE||check==0)
 	{
 		printf("wrong id please try again with 10 digits only:\n");
-		scanf("%d", &num_check);
+		scanf("%s", &num_check);
+		check = atoi(num_check);
 		getchar();
 	}
-	order.customer_id = num_check;
+	
+	order.customer_id = check;
 	
 	printf("Enter credit card with 10 digits only:\n");
-	scanf_s("%d", &num_check);
-	while (check_validation(num_check) == FALSE)
+	scanf_s("%s", &num_check);
+	check = atoi(num_check);
+	while (check_validation(check) == FALSE || check == 0)
 	{
-		printf("wrong credit card please try again with 10 digits only:\n");
-		scanf("%d", &num_check);
+		printf("wrong id please try again with 10 digits only:\n");
+		scanf("%s", &num_check);
+		check = atoi(num_check);
 		getchar();
 	}
-	order.customer_credit_card = num_check;
+	order.customer_credit_card = check;
 	printf("Enter address:\n");
-	scanf("%s", name);
-	strcpy(order.customer_address, name);
+	scanf("%s", nameAddress);
+	strcpy(order.customer_address, nameAddress);
 	getchar();
 
 	
 	printf("Enter phone number with 10 digits only with 10 digits only:\n");
-	scanf_s("%d", &num_check);
-
-	while (check_validation(num_check) == FALSE)
+	scanf_s("%s", &num_check);
+	check = atoi(num_check);
+	while (check_validation(check) == FALSE || check == 0)
 	{
-		printf("wrong phone number please try again with 10 digits only:\n");
-		scanf_s("%d", &num_check);
+		printf("wrong id please try again with 10 digits only:\n");
+		scanf("%s", &num_check);
+		check = atoi(num_check);
 		getchar();
-
 	}
-	order.phoneNumber = num_check;
+	order.phoneNumber = check;
 	order.orderPrice = 0;
 	if(user.userType==2)//if user club
 	{
@@ -132,7 +137,6 @@ void Create_Order(char* username)
 	fclose(carts_file);
 	fclose(fpointerU);
 }
-
 
  void change_order_status(char* username)
 {

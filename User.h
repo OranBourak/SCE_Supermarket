@@ -18,5 +18,6 @@ void signUp();
 enum Type managerSignUp();
 enum Bool isNameTaken(char*);
 enum Bool isPasswordLegal(char*);
+void ContactUs();
 
 
