@@ -28,10 +28,12 @@ int main() {
 	remove_Product_From_All_Carts(1);
 	temp = getCartByUser(logedUserName);
 	printCartInfo(temp);*/
-	/*addProductToCart("omer", 12, 1);*/
+	addProductToCart("omer", 12, 1);
 	
 	Create_Order("omer");
-
+	print_order_details_Appending();
+	print_order_details_Approved();
+	print_order_details_Canceld();
 	
 	
 
