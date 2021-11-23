@@ -213,23 +213,23 @@ void Create_Order(char* username)
 	 return	FALSE;
  }
 
- void print_order(Order* order)
+ void print_order(Order order)
  {
 	 char tempName[MAX_SIZE];
 	 char tempAddre[MAX_SIZE];
 	 int i = 0;
-	 strcpy(tempName, order->customer_full_name);
-	 strcpy(tempAddre, order->customer_address);
-	 printf("id: %ld\n", order->customer_id);
+	 strcpy(tempName, order.customer_full_name);
+	 strcpy(tempAddre, order.customer_address);
+	 printf("id: %ld\n", order.customer_id);
 	 printf("Name: %s\n", tempName);
-	 printf("Credit card: %ld\n", order->customer_credit_card);
-	 printf("Phone number: %ld\n", order->phoneNumber);
-	 printf("Address: %s\n", order->phoneNumber);
-	 printf("Total price: %.2lf\n",order->orderPrice );
-	 printf("Status: %d\t", order->status);
-	 for (int i = 0; i < order->counter_cart_list; i++)
+	 printf("Credit card: %ld\n", order.customer_credit_card);
+	 printf("Phone number: %ld\n", order.phoneNumber);
+	 printf("Address: %s\n", order.phoneNumber);
+	 printf("Total price: %.2lf\n",order.orderPrice );
+	 printf("Status: %d\t", order.status);
+	 for (int i = 0; i < order.counter_cart_list; i++)
 	 {
-		 printProduct(order->cart_list[i]);
+		 printProduct(order.cart_list[i]);
 	 }
  }
 
@@ -248,6 +248,6 @@ void Create_Order(char* username)
 	 while(fread(&temp,sizeof(Order),1,fpointer))
 	 {
 		 if (temp.status == 0)
-			 Print_Order(temp);
+			 print_order(temp);
 	 }
  }
