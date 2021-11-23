@@ -133,7 +133,15 @@ customerMenu(User loged_User) {
 
 
 /// <summary>
-/// view catalog menu for customer
+/// view catalog menu for manager
+///Displays the options to the customer and activates the requested function
+/// </summary>
+/// <returns></returns>
+viewCatalogManager() {
+
+
+/// <summary>
+/// view catalog menu for manager
 ///Displays the options to the customer and activates the requested function
 /// </summary>
 /// <returns></returns>
@@ -166,3 +174,6 @@ viewCatalogCustomer() {
 		}
 	} while (choice != EXIT);
 }
+
+
+
