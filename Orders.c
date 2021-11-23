@@ -2,7 +2,7 @@
 #include "Orders.h"
 #include "Structs.h"
 #include "Cart.h"
-#define MAX
+
 
 void Create_Order(char* username)
 {
@@ -41,9 +41,11 @@ void Create_Order(char* username)
 				break;
 		}
 	}
-	
+	int size = 0;
+	size=  sizeof(cart.productsInCart) / sizeof(Product);
+	order.counter_cart_list = size;
 	strcpy(order.userName , cart.userName);
-	for (int i = 0; i < cart.productCounter; i++) //copy the products from cart to the order
+	for (int i = 0; i < size; i++) //copy the products from cart to the order
 	{
 		strcpy(order.cart_list[i].productName, cart.productsInCart[i].productName);
 		order.cart_list[i].productPrice = cart.productsInCart[i].productPrice;
@@ -94,20 +96,19 @@ void Create_Order(char* username)
 	}
 	order.phoneNumber = num_check;
 	
-	for (int i = 0; i < cart.productCounter; i++)
+	for (int i = 0; i < size; i++)
 	{
 		order.orderPrice += cart.productsInCart[i].productPrice;
 
 	}
 	order.status = APPENDING;
+
 	fwrite(&order, sizeof(Order), 1, Orders);
 
 	fclose(Orders);
 	fclose(carts_file);
 	fclose(fpointerU);
 }
-
-
 
 
  void change_order_status(char* username)
@@ -160,16 +161,10 @@ void Create_Order(char* username)
 					 order.status = CANCELD;
 					 break;
 				 }
-
 				 else
 					 printf("You entered wrong answer, please try again\n");
 
 			 }
-
-
-
-
-
 
 		 }
 
@@ -218,8 +213,41 @@ void Create_Order(char* username)
 	 return	FALSE;
  }
 
-
-
- void print_order_details(Order* order)
+ void print_order(Order* order)
  {
+	 char tempName[MAX_SIZE];
+	 char tempAddre[MAX_SIZE];
+	 int i = 0;
+	 strcpy(tempName, order->customer_full_name);
+	 strcpy(tempAddre, order->customer_address);
+	 printf("id: %ld\n", order->customer_id);
+	 printf("Name: %s\n", tempName);
+	 printf("Credit card: %ld\n", order->customer_credit_card);
+	 printf("Phone number: %ld\n", order->phoneNumber);
+	 printf("Address: %s\n", order->phoneNumber);
+	 printf("Total price: %.2lf\n",order->orderPrice );
+	 printf("Status: %d\t", order->status);
+	 for (int i = 0; i < order->counter_cart_list; i++)
+	 {
+		 printProduct(order->cart_list[i]);
+	 }
+ }
+
+ void print_order_details_Appending()
+ {
+	 FILE* fpointer;
+	 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+	 if (fpointer == NULL)
+	 {
+		 fprintf(stderr, "\n Error open orders");
+		 exit(1);
+	 }
+
+	 Order temp;
+	 printf("Orders awaiting confirmation:");
+	 while(fread(&temp,sizeof(Order),1,fpointer))
+	 {
+		 if (temp.status == 0)
+			 Print_Order(temp);
+	 }
  }

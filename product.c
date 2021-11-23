@@ -165,7 +165,7 @@ void removeProductMenu(){
 
 		if (isProductExsist(serial)){
 			removeProduct(serial);
-			puts("Product removed sucssefuly");
+			puts("Product removed successfully");
 		}
 		else if(serial != 0)
 			puts("A product with this serial number doesn't exist.");
