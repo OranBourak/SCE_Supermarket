@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cart.c" />
+    <ClCompile Include="menu.c" />
     <ClCompile Include="Orders.c" />
     <ClCompile Include="product.c" />
     <ClCompile Include="user.c" />

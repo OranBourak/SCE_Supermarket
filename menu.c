@@ -1,0 +1,132 @@
+#include "Structs.h"
+
+
+
+/// <summary>
+/// MAIN MENU function
+/// </summary>
+void Menu() {
+	enum choice { REGISTER = 1, SIGN_IN = 2, EXIT = 3 };
+	int choice;
+	char temp_key;
+	User loged_User; //The user that logged to the system
+	do {
+		system("cls");
+		printf("***********************************\n");
+		printf("   Welcome to Sami Supermarket\n");
+		printf("***********************************\n\n");
+
+		printf("(1). Register\n(2). Sign in\n(3). Exit the system\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+		case REGISTER:
+			signUp();
+			break;
+
+		case SIGN_IN:
+			if (login(&loged_User)) {
+				if (loged_User.userType == MANAGER)
+					managerMenu(loged_User);
+				else
+					customerMenu(loged_User);
+			}
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+		printf("Press any key to continue...");
+		getchar();
+		scanf("%c", &temp_key);
+	} while (choice != EXIT);
+
+}
+
+
+/// <summary>
+/// MANAGER MENU SYSTEM
+///Displays the options to the manager and activates the requested function
+/// </summary>
+/// <returns></returns>
+managerMenu(User loged_User) {
+	int choice;
+
+	enum option { VIEW_CATALOG = 1, UPDATE_INVENTORY = 2, UPDATE_ORDERS = 3, EXIT = 4 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****MANAGER MENU*****\n");
+		printf("Hello %s, How can we help you today?\n\n", loged_User.userName);
+		puts("(1) View catalog.\n(2) Update inventory.\n(3) Update order's status.\n(4) Sign Out.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case VIEW_CATALOG:
+			break;
+
+		case UPDATE_INVENTORY:
+			break;
+
+		case UPDATE_ORDERS:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+
+}
+
+
+
+/// <summary>
+/// CUSTOMER MENU SYSTEM
+///Displays the options to the customer and activates the requested function
+/// </summary>
+/// <returns></returns>
+customerMenu(User loged_User) {
+	int choice;
+
+	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, CLUB_MEMBER = 4, CONTACT_US = 5, EXIT = 6 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****CUSTOMER MENU*****\n");
+		printf("Hello %s, How can we help you today?\n\n", loged_User.userName);
+		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6) Sign Out.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case VIEW_CATALOG:
+			break;
+
+		case VIEW_CART:
+			break;
+
+		case ADD_PRODUCT:
+			break;
+		case CLUB_MEMBER:
+			break;
+		case CONTACT_US:
+			break;
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+}
