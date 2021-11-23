@@ -180,13 +180,6 @@ enum Bool isPasswordLegal(char* user_password) {
 	return TRUE;//passed in this stage all checks
 }
 
-void ContactUs()
-{
-	system("cls");
-	puts("\t\t\t\t\t*****Contact Us*****\n");
-	puts("\t\t\t\t\t*****If you encounter a problem and you want us to get back to you if a solution is complete the following form*****\n");
-}
-
 
 /// <summary>
 /// MAIN MENU function
