@@ -29,8 +29,7 @@ void remove_Product_From_All_Carts(int serialNumber);
 Cart getCartByUser(char* user_name);
 
 enum Bool empty_the_cart(Cart* cart);//empty all product from cart
-enum Bool check_product_exsistenc_in_catalog();
-enum Bool check_product_exsistenc_in_cart(int id);
+
 
 
 

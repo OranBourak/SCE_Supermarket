@@ -6,7 +6,6 @@ void printCartInfo(Cart cart)
 	printf("----------------\n");
 	for (int i = 0; i < cart.productCounter; i++)
 		printProduct(cart.productsInCart[i]);
-
 }
 
 void addProductToCart(char* userName, int productSerialNumber, unsigned int quantity)
@@ -90,4 +89,10 @@ Cart getCartByUser(char* user_name)
 			return temp;
 		}
 	}
+}
+
+enum Bool empty_the_cart(User userName)
+{
+	//FILE* fpointer = fopen(USERS_FILENAME, "r");
+	//return TRUE;
 }

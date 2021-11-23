@@ -71,20 +71,31 @@ enum Bool login(User* user) {
 // adds user signing up to users databse
 void signUp() {
 	FILE* fpointer;
+	char temp_key;
 	fpointer = fopen(USERS_FILENAME, "a");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
 	}
 	User new_user;
+	system("cls");//clear terminal screen
 	
 	do {//user name check
-		puts("Please enter user name, cannot be an existing name:");
+		puts("\t\t\t\t\t*****REGISTRITION*****\n\n");
+		puts("Please enter user name [cannot be an existing name]:");
 		gets(new_user.userName);
+		if (isNameTaken(new_user.userName)) {
+			puts("\nThe username you selected is already taken...please try again\n");
+			printf("Press any key to continue...");
+			scanf("%c", &temp_key);
+			getchar();
+			system("cls");//clear terminal screen
+		}
+
 	} while(isNameTaken(new_user.userName));
 	
 	do {//password check
-		puts("Please enter user password, must contain at least 6 charcters and contain at least one number and one letter:");
+		puts("\nPlease enter user password:[must contain at least 6 charcters  and include  number and letter]");
 		gets(new_user.password);
 	} while (!isPasswordLegal(new_user.password));
 	
@@ -112,20 +123,20 @@ enum Type managerSignUp(){//works
 	char managerCode[MAX_SIZE];
 
 	do {
-		puts("Do you want to sign-up as a manager? y/n:");
+		puts("\nDo you want to sign-up as a manager? y/n:");
 		scanf("%c", &choice);
 		getchar();//clean enter
 		if (choice == 'y') {
-			puts("Enter secret manger code:");
+			puts("\nEnter secret manger code:");
 			scanf("%s", managerCode);
 			getchar();//clean enter
 			if (!strcmp(managerCode, MANAGER_CODE))
 				return MANAGER;
-			else puts("Wrong code");
+			else puts("\nWrong code");
 		}
 		else if (choice == 'n')
 			return CUSTOMER;
-		else puts("Invalid option, please enter y/n");
+		else puts("\nInvalid option, please enter y/n");
 	} while (TRUE);//I maybe dont need it,lets save. YES NO NEED
 	//while (choice != 'y' || choice != 'n') saved
 }
@@ -170,4 +181,128 @@ enum Bool isPasswordLegal(char* user_password) {
 }
 
 
+/// <summary>
+/// MAIN MENU function
+/// </summary>
+void Menu() {
+	enum choice { REGISTER = 1, SIGN_IN = 2, EXIT = 3 };
+	int choice;
+	char temp_key;
+	User loged_User; //The user that logged to the system
+	do {
+		system("cls");
+		printf("***********************************\n");
+		printf("   Welcome to Sami Supermarket\n");
+		printf("***********************************\n\n");
 
+		printf("(1). Register\n(2). Sign in\n(3). Exit the system\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+		case REGISTER:
+			signUp();
+			break;
+
+		case SIGN_IN:
+			if (login(&loged_User)) {
+				if (loged_User.userType == MANAGER)
+					managerMenu(loged_User);
+				else
+					customermenu(loged_User);
+			}	
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+		printf("Press any key to continue...");
+		getchar();
+		scanf("%c", &temp_key);
+	} while (choice != EXIT);
+
+}
+
+
+/// <summary>
+/// MANAGER MENU SYSTEM
+///Displays the options to the manager and activates the requested function
+/// </summary>
+/// <returns></returns>
+managerMenu(User loged_User) {
+	int choice;
+
+	enum option{VIEW_CATALOG=1,UPDATE_INVENTORY=2,UPDATE_ORDERS=3,EXIT=4};
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****MANAGER MENU*****\n\n");
+		printf("Hello %s, How can we help you today?\n", loged_User.userName);
+		puts("(1). View catalog.\n(2). Update inventory.\n(3). Update order's status.\n(4). Exit the system.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case VIEW_CATALOG:
+			break;
+
+		case UPDATE_INVENTORY:
+			break;
+
+		case UPDATE_ORDERS:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+
+}
+
+
+
+/// <summary>
+/// CUSTOMER MENU SYSTEM
+///Displays the options to the customer and activates the requested function
+/// </summary>
+/// <returns></returns>
+customermenu(User loged_User) {
+	int choice;
+
+	enum option { VIEW_CATALOG = 1, UPDATE_INVENTORY = 2, UPDATE_ORDERS = 3, EXIT = 4 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****MANAGER MENU*****\n\n");
+		printf("Hello %s, How can we help you today?\n", loged_User.userName);
+		puts("(1). View catalog.\n(2). Update inventory.\n(3). Update order's status.\n(4). Exit the system.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case VIEW_CATALOG:
+			break;
+
+		case UPDATE_INVENTORY:
+			break;
+
+		case UPDATE_ORDERS:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+}

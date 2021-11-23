@@ -2,35 +2,55 @@
 #include "Cart.h"
 #include "Orders.h"
 //#include "Product.h"
-
-void initFiles(); //initialize all files 
+/*initialize all data files */
+void initFiles(); 
 
 int main() {
 	initFiles();
-	
-	User logedUser = startMenu();//gives us a user without password
-	
-	enum userType logedUserType = logedUser.userType;
-	char logedUserName[MAX_SIZE];
-	strcpy(logedUserName, logedUser.userName);
+	Menu();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*ILIYA'S main*/
 	
-	//enum userType logedUserType = MANAGER;//for tests
-	
-	if (logedUserType == MANAGER)
-		managerCatalogMenu();
-	else
-		customerCatalogMenu();
-	/*addProductToCart(logedUserName, 1, 5);
-	addProductToCart(logedUserName, 2, 5);
-	Cart temp = getCartByUser(logedUserName);
-	printCartInfo(temp);
-	remove_Product_From_All_Carts(1);
-	temp = getCartByUser(logedUserName);
-	printCartInfo(temp);*/
-	/*addProductToCart("omer", 12, 1);*/
-	
-	Create_Order("shimi");
+	//User logedUser = startMenu();//gives us a user without password
+	//
+	//enum userType logedUserType = logedUser.userType;
+	//char logedUserName[MAX_SIZE];
+	//strcpy(logedUserName, logedUser.userName);
+
+	//
+	////enum userType logedUserType = MANAGER;//for tests
+	//
+	//if (logedUserType == MANAGER)
+	//	managerCatalogMenu();
+	//else
+	//	customerCatalogMenu();
+	///*addProductToCart(logedUserName, 1, 5);
+	//addProductToCart(logedUserName, 2, 5);
+	//Cart temp = getCartByUser(logedUserName);
+	//printCartInfo(temp);
+	//remove_Product_From_All_Carts(1);
+	//temp = getCartByUser(logedUserName);
+	//printCartInfo(temp);*/
+	///*addProductToCart("omer", 12, 1);*/
+	//
+	//Create_Order("shimi");
 
 	
 	
@@ -38,6 +58,9 @@ int main() {
 	return 0;
 }
 
+
+
+//initialize all data files 
 void initFiles(){
 	FILE* usersFile, * productsFile, * cartsFile, * ordersFile;
 	usersFile = fopen(USERS_FILENAME, "ab");
