@@ -273,11 +273,12 @@ customerMenu(User loged_User) {
 			break;
 
 		case ADD_PRODUCT:
-			addProductMenu();
+			addProductMenu(loged_User);
 			break;
 		case CLUB_MEMBER:
 			break;
 		case CONTACT_US:
+			ContactUs();
 			break;
 		case EXIT:
 			printf("Goodbye ! :)\n");
@@ -322,6 +323,7 @@ viewCatalogCustomer(User loged_User) {
 			break;
 
 		case ADD_PRODUCT:
+			addProductToCartMenu(loged_User);
 			break;
 
 		case EXIT:
@@ -373,7 +375,7 @@ viewCartMenu() {
 /// ADD PRODUCT MENU FOR COSTUMER
 /// </summary>
 /// <returns></returns>
-addProductMenu() {
+addProductMenu(User loged_User) {
 	int choice;
 
 	enum option { VIEW_CATALOG = 1, ADD_PRODUCT = 2,EXIT = 3};
@@ -390,6 +392,7 @@ addProductMenu() {
 			break;
 
 		case ADD_PRODUCT:
+			addProductToCartMenu(loged_User);
 			break;
 
 		case EXIT:
@@ -408,7 +411,7 @@ addProductMenu() {
 
 /// <summary>
 /// Prints menu for the costumer/manager
-//use 'showByCategory' function from Product.h
+///use 'showByCategory' function from Product.h
 /// </summary>
 /// <returns></returns>
 ShowProductsByCategory() {
@@ -422,6 +425,57 @@ ShowProductsByCategory() {
 
 
 
+
+///-------Costumer Functions--------///
+
+
+
+addProductToCartMenu(User loged_User) {
+	char* productSerial=NULL;
+	char* quantity=NULL;
+	int flag = 0;
+	do
+	{
+		/*Input and validation check of Serial number*/
+		puts("Please enter the serial number of the product you want to add:");
+		gets(productSerial);
+		if (!atoi(productSerial)) {
+			puts("Invalid input....please try again.");
+			continue;
+		}
+		else if (isProductExsist(atoi(productSerial)))
+			flag = 1;
+		else
+			puts("Invalid serial number....pleas try again.");
+	} while (flag);
+	do
+	{	
+		flag = 0;
+		/*Input and availability check of quantity*/
+		puts("Please enter quantity:[cannot be greater then the available in stoke]");
+		gets(quantity);
+		if (!atoi(quantity)) {
+			puts("Invalid input....please try again.");
+			continue;
+		}
+		///להוסיף בדיקה של זמינות  כמות מוצר 
+	} while (flag);
+
+	/*Adds product to cart*/
+	addProductToCart(loged_User.userName, atoi(productSerial), atoi(quantity));
+	
+	
+	
+
+}
+
+/// <summary>
+///Pr
+/// </summary>
+/// <returns></returns>
+removeProductFromCart() {
+
+}
 
 
 
