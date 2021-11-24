@@ -18,26 +18,6 @@ void showProducts(){
 	puts("_________________________________________________________________________________________");
 }
 
-void showByCategory(enum category c) {
-
-	Product tempProduct;
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
-	if (!fpointer) {
-		puts("Cannot open the file");
-		exit(1);
-	}
-	
-	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
-		if (tempProduct.product_category == c)
-		{
-			printProduct(tempProduct);
-		}
-	}
-	
-	fclose(fpointer);
-	
-}
-
 /*Printing product details*/
 void printProduct(Product p){
 	char pName[MAX_SIZE];
@@ -104,6 +84,73 @@ void customerCatalogMenu(){
 	showProducts();
 	puts("MEAT:");
 	showByCategory(MEAT);
+}
+
+void showByPrice() {
+	//PART 1: getting the number of products in catalog.
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (!fpointer) {
+		fprintf(stderr, "\nERROR OPENIN FILE\n");
+		exit(1);
+	}
+	fseek(fpointer, 0, SEEK_END);
+	int tempCatalogSize = (int)(ftell(fpointer) / sizeof(Product));
+
+	//PART 2: create a temp copy of catalog.
+	Product* tempCatalog = NULL;
+	Product tempProduct;
+	tempCatalog = malloc(tempCatalogSize * sizeof(Product));
+	if (!tempCatalog) {
+		fprintf(stderr, "\nERROR ALLOCATING MEMORY\n");
+		exit(1);
+	}
+
+	fseek(fpointer, 0, SEEK_SET);
+	for (int i = 0; fread(&tempProduct, sizeof(Product), 1, fpointer); i++) {
+		tempCatalog[i] = tempProduct;
+	}
+	
+	qsort(tempCatalog, tempCatalogSize, sizeof(Product), priceCompare);
+	
+	for (int i = 0; i < tempCatalogSize; i++){
+		printProduct(tempCatalog[i]);
+	}
+
+	//LAST PART: close file, free memory.
+	fclose(fpointer);
+	free(tempCatalog);
+}
+
+int priceCompare(const void*a, const void*b) {
+	Product* L = (Product*)a;
+	Product* R = (Product*)b;
+	if (L->productPrice < R->productPrice) {
+		return -1;
+	}
+	else if (L->productPrice == R->productPrice){
+		return 0;
+	}
+	else return 1;
+}
+
+void showByCategory(enum category c) {
+
+	Product tempProduct;
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (!fpointer) {
+		puts("Cannot open the file");
+		exit(1);
+	}
+	
+	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
+		if (tempProduct.product_category == c)
+		{
+			printProduct(tempProduct);
+		}
+	}
+	
+	fclose(fpointer);
+	
 }
 
 void managerCatalogMenu(){
