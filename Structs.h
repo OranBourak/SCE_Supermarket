@@ -28,7 +28,7 @@ typedef struct Product {
 	int serialNumber;
 	char productName[MAX_SIZE];
 	double productPrice;
-	unsigned int quantity;
+	int quantity;
 	enum category product_category;
 }Product;
 

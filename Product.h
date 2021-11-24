@@ -32,10 +32,11 @@ void managerCatalogMenu();
 void addProduct();
 void removeProductMenu();
 void removeProduct(int);
-void changeProduct();//to make
+enum CHANGE_MODE{ADD,REPLACE};
+enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int newQuantity);//to make
 int getProductQuantity(int);
 
-//Functions used to create/edit a product
+//Functions used to create or edit a product
 enum Bool isProductSerialValid(char *);
 enum Bool isProductPriceValid(char *);
 enum Bool isProductQuantityValid(char *);
