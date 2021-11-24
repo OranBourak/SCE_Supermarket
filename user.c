@@ -1,5 +1,5 @@
 #include "User.h"
-
+#include <string.h>
 /* Maybe change variable names to be more clear? */
 
 
@@ -51,7 +51,7 @@ enum Bool login(User* user) {
 		int	a = strcmp(comparing_user.userName, login_data.userName);
 		int	b = strcmp(comparing_user.password, login_data.password);
 		if (!(a || b)) {
-			puts("Login sucssefuly.");
+			puts("Login successfully.");
 			strcpy(user->userName, comparing_user.userName);//this returns to startMenu the users name
 			user->userType = comparing_user.userType;//this returns to startMenu the users type
 			fclose(fpointer);
@@ -114,7 +114,7 @@ void signUp() {
 	
 	fclose(fpointer);
 	
-	puts("User Registered succesfuly");
+	puts("User Registered successfully");
 }
 
 //assigns user type, customer or manager based on secret code
@@ -179,4 +179,34 @@ enum Bool isPasswordLegal(char* user_password) {
 		return FALSE;
 	return TRUE;//passed in this stage all checks
 }
-
+void ContactUs()
+{
+	char name[MAX_SIZE], email[MAX_SIZE], phone[MAX_SIZE], message[MAX_SIZE];
+	int check = 0;
+	system("cls");
+	puts("\t\t\t\t\t*****Contact Us*****\n");
+	puts("\t\t\t\t\t About Sami market\n");
+	puts("Email:ramzi@sami.com\n");
+	puts("Phone:08-8765456\n");
+	puts("The address:Ashdod, bnay brit 5/6\n");
+	puts("*****Leave a message*****\n");
+	puts("If you encounter any problems,fill the following form and we'll get back to you with a complete solution ");
+	puts("Enter your name:");
+	gets(name);
+	puts("Enter your email:");
+	gets(email);
+	puts("Enter your phone number: ");
+	gets(phone);
+	check = atoi(phone);
+	while (check_validation(check) == FALSE || check == 0)
+	{
+		printf("wrong phone please try again with 10 digits only:\n");
+		scanf("%s", &phone);
+		check = atoi(phone);
+		getchar();
+	}
+	puts("Enter the problem description:");
+	gets(message);
+	system("cls");
+	puts("\n\n\n\n\t\t****Thank you for contacting us and we'll get back to you within 48 hours with a reply****");
+}
