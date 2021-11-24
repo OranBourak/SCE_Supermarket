@@ -9,23 +9,6 @@ int main() {
 	initFiles();
 	Menu();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/*ILIYA'S main*/
 	//
 	//User logedUser = startMenu();//gives us a user without password
