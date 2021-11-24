@@ -107,9 +107,10 @@ viewCatalogManager() {
 	int choice;
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2, EXIT = 3 };
-	do {
-		system("cls");
+	system("cls");
 		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+		showProducts();//prints the catalog
+	do {
 		puts("Choose one of the following options:");
 		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Go back.\n");
 		scanf("%d", &choice);
@@ -117,9 +118,15 @@ viewCatalogManager() {
 		switch (choice) {
 
 		case SORT_BY_PRICE:
+			system("cls");
+			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			showByPrice();
 			break;
 
 		case CHOOSE_CATEGORY:
+			system("cls");
+			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			ShowProductsByCategory();
 			break;
 
 		case EXIT:
@@ -201,6 +208,40 @@ UpdateOrdersMenu() {
 	} while (choice != EXIT);
 }
 
+/// <summary>
+/// UPDATE PRODUCT MENU 
+/// </summary>
+/// <returns></returns>
+UpdateProductMemu() {
+	int choice;
+
+	enum option { Update_Product_Price = 1, UPDATE_PRODUCT_QUANTITY = 2, EXIT = 3 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****UPDATE PRODUCT INFO*****\n");
+		puts("Choose one of the following options:");
+		puts("\n(1) Update Product Price .\n(2) Update Product Quantity.\n(3) Go back.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case Update_Product_Price:
+			break;
+
+		case UPDATE_PRODUCT_QUANTITY:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+}
+
 //-----------------------------COSTUMER-MENU-SECTION-------------------------//
 
 
@@ -269,9 +310,15 @@ viewCatalogCustomer(User loged_User) {
 		switch (choice) {
 
 		case SORT_BY_PRICE:
+			system("cls");
+			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			showByPrice();
 			break;
 
 		case CHOOSE_CATEGORY:
+			system("cls");
+			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			ShowProductsByCategory();
 			break;
 
 		case ADD_PRODUCT:
@@ -329,12 +376,12 @@ viewCartMenu() {
 addProductMenu() {
 	int choice;
 
-	enum option { VIEW_CATALOG = 1, ADD_PRODUCT = 2,EXIT = 4 };
+	enum option { VIEW_CATALOG = 1, ADD_PRODUCT = 2,EXIT = 3};
 	do {
 		system("cls");
 		puts("\t\t\t\t\t*****ADD PRODUCTS TO CART*****\n");
 		puts("Choose one of the following options:");
-		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Add product to cart.\n(4) Go back.\n");
+		puts("\n(1) View Catalog.\n(2) Add Product.\n(3) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
@@ -357,7 +404,20 @@ addProductMenu() {
 }
 
 
+//------------------------Auxiliary Functions--------------//
 
+/// <summary>
+/// Prints menu for the costumer/manager
+//use 'showByCategory' function from Product.h
+/// </summary>
+/// <returns></returns>
+ShowProductsByCategory() {
+	int choice;
+	puts("\nChoose one of the categories:[0-4]");
+	puts("(0) Fruits\n(1) Vegetables\n(2) Drinks\n(3) Meat\n(4) Farm");
+	scanf("%d", &choice);
+	showByCategory(choice);
+}
 
 
 
