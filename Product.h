@@ -29,10 +29,11 @@ void showByCategory(enum category);
 
 //manager only
 void managerCatalogMenu();
-void addProduct();//add checks
+void addProduct();
 void removeProductMenu();
 void removeProduct(int);
-enum Bool changeProduct();//to make
+void changeProduct();//to make
+int getProductQuantity(int);
 
 //Functions used to create/edit a product
 enum Bool isProductSerialValid(char *);

@@ -1,5 +1,6 @@
 #define NUM_OF_CATEGORIES 5
 #include "Product.h"
+#include "Cart.h"
 
 /*Printing all products that contains in the catalog*/
 void showProducts(){
@@ -86,6 +87,7 @@ void customerCatalogMenu(){
 	showByCategory(MEAT);
 }
 
+//Prints all products in catalog by ascending price
 void showByPrice() {
 	//PART 1: getting the number of products in catalog.
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
@@ -121,6 +123,7 @@ void showByPrice() {
 	free(tempCatalog);
 }
 
+//Used by qsort() in showByPrice()
 int priceCompare(const void*a, const void*b) {
 	Product* L = (Product*)a;
 	Product* R = (Product*)b;
@@ -133,6 +136,7 @@ int priceCompare(const void*a, const void*b) {
 	else return 1;
 }
 
+//Prints all products of a specific category
 void showByCategory(enum category c) {
 
 	Product tempProduct;
@@ -247,6 +251,7 @@ void removeProductMenu(){
 
 }
 
+//removes a product from catalog, does not check if product exist
 void removeProduct(int serial) {
 	//PART 1: getting the number of products in catalog.
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
@@ -285,11 +290,35 @@ void removeProduct(int serial) {
 	for (int i = 0; i < tempCatalogSize; i++){
 		fwrite(&tempCatalog[i], sizeof(Product), 1, fpointer);
 	}
-
+	
 	fclose(fpointer);
 	free(tempCatalog);
+	
+	remove_Product_From_All_Carts(serial);
 }
 
+void changeProductMenu(){
+	//wip
+}
+
+int getProductQuantity(int serial) {
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	if (!fpointer) {
+		puts("Cannot open the file");
+		exit(1);
+	}
+	Product tempProduct;
+	while (fread(&tempProduct,sizeof(Product),1,fpointer)){
+		if (tempProduct.serialNumber == serial){
+			fclose(fpointer);
+			return tempProduct.quantity;
+		}
+	}
+	fclose(fpointer);
+	return -1;
+}
+
+//Is valid functions
 enum Bool isProductSerialValid(char * serial) {
 	if (!atoi(serial) || atoi(serial)<0) {
 		puts("This serial number isn't valid");
