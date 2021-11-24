@@ -164,6 +164,7 @@ void managerCatalogMenu(){
 		puts("0. EXIT");
 
 		scanf("%d", &choice);
+		getchar();
 		switch (choice)
 		{
 		case 0:
@@ -193,34 +194,36 @@ void addProduct(){
 	}
 	
 	Product new_product;
+	char tempInput[MAX_SIZE];
+
+	do {
+		puts("Enter product's serial number:");
+		gets(tempInput);
+	} while (!isProductSerialValid(tempInput));
+	new_product.serialNumber = atoi(tempInput);
 
 	//add checks to all see below
-	puts("Enter product's serial number:");
-	scanf("%d", &(new_product.serialNumber));
-	getchar();
-	
 	puts("Enter product's name:");
 	gets(new_product.productName);
 
-	puts("Enter product's price:");
-	scanf("%lf", &(new_product.productPrice));//check formating
-	getchar();
-
-	puts("Enter product's quantity:");
-	scanf("%u", &(new_product.quantity));
-	getchar();
-
-	puts("Enter product's category:");
-	puts("0.FRUITS 1.VEGETABLES 2.DRINKS 3.MEAT 4.FARM");
-	scanf("%d", &(new_product.product_category));
+	do {
+		puts("Enter product's price:");
+		gets(tempInput);
+	} while (!isProductPriceValid(tempInput));
+	new_product.productPrice = atof(tempInput);
 	
-	
-	/*check format
-	do {//password check
-		puts("Please enter user password, must contain at least 6 charcters and contain at least one number and one letter:");
-		gets(new_user.password);
-	} while (!isPasswordLegal(new_user.password));
-	*/
+	do {
+		puts("Enter product's quantity:");
+		gets(tempInput);
+	} while (!isProductQuantityValid(tempInput));
+	new_product.quantity = atoi(tempInput);
+
+	do {
+		puts("Enter product's category:");
+		puts("0.FRUITS 1.VEGETABLES 2.DRINKS 3.MEAT 4.FARM");
+		gets(tempInput);
+	} while (!isProductCategoryValid(tempInput));
+	new_product.product_category = atoi(tempInput);
 
 	fwrite(&new_product, sizeof(Product), 1, fpointer);
 
@@ -285,4 +288,52 @@ void removeProduct(int serial) {
 
 	fclose(fpointer);
 	free(tempCatalog);
+}
+
+enum Bool isProductSerialValid(char * serial) {
+	if (!atoi(serial) || atoi(serial)<0) {
+		puts("This serial number isn't valid");
+		return FALSE;
+	}
+	if (isProductExsist(atoi(serial))){
+		puts("This serial number already exists");
+		return FALSE;
+	}
+	return TRUE;
+}
+
+enum Bool isProductPriceValid(char * price) {
+	if (!atof(price) && strcmp(price,"0")) {
+		puts("This price isn't valid");
+		return FALSE;
+	}
+	if (atof(price) <= 0){
+		puts("Price can't be negative or zero");
+		return FALSE;
+	}
+	return TRUE;
+}
+
+enum Bool isProductQuantityValid(char* quantity) {
+	if (!atoi(quantity) && strcmp(quantity, "0")){
+		puts("This quantity isn't valid");
+		return FALSE;
+	}
+	if (atoi(quantity) < 0) {
+		puts("Quantity cannot be negative");
+		return FALSE;
+	}
+	return TRUE;
+}
+
+enum Bool isProductCategoryValid(char* category) {
+	if (!atoi(category) && strcmp(category, "0")) {
+		puts("This category isn't valid");
+		return FALSE;
+	}
+	if (atoi(category) < 0 || atoi(category) >= NUM_OF_CATEGORIES) {
+		puts("No such category");
+		return FALSE;
+	}
+	return TRUE;
 }

@@ -35,10 +35,9 @@ void removeProduct(int);
 enum Bool changeProduct();//to make
 
 //Functions used to create/edit a product
-enum Bool isProductSerialValid(int);
-enum Bool isProductNameValid(char*);
-enum Bool isProductPriceValid(double);
-enum Bool isProductQuantityValid(unsigned int);
-enum Bool isProductCategoryValid(enum category);
+enum Bool isProductSerialValid(char *);
+enum Bool isProductPriceValid(char *);
+enum Bool isProductQuantityValid(char *);
+enum Bool isProductCategoryValid(char *);
 
 
