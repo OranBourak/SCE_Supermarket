@@ -1,5 +1,5 @@
 #include "Structs.h"
-
+#include"User.h"
 
 
 /// <summary>
@@ -22,6 +22,7 @@ void Menu() {
 		switch (choice) {
 		case REGISTER:
 			signUp();
+			
 			break;
 
 		case SIGN_IN:
