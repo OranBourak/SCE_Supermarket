@@ -232,6 +232,7 @@ customerMenu(User loged_User) {
 			break;
 
 		case ADD_PRODUCT:
+			addProductMenu();
 			break;
 		case CLUB_MEMBER:
 			break;
@@ -308,6 +309,40 @@ viewCartMenu() {
 			break;
 
 		case PROCEED_TO_CHECKOUT:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+}
+
+/// <summary>
+/// ADD PRODUCT MENU FOR COSTUMER
+/// </summary>
+/// <returns></returns>
+addProductMenu() {
+	int choice;
+
+	enum option { VIEW_CATALOG = 1, ADD_PRODUCT = 2,EXIT = 4 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****ADD PRODUCTS TO CART*****\n");
+		puts("Choose one of the following options:");
+		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Add product to cart.\n(4) Go back.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case VIEW_CATALOG:
+			break;
+
+		case ADD_PRODUCT:
 			break;
 
 		case EXIT:
