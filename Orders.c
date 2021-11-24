@@ -71,7 +71,7 @@ void Create_Order(char* username)
 	printf("Enter id with 10 digits only:\n");
 	scanf_s("%s", &num_check);
 	check = atoi(num_check);
-	while (check_validation(check)==FALSE||check==0)
+	while (strlen(num_check) != 10 ||check==0)
 	{
 		printf("wrong id please try again with 10 digits only:\n");
 		scanf("%s", &num_check);
@@ -84,7 +84,7 @@ void Create_Order(char* username)
 	printf("Enter credit card with 10 digits only:\n");
 	scanf_s("%s", &num_check);
 	check = atoi(num_check);
-	while (check_validation(check) == FALSE || check == 0)
+	while (strlen(num_check) != 10 || check == 0)
 	{
 		printf("wrong id please try again with 10 digits only:\n");
 		scanf("%s", &num_check);
@@ -101,7 +101,7 @@ void Create_Order(char* username)
 	printf("Enter phone number with 10 digits only with 10 digits only:\n");
 	scanf_s("%s", &num_check);
 	check = atoi(num_check);
-	while (check_validation(check) == FALSE || check == 0)
+	while (strlen(num_check) != 10 || check == 0)
 	{
 		printf("wrong id please try again with 10 digits only:\n");
 		scanf("%s", &num_check);

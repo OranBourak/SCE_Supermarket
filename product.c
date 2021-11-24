@@ -297,8 +297,38 @@ void removeProduct(int serial) {
 	remove_Product_From_All_Carts(serial);
 }
 
-void changeProductMenu(){
-	//wip
+enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
+	Product tempProduct;
+	if (!isProductExsist(serial))
+		return FALSE;
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r+");
+	if (!fpointer) {
+		puts("Cannot open the file");
+		exit(1);
+	}
+	while (fread(&tempProduct,sizeof(Product),1,fpointer)){
+		if (tempProduct.serialNumber ==	serial){
+			break;
+		}
+	}
+	if (m == ADD) {
+		tempProduct.quantity += quantity;
+	}
+	else if (m == REPLACE) {
+		tempProduct.quantity = quantity;
+	}
+	else return FALSE;
+	
+	if (tempProduct.quantity < 0)
+		return FALSE;
+	
+
+	fseek(fpointer, -(int)sizeof(Product), SEEK_CUR);
+	
+	fwrite(&tempProduct, sizeof(Product), 1, fpointer);
+	
+	fclose(fpointer);
+	return TRUE;
 }
 
 int getProductQuantity(int serial) {
