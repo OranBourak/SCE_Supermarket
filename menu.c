@@ -72,6 +72,7 @@ managerMenu(User loged_User) {
 			break;
 
 		case UPDATE_INVENTORY:
+			updateInventoryMenu();
 			break;
 
 		case UPDATE_ORDERS:
@@ -211,4 +212,40 @@ viewCatalogCustomer(User loged_User) {
 }
 
 
+/// <summary>
+/// Update inventory func:
+///prints the options for the manager and activates the requested function
+/// </summary>
+/// <returns></returns>
+updateInventoryMenu() {
+	int choice;
 
+	enum option { ADD_PRODUCT = 1, REMOVE_PRODUCT = 2, UPDATE_PRODUCT = 3, EXIT = 4 };
+	do {
+		system("cls");
+		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+		puts("Choose one of the following options:");
+		puts("\n(1) Add New Product To Inventory .\n(2) Remove Product From Inventory.\n(3) Update Product Info.\n(4) Go back.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+
+		case ADD_PRODUCT:
+			break;
+
+		case REMOVE_PRODUCT:
+			break;
+
+		case UPDATE_PRODUCT:
+			break;
+
+		case EXIT:
+			printf("Goodbye ! :)\n");
+			break;
+
+		default:
+			printf("You entered a wrong input. Please try again\n");
+			break;
+		}
+	} while (choice != EXIT);
+}
