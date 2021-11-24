@@ -21,8 +21,8 @@ void Menu() {
 		getchar();
 		switch (choice) {
 		case REGISTER:
-			signUp();
-			
+			/*signUp();*/
+			ContactUs();
 			break;
 
 		case SIGN_IN:

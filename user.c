@@ -1,5 +1,6 @@
 #include "User.h"
 #include <string.h>
+#include"Orders.h"
 /* Maybe change variable names to be more clear? */
 
 
@@ -198,7 +199,7 @@ void ContactUs()
 	puts("Enter your phone number: ");
 	gets(phone);
 	check = atoi(phone);
-	while (check_validation(check) == FALSE || check == 0)
+	while (strlen(phone)!=10 || check == 0)
 	{
 		printf("wrong phone please try again with 10 digits only:\n");
 		scanf("%s", &phone);
