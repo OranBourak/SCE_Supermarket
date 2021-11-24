@@ -4,10 +4,8 @@
 #define PASSWORD_MIN_LENGTH 6
 
 #include "Structs.h"
-#include "User.h"
+#include "Cart.h"
 
-
-//#include "Cart.h"
 
 
 

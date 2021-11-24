@@ -270,7 +270,7 @@ customerMenu(User loged_User) {
 			break;
 
 		case VIEW_CART:
-			viewCartMenu();
+			viewCartMenu(loged_User);
 			break;
 
 		case ADD_PRODUCT:
@@ -302,9 +302,10 @@ viewCatalogCustomer(User loged_User) {
 	int choice;
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2,ADD_PRODUCT=3, EXIT = 4 };
-	do {
 		system("cls");
 		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+		showProducts();//prints the catalog
+	do {
 		puts("Choose one of the following options:");
 		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Add product to cart.\n(4) Go back.\n");
 		scanf("%d", &choice);
@@ -342,13 +343,14 @@ viewCatalogCustomer(User loged_User) {
 /// VIEW CART MENU FOR CUSTOMER USE
 /// </summary>
 /// <returns></returns>
-viewCartMenu() {
+viewCartMenu(User loged_User) {
 	int choice;
 
 	enum option { REMOVE_PRODUCT = 1, PROCEED_TO_CHECKOUT = 2, EXIT = 3 };
 	do {
 		system("cls");
 		puts("\t\t\t\t\t*****VIEW CART*****\n");
+		printCartInfo(getCartByUser(loged_User.userName));//print costumer cart
 		puts("Choose one of the following options:");
 		puts("\n(1) Remove Product From Cart.\n(2) Proceed To Checkout.\n(3) Go back.\n");
 		scanf("%d", &choice);
@@ -432,42 +434,49 @@ ShowProductsByCategory() {
 
 
 addProductToCartMenu(User loged_User) {
-	char* productSerial=NULL;
-	char* quantity=NULL;
-	int flag = 0;
+	int productSerial=0;
+	int quantity=0;
+	int flag = 1;
+	char* temp [50];
 	do
 	{
 		/*Input and validation check of Serial number*/
 		puts("Please enter the serial number of the product you want to add:");
-		gets(productSerial);
-		if (!atoi(productSerial)) {
+		gets(temp);
+		productSerial = atoi(temp);//return 0 if the string is not build from numbers only,otherwise return int
+		if (!productSerial) {
 			puts("Invalid input....please try again.");
 			continue;
 		}
-		else if (isProductExsist(atoi(productSerial)))
-			flag = 1;
+		else if (isProductExsist(productSerial))
+			flag = 0;
 		else
 			puts("Invalid serial number....pleas try again.");
 	} while (flag);
 	do
 	{	
-		flag = 0;
+		flag = 1;
 		/*Input and availability check of quantity*/
-		puts("Please enter quantity:[cannot be greater then the available in stoke]");
-		gets(quantity);
-		if (!atoi(quantity)) {
+		puts("Please enter quantity:[cannot be greater then the available in stock]");
+		gets(temp);
+		quantity = atoi(temp);
+		if (!quantity) {
 			puts("Invalid input....please try again.");
 			continue;
 		}
-		///להוסיף בדיקה של זמינות  כמות מוצר 
+		else if (getProductQuantity(productSerial) < quantity) {
+			puts("Great quantity from the available in stock....please try again.");
+			continue;
+		}
+		else {
+			flag = 0;
+		}
+
+
 	} while (flag);
 
 	/*Adds product to cart*/
-	addProductToCart(loged_User.userName, atoi(productSerial), atoi(quantity));
-	
-	
-	
-
+	addProductToCart(loged_User.userName, productSerial, quantity);
 }
 
 /// <summary>
