@@ -16,10 +16,11 @@ void addProductToCart(char* userName, int productSerialNumber, unsigned int quan
 
 /// <summary>
 /// Remove product from cart by serial number
+///Return the product quantity that removed from the cart.
 /// </summary>
 /// <param name="userName"></param>
 /// <param name="serialNumber"></param>
-void remove_Product_From_Cart(char* userName, int serialNumber);
+int remove_Product_From_Cart(char* userName, int serialNumber);
 void remove_Product_From_All_Carts(int serialNumber);
 /// <summary>
 /// Return user's Cart struct

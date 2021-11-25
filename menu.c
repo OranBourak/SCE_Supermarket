@@ -1,6 +1,4 @@
-#include "Structs.h"
-#include"User.h"
-
+#include "menu.h"
 
 /// <summary>
 /// MAIN MENU function
@@ -55,14 +53,12 @@ void Menu() {
 
 //-----------------------------MANAGER-MENU-SECTION-------------------------//
 
-
-
 /// <summary>
 /// MANAGER MENU SYSTEM
 ///Displays the options to the manager and activates the requested function
 /// </summary>
-/// <returns></returns>
-managerMenu(User loged_User) {
+/// <param name="loged_User"></param>
+void managerMenu(User loged_User) {
 	int choice;
 
 	enum option { VIEW_CATALOG = 1, UPDATE_INVENTORY = 2, UPDATE_ORDERS = 3, EXIT = 4 };
@@ -100,11 +96,10 @@ managerMenu(User loged_User) {
 }
 
 /// <summary>
-/// view catalog menu for manager
+///view catalog menu for manager
 ///Displays the options to the customer and activates the requested function
 /// </summary>
-/// <returns></returns>
-viewCatalogManager() {
+void viewCatalogManager() {
 	int choice;
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2, EXIT = 3 };
@@ -146,7 +141,7 @@ viewCatalogManager() {
 ///prints the options for the manager and activates the requested function
 /// </summary>
 /// <returns></returns>
-updateInventoryMenu() {
+void updateInventoryMenu() {
 	int choice;
 
 	enum option { ADD_PRODUCT = 1, REMOVE_PRODUCT = 2, UPDATE_PRODUCT = 3, EXIT = 4 };
@@ -179,7 +174,7 @@ updateInventoryMenu() {
 	} while (choice != EXIT);
 }
 
-UpdateOrdersMenu() {
+void UpdateOrdersMenu() {
 	int choice;
 
 	enum option { SHOW_ORDER_BY_STATUS = 1, UPDATE_ORDER = 2, EXIT = 3 };
@@ -213,7 +208,7 @@ UpdateOrdersMenu() {
 /// UPDATE PRODUCT MENU 
 /// </summary>
 /// <returns></returns>
-UpdateProductMemu() {
+void UpdateProductMemu() {
 	int choice;
 
 	enum option { Update_Product_Price = 1, UPDATE_PRODUCT_QUANTITY = 2, EXIT = 3 };
@@ -251,7 +246,7 @@ UpdateProductMemu() {
 ///Displays the options to the customer and activates the requested function
 /// </summary>
 /// <returns></returns>
-customerMenu(User loged_User) {
+void customerMenu(User loged_User) {
 	int choice;
 
 
@@ -298,7 +293,7 @@ customerMenu(User loged_User) {
 /// </summary>
 /// <param name="username">Using username in Add product function</param>
 /// <returns></returns>
-viewCatalogCustomer(User loged_User) {
+void viewCatalogCustomer(User loged_User) {
 	int choice;
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2,ADD_PRODUCT=3, EXIT = 4 };
@@ -343,7 +338,7 @@ viewCatalogCustomer(User loged_User) {
 /// VIEW CART MENU FOR CUSTOMER USE
 /// </summary>
 /// <returns></returns>
-viewCartMenu(User loged_User) {
+void viewCartMenu(User loged_User) {
 	int choice;
 	enum option { REMOVE_PRODUCT = 1, PROCEED_TO_CHECKOUT = 2, EXIT = 3 };
 	do {
@@ -357,6 +352,8 @@ viewCartMenu(User loged_User) {
 		switch (choice) {
 
 		case REMOVE_PRODUCT:
+			removeProductFromCart(loged_User);
+			printCartInfo(getCartByUser(loged_User.userName));//print costumer cart
 			break;
 
 		case PROCEED_TO_CHECKOUT:
@@ -377,7 +374,7 @@ viewCartMenu(User loged_User) {
 /// ADD PRODUCT MENU FOR COSTUMER
 /// </summary>
 /// <returns></returns>
-addProductMenu(User loged_User) {
+void addProductMenu(User loged_User) {
 	int choice;
 
 	enum option { VIEW_CATALOG = 1, ADD_PRODUCT = 2,EXIT = 3};
@@ -416,7 +413,7 @@ addProductMenu(User loged_User) {
 ///use 'showByCategory' function from Product.h
 /// </summary>
 /// <returns></returns>
-ShowProductsByCategory() {
+void ShowProductsByCategory() {
 	int choice;
 	puts("\nChoose one of the categories:[0-4]");
 	puts("(0) Fruits\n(1) Vegetables\n(2) Drinks\n(3) Meat\n(4) Farm");
@@ -432,7 +429,7 @@ ShowProductsByCategory() {
 
 
 
-addProductToCartMenu(User loged_User) {
+void addProductToCartMenu(User loged_User) {
 	int productSerial=0;
 	int quantity=0;
 	int flag = 1;
@@ -479,11 +476,26 @@ addProductToCartMenu(User loged_User) {
 }
 
 /// <summary>
-///Pr
+///Remove product from the cart, and update the product quantity in stock.
 /// </summary>
 /// <returns></returns>
-removeProductFromCart() {
 
+void removeProductFromCart(User loged_User) {
+	char* temp[50];
+	int serial_number = 0;
+	int quantity = 0;
+	puts("Enter the serial number of the product you want to remove:");
+	gets(temp);
+	serial_number = atoi(temp);
+	if (atoi(temp)&& isProductExsist(serial_number)) {
+		quantity = remove_Product_From_Cart(loged_User.userName, serial_number);
+		if (!quantity)
+			puts("Invalid input...The serial number you entered is not in the cart.");
+		else
+			changeProductQuantity(serial_number, ADD, quantity);//Adds the quantity to the available stock.
+	}
+	else
+		puts("Invalid input....please try again.");
 }
 
 

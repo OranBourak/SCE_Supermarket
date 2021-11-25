@@ -57,9 +57,10 @@ void addProductToCart(char* userName, int productSerialNumber, int quantity)
 
 }
 
-void remove_Product_From_Cart(char* userName, int serialNumber)
+int remove_Product_From_Cart(char* userName, int serialNumber)
 {
 	Cart temp,temp2;
+	int quantity = 0;
 	FILE* fpointer = fopen(CARTS_FILENAME, "r+");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
@@ -69,7 +70,7 @@ void remove_Product_From_Cart(char* userName, int serialNumber)
 		if (!strcmp(temp.userName, userName))
 			break;
 	}
-	strcpy(temp2.userName, temp.userName);//copy user name 
+	strcpy(temp2.userName,temp.userName);//copy user name 
 	temp2.productCounter = 0;
 	/*copy all product one by one, and skip the product we want to remove*/
 	for (int i = 0; i < temp.productCounter; i++) {
@@ -77,11 +78,14 @@ void remove_Product_From_Cart(char* userName, int serialNumber)
 			temp2.productsInCart[temp2.productCounter] = temp.productsInCart[i];
 			temp2.productCounter++;
 		}
+		else if(temp.productsInCart[i].serialNumber == serialNumber)
+			quantity = temp.productsInCart[i].quantity;//save the product quantity that removed from cart .needs to be returned to update the inventory.
 	}
 
 	fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);
 	fwrite(&temp2, sizeof(Cart), 1, fpointer);
 	fclose(fpointer);
+	return quantity;
 }
 
 void remove_Product_From_All_Carts(int serialNumber)
