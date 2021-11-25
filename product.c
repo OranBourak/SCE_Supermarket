@@ -6,7 +6,7 @@
 void showProducts(){
 	Product tempProduct;
 	FILE* fpointer;
-	fpointer = fopen(PRODUCTS_FILENAME, "r");
+	fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -70,7 +70,7 @@ Product getProductBySerial(int serialNumber){//what if serial number dosent exis
 }
 
 enum Bool isProductExsist(int serialNumber){
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
 		exit(1);
@@ -94,7 +94,7 @@ void customerCatalogMenu(){
 //Prints all products in catalog by ascending price
 void showByPrice() {
 	//PART 1: getting the number of products in catalog.
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (!fpointer) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
 		exit(1);
@@ -148,7 +148,7 @@ int priceCompare(const void*a, const void*b) {
 void showByCategory(enum category c) {
 
 	Product tempProduct;
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -202,7 +202,7 @@ void managerCatalogMenu(){
 
 void addProduct(){
 	FILE* fpointer;
-	fpointer = fopen(PRODUCTS_FILENAME, "a");
+	fpointer = fopen(PRODUCTS_FILENAME, "ab");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -265,7 +265,7 @@ void removeProductMenu(){
 //removes a product from catalog, does not check if product exist
 void removeProduct(int serial) {
 	//PART 1: getting the number of products in catalog.
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (!fpointer) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
 		exit(1);
@@ -292,7 +292,7 @@ void removeProduct(int serial) {
 	}
 	
 	//PART 3 overwriting existing file with new
-	fpointer = fopen(PRODUCTS_FILENAME, "w");
+	fpointer = fopen(PRODUCTS_FILENAME, "wb");
 	if (!fpointer) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
 		exit(1);
@@ -312,7 +312,7 @@ enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 	Product tempProduct;
 	if (!isProductExsist(serial))
 		return FALSE;
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r+");
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb+");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -343,7 +343,7 @@ enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 }
 
 int getProductQuantity(int serial) {
-	FILE* fpointer = fopen(PRODUCTS_FILENAME, "r");
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);

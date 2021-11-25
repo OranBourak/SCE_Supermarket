@@ -104,5 +104,4 @@ void addProductToCartMenu(User loged_User);
 ///Remove product from the cart, and update the product quantity in stock.
 /// </summary>
 /// <returns></returns>
-
 void removeProductFromCart(User loged_User);

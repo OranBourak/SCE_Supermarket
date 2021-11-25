@@ -18,7 +18,7 @@ void printCartInfo(Cart cart)
 
 void addProductToCart(char* userName, int productSerialNumber, int quantity)
 {
-	FILE* fpointer = fopen(CARTS_FILENAME, "r+");
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -61,7 +61,7 @@ int remove_Product_From_Cart(char* userName, int serialNumber)
 {
 	Cart temp,temp2;
 	int quantity = 0;
-	FILE* fpointer = fopen(CARTS_FILENAME, "r+");
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -92,7 +92,7 @@ void remove_Product_From_All_Carts(int serialNumber)
 {
 	User temp;
 
-	FILE* fpointer = fopen(USERS_FILENAME, "r");
+	FILE* fpointer = fopen(USERS_FILENAME, "rb");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -104,7 +104,7 @@ void remove_Product_From_All_Carts(int serialNumber)
 
 Cart getCartByUser(char* user_name)
 {
-	FILE* fpointer = fopen(CARTS_FILENAME, "r");
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
@@ -120,6 +120,6 @@ Cart getCartByUser(char* user_name)
 
 enum Bool empty_the_cart(User userName)
 {
-	//FILE* fpointer = fopen(USERS_FILENAME, "r");
+	//FILE* fpointer = fopen(USERS_FILENAME, "rb");
 	//return TRUE;
 }

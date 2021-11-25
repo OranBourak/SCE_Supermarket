@@ -14,19 +14,19 @@ void Create_Order(char* username)
 	Product orderp;
 	User user;
 
-	Orders = fopen(ORDERS_FILENAME, "r+");
+	Orders = fopen(ORDERS_FILENAME, "rb+");
 	if (Orders == NULL)
 	{
 		fprintf(stderr, "\n Error open orders");
 		exit(1);
 	}
-	carts_file = fopen(CARTS_FILENAME, "r+"); // open file with carts 
+	carts_file = fopen(CARTS_FILENAME, "rb+"); // open file with carts 
 	if (carts_file == NULL)
 	{
 		fprintf(stderr, "\n Error open orders");
 		exit(1);
 	}
-	fpointerU = fopen(USERS_FILENAME, "r+");
+	fpointerU = fopen(USERS_FILENAME, "rb+");
 	if (fpointerU == NULL)
 	{
 		fprintf(stderr, "\n Error open orders");
@@ -145,12 +145,12 @@ void Create_Order(char* username)
 	 FILE* fpointerU;
 	 FILE* fpointerO;
 	 int choice=2;
-	 fpointerU = fopen(USERS_FILENAME, "r+"); //open users file
+	 fpointerU = fopen(USERS_FILENAME, "rb+"); //open users file
 	 if (fpointerU == NULL) {
 		 fprintf(stderr, "\nERROR OPENING FILE\n");
 		 exit(1);
 	 }
-	 fpointerO = fopen(ORDERS_FILENAME, "r+"); // open orders file
+	 fpointerO = fopen(ORDERS_FILENAME, "rb+"); // open orders file
 	 if (fpointerO == NULL) {
 		 fprintf(stderr, "\nERROR OPENING FILE\n");
 		 exit(1);
@@ -275,7 +275,7 @@ void Create_Order(char* username)
  void print_order_details_Appending()
  {
 	 FILE* fpointer;
-	 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+	 fpointer = fopen(ORDERS_FILENAME, "rb");//test open files
 	 if (fpointer == NULL)
 	 {
 		 fprintf(stderr, "\n Error open orders");
@@ -296,7 +296,7 @@ void Create_Order(char* username)
  void print_order_details_Approved()
  {
 	 FILE* fpointer;
-	 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+	 fpointer = fopen(ORDERS_FILENAME, "rb");//test open files
 	 if (fpointer == NULL)
 	 {
 		 fprintf(stderr, "\n Error open orders");
@@ -317,7 +317,7 @@ void Create_Order(char* username)
  void print_order_details_Canceld()
  {
 	 FILE* fpointer;
-	 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+	 fpointer = fopen(ORDERS_FILENAME, "rb");//test open files
 	 if (fpointer == NULL)
 	 {
 		 fprintf(stderr, "\n Error open orders");
@@ -338,7 +338,7 @@ void Create_Order(char* username)
  {
 	 {
 		 FILE* fpointer;
-		 fpointer = fopen(ORDERS_FILENAME, "r");//test open files
+		 fpointer = fopen(ORDERS_FILENAME, "rb");//test open files
 		 if (fpointer == NULL)
 		 {
 			 fprintf(stderr, "\n Error open orders");

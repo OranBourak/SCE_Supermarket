@@ -4,10 +4,10 @@
 #define MAX_SIZE 50
 #define MAX_Products_In_Cart 10
 
-#define PRODUCTS_FILENAME "products_database.dat"
-#define USERS_FILENAME "users_database.dat"
-#define ORDERS_FILENAME "orders_database.dat"
-#define CARTS_FILENAME "carts_database.dat"
+#define PRODUCTS_FILENAME "products_database.bin"
+#define USERS_FILENAME "users_database.bin"
+#define ORDERS_FILENAME "orders_database.bin"
+#define CARTS_FILENAME "carts_database.bin"
 
 #include <stdio.h>
 #include <stdlib.h>
