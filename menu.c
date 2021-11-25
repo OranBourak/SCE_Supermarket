@@ -458,7 +458,7 @@ void addProductToCartMenu(User loged_User) {
 		if (temp == '0')
 			return;
 		quantity = atoi(temp);
-		if (!quantity) {
+		if (!quantity||quantity<0) {
 			puts("Invalid input....please try again.");
 			continue;
 		}
