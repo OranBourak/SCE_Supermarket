@@ -11,12 +11,13 @@ void showProducts(){
 		puts("Cannot open the file");
 		exit(1);
 		}
-	puts("_________________________________________CATALOG_________________________________________");
+	printf("             *****  CATALOG ***** \n");
+	printf("---------------------------------------------------------------- - \n");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		printProduct(tempProduct);
 	}
 	fclose(fpointer);
-	puts("_________________________________________________________________________________________");
+	printf("----------------------------------------------------------------- - \n");
 }
 
 /*Printing product details*/
