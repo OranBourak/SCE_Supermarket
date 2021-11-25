@@ -36,7 +36,7 @@ enum Bool login(User* user) {
 	FILE* fpointer;
 	User login_data;
 	User comparing_user;
-	fpointer = fopen(USERS_FILENAME, "r");
+	fpointer = fopen(USERS_FILENAME, "rb");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -73,7 +73,7 @@ enum Bool login(User* user) {
 void signUp() {
 	FILE* fpointer;
 	char temp_key;
-	fpointer = fopen(USERS_FILENAME, "a");
+	fpointer = fopen(USERS_FILENAME, "ab");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
@@ -104,7 +104,7 @@ void signUp() {
 
 	if (new_user.userType == CUSTOMER) {//creating a cart for an new customer.
 		Cart newCart;
-		FILE* cartPtr = fopen(CARTS_FILENAME, "a");
+		FILE* cartPtr = fopen(CARTS_FILENAME, "ab");
 		strcpy(newCart.userName,new_user.userName);
 		newCart.productCounter = 0;
 		fwrite(&newCart, sizeof(Cart), 1, cartPtr);
@@ -145,7 +145,7 @@ enum Type managerSignUp(){//works
 //check if username taken
 enum Bool isNameTaken(char* user_name)//works
 {
-	FILE* fpointer = fopen(USERS_FILENAME, "r");
+	FILE* fpointer = fopen(USERS_FILENAME, "rb");
 	User tempUser;
 	
 	while (fread(&tempUser, sizeof(User), 1, fpointer)) {

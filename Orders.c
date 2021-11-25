@@ -69,7 +69,7 @@ void Create_Order(char* username)
 	printf("Enter full name:\n");
 	gets(order.customer_full_name);
 	printf("Enter ID [10 digits]:\n");
-	scanf_s("%s", &num_check);
+	gets(num_check);
 	check = atoi(num_check);
 	while (strlen(num_check) != 10 ||check==0)
 	{
@@ -82,29 +82,29 @@ void Create_Order(char* username)
 	order.customer_id = check;
 	
 	printf("Enter credit card [10 digits]:\n");
-	scanf_s("%s", &num_check);
+	gets(num_check);
 	check = atoi(num_check);
 	while (strlen(num_check) != 10 || check == 0)
 	{
 		printf("Invalid input...The credit card must consist of 10 digits:\n");
-		scanf("%s", &num_check);
+		gets(num_check);
 		check = atoi(num_check);
 		getchar();
 	}
 	order.customer_credit_card = check;
 	printf("Enter address:\n");
-	scanf("%s", nameAddress);
+	gets(nameAddress);
 	strcpy(order.customer_address, nameAddress);
 	getchar();
 
 	
 	printf("Enter phone number [10 digits]:\n");
-	scanf_s("%s", &num_check);
+	gets(&num_check);
 	check = atoi(num_check);
 	while (strlen(num_check) != 10 || check == 0)
 	{
 		printf("Invalid input...The phone number must consist of 10 digits:\n");
-		scanf("%s", &num_check);
+		gets(&num_check);
 		check = atoi(num_check);
 		getchar();
 	}
@@ -136,6 +136,10 @@ void Create_Order(char* username)
 	fclose(Orders);
 	fclose(carts_file);
 	fclose(fpointerU);
+	if(empty_the_cart(username))
+		puts("Your order has been received and sent for manager approval ...\n The status of the order will be updated within 48 hours.");
+	else
+		puts("Something went wrong with the system please try later...");
 }
 
  void change_order_status(char* username)

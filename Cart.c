@@ -119,8 +119,23 @@ Cart getCartByUser(char* user_name)
 	}
 }
 
-enum Bool empty_the_cart(User userName)
-{
-	//FILE* fpointer = fopen(USERS_FILENAME, "rb");
-	//return TRUE;
+enum Bool empty_the_cart(User loged_user)
+{	
+	Cart tempCart;
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
+	if (!fpointer) {
+		puts("Cannot open the file");
+		exit(1);
+	}
+	while (fread(&tempCart, sizeof(Cart), 1, fpointer)) {
+		if (strcmp(loged_user.userName, tempCart.userName)) {
+			tempCart.productCounter = 0;
+			fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);
+			fwrite(&tempCart, sizeof(Cart), 1, fpointer);
+			return TRUE;
+		}
+
+	}
+
+	return FALSE;
 }

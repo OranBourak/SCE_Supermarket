@@ -365,7 +365,7 @@ void viewCartMenu(User loged_User) {
 			break;
 
 		case PROCEED_TO_CHECKOUT:
-			//Create_Order(loged_User.userName);
+			Create_Order(loged_User.userName);
 			break;
 
 		case EXIT:
