@@ -148,12 +148,16 @@ void showByCategory(enum category c) {
 		exit(1);
 	}
 	
+	printf("---------------------------------------------------------------- - \n");
+	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		if (tempProduct.product_category == c)
 		{
 			printProduct(tempProduct);
 		}
 	}
+	printf("----------------------------------------------------------------- - \n");
 	
 	fclose(fpointer);
 	
