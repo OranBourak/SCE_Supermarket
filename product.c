@@ -13,6 +13,8 @@ void showProducts(){
 		}
 	printf("             *****  CATALOG ***** \n");
 	printf("---------------------------------------------------------------- - \n");
+	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		printProduct(tempProduct);
 	}
@@ -116,9 +118,13 @@ void showByPrice() {
 	
 	qsort(tempCatalog, tempCatalogSize, sizeof(Product), priceCompare);
 	
+	printf("---------------------------------------------------------------- - \n");
+	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < tempCatalogSize; i++){
 		printProduct(tempCatalog[i]);
 	}
+	printf("---------------------------------------------------------------- - \n");
 
 	//LAST PART: close file, free memory.
 	fclose(fpointer);
