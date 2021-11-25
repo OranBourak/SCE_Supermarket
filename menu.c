@@ -345,7 +345,6 @@ viewCatalogCustomer(User loged_User) {
 /// <returns></returns>
 viewCartMenu(User loged_User) {
 	int choice;
-
 	enum option { REMOVE_PRODUCT = 1, PROCEED_TO_CHECKOUT = 2, EXIT = 3 };
 	do {
 		system("cls");

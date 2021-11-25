@@ -39,7 +39,7 @@ void printCartInfo(Cart cart)
 	printf("----------------------------------------------------------------- - \n");
 }
 
-void addProductToCart(char* userName, int productSerialNumber, unsigned int quantity)
+void addProductToCart(char* userName, int productSerialNumber, int quantity)
 {
 	FILE* fpointer = fopen(CARTS_FILENAME, "r+");
 	if (fpointer == NULL) {
@@ -51,6 +51,20 @@ void addProductToCart(char* userName, int productSerialNumber, unsigned int quan
 		if (!strcmp(temp.userName, userName))
 			break;
 	}
+
+
+	/*if the product is already exist it the cart*/
+	for(int i=0;i<temp.productCounter;i++)
+		if (temp.productsInCart[i].serialNumber == productSerialNumber) {//in case the product already contain in the cart
+			temp.productsInCart[i].quantity += quantity;//Adds the quantity to the existing product in the cart
+			fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);// jump back one Cart
+			fwrite(&temp, sizeof(Cart), 1, fpointer);//rewrite the cart with the new product included
+			fclose(fpointer);
+			changeProductQuantity(productSerialNumber, ADD, -quantity);//Updates the quantity in stock
+			return;
+		}
+
+	/*if the product not exist in cart: checking if there is free space in cart and add the product*/
 	if (temp.productCounter < MAX_Products_In_Cart) {//Check if the cart is full.
 		temp.productsInCart[temp.productCounter] = getProductBySerial(productSerialNumber);//adds the product to cart(copy product from the inventory)
 		temp.productsInCart[temp.productCounter].quantity = quantity;//update the quantity in cart
@@ -58,6 +72,7 @@ void addProductToCart(char* userName, int productSerialNumber, unsigned int quan
 		fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);// jump back one Cart
 		fwrite(&temp, sizeof(Cart), 1, fpointer);//rewrite the cart with the new product included
 		fclose(fpointer);
+		changeProductQuantity(productSerialNumber, ADD, -quantity);//Updates the quantity in stock
 	}
 	else{
 		printf("\nThe cart is full.\n");
