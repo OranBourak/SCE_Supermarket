@@ -8,8 +8,8 @@ void printCartInfo(Cart cart)
 	//	printProduct(cart.productsInCart[i]);
 
 	printf("             *****  MY CART ***** \n");
-	printf("---------------------------------------------------------------- - \n");
-	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
+	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < cart.productCounter; i++) 
 		printProduct(cart.productsInCart[i]);

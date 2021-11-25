@@ -12,8 +12,8 @@ void showProducts(){
 		exit(1);
 		}
 	printf("             *****  CATALOG ***** \n");
-	printf("---------------------------------------------------------------- - \n");
-	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
+	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		printProduct(tempProduct);
@@ -30,7 +30,7 @@ void printProduct(Product p){
 	//printf("Name: %s\t", pName);
 	//printf("Price: %.2lf\t", p.productPrice);//check formating
 	//printf("Quantity: %d\t", p.quantity);
-	printf(" %d     %-15s        %-5d     %-5.2lf", p.serialNumber, p.productName, p.quantity,p.productPrice);
+	printf(" %-5d     %-15s        %-5d       %-8.2lf", p.serialNumber, p.productName, p.quantity,p.productPrice);
 
 	switch (p.product_category)
 	{
@@ -44,7 +44,7 @@ void printProduct(Product p){
 		puts("   Drinks");
 		break;
 	case 3:
-		puts("    Meat");
+		puts("   Meat");
 		break;
 	case 4:
 		puts("   Farm");
@@ -118,8 +118,8 @@ void showByPrice() {
 	
 	qsort(tempCatalog, tempCatalogSize, sizeof(Product), priceCompare);
 	
-	printf("---------------------------------------------------------------- - \n");
-	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
+	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < tempCatalogSize; i++){
 		printProduct(tempCatalog[i]);
@@ -153,9 +153,8 @@ void showByCategory(enum category c) {
 		puts("Cannot open the file");
 		exit(1);
 	}
-	
-	printf("---------------------------------------------------------------- - \n");
-	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
+	printf("----------------------------------------------------------------- - \n");
+	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
 		if (tempProduct.product_category == c)
