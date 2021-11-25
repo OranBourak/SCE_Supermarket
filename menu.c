@@ -455,7 +455,7 @@ void addProductToCartMenu(User loged_User) {
 		/*Input and availability check of quantity*/
 		puts("Please enter quantity:[cannot be greater then the available in stock]");
 		gets(temp);
-		if (!strcmp(temp,'0'))
+		if (!strcmp(temp,"0"))
 			return;
 		quantity = atoi(temp);
 		if (!quantity||quantity<0) {
@@ -491,13 +491,19 @@ void removeProductFromCart(User loged_User) {
 	serial_number = atoi(temp);
 	if (atoi(temp)&& isProductExsist(serial_number)) {
 		quantity = remove_Product_From_Cart(loged_User.userName, serial_number);
-		if (!quantity)
+		if (!quantity) {
 			puts("Invalid input...The serial number you entered is not in the cart.");
+			printf("Press any key to continue...");
+			getchar();
+		}
 		else
 			changeProductQuantity(serial_number, ADD, quantity);//Adds the quantity to the available stock.
 	}
-	else
+	else {
 		puts("Invalid input....please try again.");
+		printf("Press any key to continue...");
+		getchar();
+	}
 }
 
 
