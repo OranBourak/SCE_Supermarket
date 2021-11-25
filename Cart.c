@@ -16,6 +16,7 @@ void printCartInfo(Cart cart)
 	printf("----------------------------------------------------------------- - \n");
 }
 
+
 void addProductToCart(char* userName, int productSerialNumber, int quantity)
 {
 	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");

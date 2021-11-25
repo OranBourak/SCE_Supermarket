@@ -455,6 +455,8 @@ void addProductToCartMenu(User loged_User) {
 		/*Input and availability check of quantity*/
 		puts("Please enter quantity:[cannot be greater then the available in stock]");
 		gets(temp);
+		if (temp == '0')
+			return;
 		quantity = atoi(temp);
 		if (!quantity) {
 			puts("Invalid input....please try again.");
