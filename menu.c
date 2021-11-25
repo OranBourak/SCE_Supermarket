@@ -102,13 +102,13 @@ void managerMenu(User loged_User) {
 void viewCatalogManager() {
 	int choice;
 
-	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2, EXIT = 3 };
+	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2, REFRESH_PAGE=3, EXIT = 4 };
 	system("cls");
 		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
 		showProducts();//prints the catalog
 	do {
 		puts("Choose one of the following options:");
-		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Go back.\n");
+		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Refresh Page.\n(4) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
@@ -124,7 +124,11 @@ void viewCatalogManager() {
 			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
 			ShowProductsByCategory();
 			break;
-
+		case REFRESH_PAGE:
+			system("cls");
+			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			showProducts();//prints the catalog
+			break;
 		case EXIT:
 			printf("Goodbye ! :)\n");
 			break;
@@ -296,13 +300,13 @@ void customerMenu(User loged_User) {
 void viewCatalogCustomer(User loged_User) {
 	int choice;
 
-	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2,ADD_PRODUCT=3, EXIT = 4 };
+	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2,ADD_PRODUCT=3,REFRESH_PAGE=4,EXIT = 5 };
 		system("cls");
 		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
 		showProducts();//prints the catalog
 	do {
 		puts("Choose one of the following options:");
-		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Add product to cart.\n(4) Go back.\n");
+		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Add product to cart.\n(4) Refresh Page\n(5) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
@@ -322,7 +326,11 @@ void viewCatalogCustomer(User loged_User) {
 		case ADD_PRODUCT:
 			addProductToCartMenu(loged_User);
 			break;
-
+		case REFRESH_PAGE:
+			system("cls");
+			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			showProducts();//prints the catalog
+			break;
 		case EXIT:
 			printf("Goodbye ! :)\n");
 			break;
@@ -357,6 +365,7 @@ void viewCartMenu(User loged_User) {
 			break;
 
 		case PROCEED_TO_CHECKOUT:
+			//Create_Order(loged_User.userName);
 			break;
 
 		case EXIT:
@@ -377,18 +386,16 @@ void viewCartMenu(User loged_User) {
 void addProductMenu(User loged_User) {
 	int choice;
 
-	enum option { VIEW_CATALOG = 1, ADD_PRODUCT = 2,EXIT = 3};
+	enum option { ADD_PRODUCT = 1,EXIT = 2};
 	do {
 		system("cls");
 		puts("\t\t\t\t\t*****ADD PRODUCTS TO CART*****\n");
+		showProducts();
 		puts("Choose one of the following options:");
-		puts("\n(1) View Catalog.\n(2) Add Product.\n(3) Go back.\n");
+		puts("\n(1) Add Product.\n(2) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
-
-		case VIEW_CATALOG:
-			break;
 
 		case ADD_PRODUCT:
 			addProductToCartMenu(loged_User);

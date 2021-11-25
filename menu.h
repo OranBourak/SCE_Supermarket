@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Structs.h"
-#include"User.h"
+#include "User.h"
+#include "Orders.h"
 
 
 

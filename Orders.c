@@ -68,12 +68,12 @@ void Create_Order(char* username)
 	int check = 0;
 	printf("Enter full name:\n");
 	gets(order.customer_full_name);
-	printf("Enter id with 10 digits only:\n");
+	printf("Enter ID [10 digits]:\n");
 	scanf_s("%s", &num_check);
 	check = atoi(num_check);
 	while (strlen(num_check) != 10 ||check==0)
 	{
-		printf("wrong id please try again with 10 digits only:\n");
+		printf("Invalid input...The ID number must consist of 10 digits:\n");
 		scanf("%s", &num_check);
 		check = atoi(num_check);
 		getchar();
@@ -81,12 +81,12 @@ void Create_Order(char* username)
 	
 	order.customer_id = check;
 	
-	printf("Enter credit card with 10 digits only:\n");
+	printf("Enter credit card [10 digits]:\n");
 	scanf_s("%s", &num_check);
 	check = atoi(num_check);
 	while (strlen(num_check) != 10 || check == 0)
 	{
-		printf("wrong id please try again with 10 digits only:\n");
+		printf("Invalid input...The credit card must consist of 10 digits:\n");
 		scanf("%s", &num_check);
 		check = atoi(num_check);
 		getchar();
@@ -98,12 +98,12 @@ void Create_Order(char* username)
 	getchar();
 
 	
-	printf("Enter phone number with 10 digits only with 10 digits only:\n");
+	printf("Enter phone number [10 digits]:\n");
 	scanf_s("%s", &num_check);
 	check = atoi(num_check);
 	while (strlen(num_check) != 10 || check == 0)
 	{
-		printf("wrong id please try again with 10 digits only:\n");
+		printf("Invalid input...The phone number must consist of 10 digits:\n");
 		scanf("%s", &num_check);
 		check = atoi(num_check);
 		getchar();
