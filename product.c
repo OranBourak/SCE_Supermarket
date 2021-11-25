@@ -11,7 +11,7 @@ void showProducts(){
 		puts("Cannot open the file");
 		exit(1);
 		}
-	printf("             *****  CATALOG ***** \n");
+	printf(GREEN"             *****  CATALOG ***** \n");
 	printf("----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
@@ -19,7 +19,7 @@ void showProducts(){
 		printProduct(tempProduct);
 	}
 	fclose(fpointer);
-	printf("----------------------------------------------------------------- - \n");
+	printf("----------------------------------------------------------------- - \n"RESET);
 }
 
 /*Printing product details*/
@@ -118,13 +118,13 @@ void showByPrice() {
 	
 	qsort(tempCatalog, tempCatalogSize, sizeof(Product), priceCompare);
 	
-	printf("----------------------------------------------------------------- - \n");
+	printf(BOLDGREEN"----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < tempCatalogSize; i++){
 		printProduct(tempCatalog[i]);
 	}
-	printf("---------------------------------------------------------------- - \n");
+	printf("---------------------------------------------------------------- - \n"RESET);
 
 	//LAST PART: close file, free memory.
 	fclose(fpointer);

@@ -2,18 +2,13 @@
 
 void printCartInfo(Cart cart)
 {
-	//printf("\nProducts List:\n");
-	//printf("----------------\n");
-	//for (int i = 0; i < cart.productCounter; i++)
-	//	printProduct(cart.productsInCart[i]);
-
-	printf("             *****  MY CART ***** \n");
+	printf(GREEN"             *****  MY CART ***** \n");
 	printf("----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < cart.productCounter; i++) 
 		printProduct(cart.productsInCart[i]);
-	printf("----------------------------------------------------------------- - \n");
+	printf("----------------------------------------------------------------- - \n"RESET);
 }
 
 
@@ -122,20 +117,21 @@ Cart getCartByUser(char* user_name)
 enum Bool empty_the_cart(User loged_user)
 {	
 	Cart tempCart;
-	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
+	FILE* fpointer = fopen(CARTS_FILENAME,"r+b");
 	if (!fpointer) {
 		puts("Cannot open the file");
 		exit(1);
 	}
 	while (fread(&tempCart, sizeof(Cart), 1, fpointer)) {
-		if (strcmp(loged_user.userName, tempCart.userName)) {
+		if (!strcmp(loged_user.userName, tempCart.userName)) {
 			tempCart.productCounter = 0;
 			fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);
 			fwrite(&tempCart, sizeof(Cart), 1, fpointer);
+			fclose(fpointer);
 			return TRUE;
 		}
 
 	}
-
+	fclose(fpointer);
 	return FALSE;
 }

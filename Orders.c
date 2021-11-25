@@ -74,9 +74,8 @@ void Create_Order(char* username)
 	while (strlen(num_check) != 10 ||check==0)
 	{
 		printf("Invalid input...The ID number must consist of 10 digits:\n");
-		scanf("%s", &num_check);
+		gets(num_check);
 		check = atoi(num_check);
-		getchar();
 	}
 	
 	order.customer_id = check;
@@ -89,13 +88,12 @@ void Create_Order(char* username)
 		printf("Invalid input...The credit card must consist of 10 digits:\n");
 		gets(num_check);
 		check = atoi(num_check);
-		getchar();
 	}
 	order.customer_credit_card = check;
 	printf("Enter address:\n");
 	gets(nameAddress);
 	strcpy(order.customer_address, nameAddress);
-	getchar();
+	
 
 	
 	printf("Enter phone number [10 digits]:\n");
@@ -106,7 +104,6 @@ void Create_Order(char* username)
 		printf("Invalid input...The phone number must consist of 10 digits:\n");
 		gets(&num_check);
 		check = atoi(num_check);
-		getchar();
 	}
 	order.phoneNumber = check;
 	order.orderPrice = 0;
@@ -136,10 +133,13 @@ void Create_Order(char* username)
 	fclose(Orders);
 	fclose(carts_file);
 	fclose(fpointerU);
-	if(empty_the_cart(username))
-		puts("Your order has been received and sent for manager approval ...\n The status of the order will be updated within 48 hours.");
+	if (empty_the_cart(username)) {
+		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
+		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
+		getchar();
+	}
 	else
-		puts("Something went wrong with the system please try later...");
+		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
 }
 
  void change_order_status(char* username)

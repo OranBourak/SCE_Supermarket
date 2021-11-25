@@ -257,8 +257,8 @@ void customerMenu(User loged_User) {
 	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, CLUB_MEMBER = 4, CONTACT_US = 5, EXIT = 6 };
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****CUSTOMER MENU*****\n");
-		printf("Hello %s, How can we help you today?\n\n", loged_User.userName);
+		printf(BOLDGREEN"\t\t\t\t\t*****CUSTOMER MENU*****\n"RESET);
+		printf(BOLDBLUE"Hello %s, How can we help you today?\n\n"RESET, loged_User.userName );
 		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6) Sign Out.\n");
 		scanf("%d", &choice);
 		getchar();
@@ -351,7 +351,7 @@ void viewCartMenu(User loged_User) {
 	enum option { REMOVE_PRODUCT = 1, PROCEED_TO_CHECKOUT = 2, EXIT = 3 };
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****VIEW CART*****\n");
+		printf(BOLDGREEN"\t\t\t\t\t*****VIEW CART*****\n"RESET);
 		printCartInfo(getCartByUser(loged_User.userName));//print costumer cart
 		puts("Choose one of the following options:");
 		puts("\n(1) Remove Product From Cart.\n(2) Proceed To Checkout.\n(3) Go back.\n");
