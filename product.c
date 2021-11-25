@@ -21,32 +21,33 @@ void showProducts(){
 
 /*Printing product details*/
 void printProduct(Product p){
-	char pName[MAX_SIZE];
-	strcpy(pName, p.productName);
-	printf("Serial: %d\t", p.serialNumber);
-	printf("Name: %s\t", pName);
-	printf("Price: %.2lf\t", p.productPrice);//check formating
-	printf("Quantity: %d\t", p.quantity);
+	//char pName[MAX_SIZE];
+	//strcpy(pName, p.productName);
+	//printf("Serial: %d\t", p.serialNumber);
+	//printf("Name: %s\t", pName);
+	//printf("Price: %.2lf\t", p.productPrice);//check formating
+	//printf("Quantity: %d\t", p.quantity);
+	printf(" %d     %-15s        %-5d     %-5.2lf", p.serialNumber, p.productName, p.quantity,p.productPrice);
 
 	switch (p.product_category)
 	{
 	case 0:
-		puts("Category: Fruits");
+		puts("   Fruits");
 		break;
 	case 1:
-		puts("Category: Vegetables");
+		puts("   Vegetables");
 		break;
 	case 2:
-		puts("Category: Drinks");
+		puts("   Drinks");
 		break;
 	case 3:
-		puts("Category: Meat");
+		puts("    Meat");
 		break;
 	case 4:
-		puts("Category: Farm");
+		puts("   Farm");
 		break;
 	default:
-		puts("ERROR");
+		puts("   ERROR");
 		break;
 	}
 }

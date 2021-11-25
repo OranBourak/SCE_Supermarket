@@ -9,33 +9,10 @@ void printCartInfo(Cart cart)
 
 	printf("             *****  MY CART ***** \n");
 	printf("---------------------------------------------------------------- - \n");
-	printf("S.N.|    NAME           |  QUANTITY |  PRICE| CATEGORY \n");
+	printf("S.N.|    NAME           |  QUANTITY |  PRICE  | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
-	for (int i = 0; i < cart.productCounter; i++) {
-		printf(" %d     %-15s        %-5d     %-5.2lf", cart.productsInCart[i].serialNumber, cart.productsInCart[i].productName, cart.productsInCart[i].quantity,
-			cart.productsInCart[i].productPrice);
-		switch (cart.productsInCart[i].product_category)
-		{
-		case 0:
-			puts("  Fruits");
-			break;
-		case 1:
-			puts("  Vegetables");
-			break;
-		case 2:
-			puts("  Drinks");
-			break;
-		case 3:
-			puts("  Meat");
-			break;
-		case 4:
-			puts("  Farm");
-			break;
-		default:
-			puts("  ERROR");
-			break;
-		}
-	}
+	for (int i = 0; i < cart.productCounter; i++) 
+		printProduct(cart.productsInCart[i]);
 	printf("----------------------------------------------------------------- - \n");
 }
 
