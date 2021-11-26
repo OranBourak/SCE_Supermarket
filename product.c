@@ -11,7 +11,7 @@ void showProducts(){
 		puts("Cannot open the file");
 		exit(1);
 		}
-	printf(GREEN"             *****  CATALOG ***** \n");
+	printf(BOLDYELLOW"             *****  CATALOG ***** \n");
 	printf("----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
@@ -24,12 +24,7 @@ void showProducts(){
 
 /*Printing product details*/
 void printProduct(Product p){
-	//char pName[MAX_SIZE];
-	//strcpy(pName, p.productName);
-	//printf("Serial: %d\t", p.serialNumber);
-	//printf("Name: %s\t", pName);
-	//printf("Price: %.2lf\t", p.productPrice);//check formating
-	//printf("Quantity: %d\t", p.quantity);
+
 	printf(" %-5d     %-15s        %-5d       %-8.2lf", p.serialNumber, p.productName, p.quantity,p.productPrice);
 
 	switch (p.product_category)
@@ -118,7 +113,7 @@ void showByPrice() {
 	
 	qsort(tempCatalog, tempCatalogSize, sizeof(Product), priceCompare);
 	
-	printf(BOLDGREEN"----------------------------------------------------------------- - \n");
+	printf(BOLDYELLOW"----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < tempCatalogSize; i++){
@@ -153,7 +148,7 @@ void showByCategory(enum category c) {
 		puts("Cannot open the file");
 		exit(1);
 	}
-	printf("----------------------------------------------------------------- - \n");
+	printf(BOLDYELLOW"----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
 	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
@@ -162,7 +157,7 @@ void showByCategory(enum category c) {
 			printProduct(tempProduct);
 		}
 	}
-	printf("----------------------------------------------------------------- - \n");
+	printf("----------------------------------------------------------------- - \n"RESET);
 	
 	fclose(fpointer);
 	

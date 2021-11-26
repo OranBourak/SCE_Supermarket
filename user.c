@@ -86,7 +86,7 @@ void signUp() {
 		puts("Please enter user name [cannot be an existing name]:");
 		gets(new_user.userName);
 		if (isNameTaken(new_user.userName)) {
-			puts("\nThe username you selected is already taken...please try again\n");
+			puts(RED"\nThe username you selected is already taken...please try again\n"RESET);
 			printf("Press any key to continue...");
 			scanf("%c", &temp_key);
 			getchar();
@@ -133,11 +133,11 @@ enum Type managerSignUp(){//works
 			getchar();//clean enter
 			if (!strcmp(managerCode, MANAGER_CODE))
 				return MANAGER;
-			else puts("\nWrong code");
+			else puts(RED"\nWrong code"RESET);
 		}
 		else if (choice == 'n')
 			return CUSTOMER;
-		else puts("\nInvalid option, please enter y/n");
+		else puts(RED"\nInvalid option, please enter y/n"RESET);
 	} while (TRUE);//I maybe dont need it,lets save. YES NO NEED
 	//while (choice != 'y' || choice != 'n') saved
 }
@@ -201,7 +201,7 @@ void ContactUs()
 	check = atoi(phone);
 	while (strlen(phone)!=10 || check == 0)
 	{
-		printf("wrong phone please try again with 10 digits only:\n");
+		printf(RED"wrong phone please try again with 10 digits only:\n"RESET);
 		scanf("%s", &phone);
 		check = atoi(phone);
 		getchar();

@@ -33,11 +33,11 @@ void Menu() {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 		printf("Press any key to continue...");
@@ -84,7 +84,7 @@ void managerMenu(User loged_User) {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
@@ -104,7 +104,7 @@ void viewCatalogManager() {
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2, REFRESH_PAGE=3, EXIT = 4 };
 	system("cls");
-		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+		puts(BOLDCYAN"\t\t\t\t\t*****VIEW CATALOG*****\n"RESET);
 		showProducts();//prints the catalog
 	do {
 		puts("Choose one of the following options:");
@@ -130,11 +130,11 @@ void viewCatalogManager() {
 			showProducts();//prints the catalog
 			break;
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -151,7 +151,7 @@ void updateInventoryMenu() {
 	enum option { ADD_PRODUCT = 1, REMOVE_PRODUCT = 2, UPDATE_PRODUCT = 3, EXIT = 4 };
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****UPDATE INVENTORY*****\n");
+		puts(BOLDCYAN"\t\t\t\t\t*****UPDATE INVENTORY*****\n"RESET);
 		puts("Choose one of the following options:");
 		puts("\n(1) Add New Product To Inventory .\n(2) Remove Product From Inventory.\n(3) Update Product Info.\n(4) Go back.\n");
 		scanf("%d", &choice);
@@ -168,11 +168,11 @@ void updateInventoryMenu() {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -184,7 +184,7 @@ void UpdateOrdersMenu() {
 	enum option { SHOW_ORDER_BY_STATUS = 1, UPDATE_ORDER = 2, EXIT = 3 };
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****UPDATE ORDERS*****\n");
+		puts(BOLDCYAN"\t\t\t\t\t*****UPDATE ORDERS*****\n"RESET);
 		puts("Choose one of the following options:");
 		puts("\n(1) Show Orders By Status .\n(2) Update Order.\n(3) Go back.\n");
 		scanf("%d", &choice);
@@ -198,11 +198,11 @@ void UpdateOrdersMenu() {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -218,7 +218,7 @@ void UpdateProductMemu() {
 	enum option { Update_Product_Price = 1, UPDATE_PRODUCT_QUANTITY = 2, EXIT = 3 };
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****UPDATE PRODUCT INFO*****\n");
+		puts(BOLDCYAN"\t\t\t\t\t*****UPDATE PRODUCT INFO*****\n"RESET);
 		puts("Choose one of the following options:");
 		puts("\n(1) Update Product Price .\n(2) Update Product Quantity.\n(3) Go back.\n");
 		scanf("%d", &choice);
@@ -232,11 +232,11 @@ void UpdateProductMemu() {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -281,7 +281,7 @@ void customerMenu(User loged_User) {
 			ContactUs();
 			break;
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
@@ -302,7 +302,7 @@ void viewCatalogCustomer(User loged_User) {
 
 	enum option { SORT_BY_PRICE = 1, CHOOSE_CATEGORY = 2,ADD_PRODUCT=3,REFRESH_PAGE=4,EXIT = 5 };
 		system("cls");
-		puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+		puts(BOLDCYAN"\t\t\t\t\t*****VIEW CATALOG*****\n"RESET);
 		showProducts();//prints the catalog
 	do {
 		puts("Choose one of the following options:");
@@ -313,13 +313,13 @@ void viewCatalogCustomer(User loged_User) {
 
 		case SORT_BY_PRICE:
 			system("cls");
-			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			puts(BOLDCYAN"\t\t\t\t\t*****VIEW CATALOG*****\n"RESET);
 			showByPrice();
 			break;
 
 		case CHOOSE_CATEGORY:
 			system("cls");
-			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			puts(BOLDCYAN"\t\t\t\t\t*****VIEW CATALOG*****\n"RESET);
 			ShowProductsByCategory();
 			break;
 
@@ -328,15 +328,15 @@ void viewCatalogCustomer(User loged_User) {
 			break;
 		case REFRESH_PAGE:
 			system("cls");
-			puts("\t\t\t\t\t*****VIEW CATALOG*****\n");
+			puts(BOLDCYAN"\t\t\t\t\t*****VIEW CATALOG*****\n"RESET);
 			showProducts();//prints the catalog
 			break;
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -351,7 +351,7 @@ void viewCartMenu(User loged_User) {
 	enum option { REMOVE_PRODUCT = 1, PROCEED_TO_CHECKOUT = 2, EXIT = 3 };
 	do {
 		system("cls");
-		printf(BOLDGREEN"\t\t\t\t\t*****VIEW CART*****\n"RESET);
+		printf(BOLDCYAN"\t\t\t\t\t*****VIEW CART*****\n"RESET);
 		printCartInfo(getCartByUser(loged_User.userName));//print costumer cart
 		puts("Choose one of the following options:");
 		puts("\n(1) Remove Product From Cart.\n(2) Proceed To Checkout.\n(3) Go back.\n");
@@ -369,11 +369,11 @@ void viewCartMenu(User loged_User) {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -389,7 +389,7 @@ void addProductMenu(User loged_User) {
 	enum option { ADD_PRODUCT = 1,EXIT = 2};
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****ADD PRODUCTS TO CART*****\n");
+		puts(BOLDCYAN"\t\t\t\t\t*****ADD PRODUCTS TO CART*****\n"RESET);
 		showProducts();
 		puts("Choose one of the following options:");
 		puts("\n(1) Add Product.\n(2) Go back.\n");
@@ -402,11 +402,11 @@ void addProductMenu(User loged_User) {
 			break;
 
 		case EXIT:
-			printf("Goodbye ! :)\n");
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -448,13 +448,13 @@ void addProductToCartMenu(User loged_User) {
 		gets(temp);
 		productSerial = atoi(temp);//return 0 if the string is not build from numbers only,otherwise return int
 		if (!productSerial) {
-			puts("Invalid input....please try again.");
+			puts(RED"Invalid input....please try again."RESET);
 			continue;
 		}
 		else if (isProductExsist(productSerial))
 			flag = 0;
 		else
-			puts("Invalid serial number....pleas try again.");
+			puts(RED"Invalid serial number....pleas try again."RESET);
 	} while (flag);
 	do
 	{	
@@ -466,7 +466,7 @@ void addProductToCartMenu(User loged_User) {
 			return;
 		quantity = atoi(temp);
 		if (!quantity||quantity<0) {
-			puts("Invalid input....please try again.");
+			puts(RED"Invalid input....please try again."RESET);
 			continue;
 		}
 		else if (getProductQuantity(productSerial) < quantity) {
@@ -499,7 +499,7 @@ void removeProductFromCart(User loged_User) {
 	if (atoi(temp)&& isProductExsist(serial_number)) {
 		quantity = remove_Product_From_Cart(loged_User.userName, serial_number);
 		if (!quantity) {
-			puts("Invalid input...The serial number you entered is not in the cart.");
+			puts(RED"Invalid input...The serial number you entered is not in the cart."RESET);
 			printf("Press any key to continue...");
 			getchar();
 		}
@@ -507,7 +507,7 @@ void removeProductFromCart(User loged_User) {
 			changeProductQuantity(serial_number, ADD, quantity);//Adds the quantity to the available stock.
 	}
 	else {
-		puts("Invalid input....please try again.");
+		puts(RED"Invalid input....please try again."RESET);
 		printf("Press any key to continue...");
 		getchar();
 	}

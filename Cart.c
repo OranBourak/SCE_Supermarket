@@ -2,7 +2,7 @@
 
 void printCartInfo(Cart cart)
 {
-	printf(GREEN"             *****  MY CART ***** \n");
+	printf(BOLDYELLOW"             *****  MY CART ***** \n");
 	printf("----------------------------------------------------------------- - \n");
 	printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
 	printf("----------------------------------------------------------------- - \n");
