@@ -50,11 +50,10 @@ void Create_Order(char* username)
 		}
 	}
 
-	int size = 0;
-	size = sizeof(cart.productsInCart) / sizeof(Product);
-	order.counter_cart_list = size;
+	
+	order.counter_cart_list = cart.productCounter;
 	strcpy(order.userName, cart.userName);
-	for (int i = 0; i < size; i++) //copy the products from cart to the order
+	for (int i = 0; i < order.counter_cart_list; i++) //copy the products from cart to the order
 	{
 		strcpy(order.cart_list[i].productName, cart.productsInCart[i].productName);
 		order.cart_list[i].productPrice = cart.productsInCart[i].productPrice;
@@ -110,7 +109,7 @@ void Create_Order(char* username)
 	if(user.userType==2)//if user club
 	{
 		float sumReduction = 0;
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < order.counter_cart_list; i++)
 		{
 			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
 
@@ -120,7 +119,7 @@ void Create_Order(char* username)
 	}
 	else//if user not club
 	{
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < order.counter_cart_list; i++)
 		{
 			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
 
@@ -251,7 +250,6 @@ void Create_Order(char* username)
 	 int i = 0;
 	 strcpy(tempName, order.customer_full_name);
 	 strcpy(tempAddre, order.customer_address);
-	 system("cls");
 	 printf("id: %ld\n", order.customer_id);//print id
 	 printf("Name: %s\n", tempName);//print name
 	 printf("Credit card: %ld\n", order.customer_credit_card);//print card
@@ -287,7 +285,7 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	 printf("Orders awaiting confirmation:\n");
+	/* printf("Orders awaiting confirmation:\n");*/
 	 while(fread(&temp,sizeof(Order),1,fpointer))
 	 {
 		 if (temp.status == 0)
@@ -308,7 +306,7 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	 printf("Orders are confirmed:\n");
+	 /*printf("Orders are confirmed:\n");*/
 	 while (fread(&temp, sizeof(Order), 1, fpointer))
 	 {
 		 if (temp.status == 1)
@@ -329,7 +327,7 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	 printf("Orders are canceled:\n");
+	 /*printf("Orders are canceled:\n");*/
 	 while (fread(&temp, sizeof(Order), 1, fpointer))
 	 {
 		 if (temp.status == 2)

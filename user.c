@@ -208,6 +208,7 @@ void ContactUs()
 	}
 	puts("Enter the problem description:");
 	gets(message);
-	system("cls");
+	
 	puts("\n\n\n\n\t\t****Thank you for contacting us and we'll get back to you within 48 hours with a reply****");
+	getchar();
 }

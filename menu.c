@@ -231,9 +231,18 @@ void UpdateOrdersMenu() {
 		switch (choice) {
 
 		case SHOW_ORDER_BY_STATUS:
+			puts(BOLDCYAN"\t\t\t\t\t*****Orders Appending*****\n"RESET);
+			print_order_details_Appending();
+			puts(BOLDCYAN"\t\t\t\t\t*****Orders Approved*****\n"RESET);
+			print_order_details_Approved();
+			puts(BOLDCYAN"\t\t\t\t\t*****Orders Canceld*****\n"RESET);
+			print_order_details_Canceld();
+			getchar();
+
 			break;
 
 		case UPDATE_ORDER:
+
 			break;
 
 		case EXIT:
