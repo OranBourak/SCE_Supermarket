@@ -10,9 +10,9 @@ void Menu() {
 	User loged_User; //The user that logged to the system
 	do {
 		system("cls");
-		printf("***********************************\n");
+		printf(BOLDCYAN"***********************************\n");
 		printf("   Welcome to Sami Supermarket\n");
-		printf("***********************************\n\n");
+		printf("***********************************\n\n"RESET);
 
 		printf("(1). Register\n(2). Sign in\n(3). Exit the system\n");
 		scanf("%d", &choice);
@@ -64,8 +64,8 @@ void managerMenu(User loged_User) {
 	enum option { VIEW_CATALOG = 1, UPDATE_INVENTORY = 2, UPDATE_ORDERS = 3, EXIT = 4 };
 	do {
 		system("cls");
-		puts("\t\t\t\t\t*****MANAGER MENU*****\n");
-		printf("Hello %s, How can we help you today?\n\n", loged_User.userName);
+		puts(BOLDCYAN"\t\t\t\t\t*****MANAGER MENU*****\n"RESET);
+		printf(BOLDBLUE"Hello %s, How can we help you today?\n\n"RESET, loged_User.userName);
 		puts("(1) View catalog.\n(2) Update inventory.\n(3) Update order's status.\n(4) Sign Out.\n");
 		scanf("%d", &choice);
 		getchar();
@@ -88,7 +88,7 @@ void managerMenu(User loged_User) {
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
@@ -257,7 +257,7 @@ void customerMenu(User loged_User) {
 	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, CLUB_MEMBER = 4, CONTACT_US = 5, EXIT = 6 };
 	do {
 		system("cls");
-		printf(BOLDGREEN"\t\t\t\t\t*****CUSTOMER MENU*****\n"RESET);
+		printf(BOLDCYAN"\t\t\t\t\t*****CUSTOMER MENU*****\n"RESET);
 		printf(BOLDBLUE"Hello %s, How can we help you today?\n\n"RESET, loged_User.userName );
 		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6) Sign Out.\n");
 		scanf("%d", &choice);
@@ -285,7 +285,7 @@ void customerMenu(User loged_User) {
 			break;
 
 		default:
-			printf("You entered a wrong input. Please try again\n");
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
 			break;
 		}
 	} while (choice != EXIT);
