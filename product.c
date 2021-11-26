@@ -337,6 +337,32 @@ enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 	return TRUE;
 }
 
+enum Bool changeProductPrice(int serial, double newPrice) {
+	Product tempProduct;
+	if (!isProductExsist(serial) || newPrice<=0)
+		return FALSE;
+	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb+");
+	if (!fpointer) {
+		puts("Cannot open the file");
+		exit(1);
+	}
+	while (fread(&tempProduct, sizeof(Product), 1, fpointer)) {
+		if (tempProduct.serialNumber == serial) {
+			break;
+		}
+	}
+	
+	tempProduct.productPrice = newPrice;
+
+	fseek(fpointer, -(int)sizeof(Product), SEEK_CUR);
+
+	fwrite(&tempProduct, sizeof(Product), 1, fpointer);
+
+	fclose(fpointer);
+	return TRUE;
+}
+
+
 int getProductQuantity(int serial) {
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (!fpointer) {

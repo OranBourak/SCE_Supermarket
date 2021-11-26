@@ -34,6 +34,7 @@ void removeProductMenu();
 void removeProduct(int);
 enum CHANGE_MODE{ADD,REPLACE};
 enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int newQuantity);//to make
+enum Bool changeProductPrice(int serial, double newPrice);
 int getProductQuantity(int);
 
 //Functions used to create or edit a product
