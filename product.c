@@ -2,6 +2,7 @@
 #include "Product.h"
 #include "Cart.h"
 
+
 /*Printing all products that contains in the catalog*/
 void showProducts(){
 	Product tempProduct;
@@ -110,7 +111,7 @@ void showByPrice() {
 	for (int i = 0; fread(&tempProduct, sizeof(Product), 1, fpointer); i++) {
 		tempCatalog[i] = tempProduct;
 	}
-	
+	//PART 3: where magic happens...
 	qsort(tempCatalog, tempCatalogSize, sizeof(Product), priceCompare);
 	
 	printf(BOLDYELLOW"----------------------------------------------------------------- - \n");
@@ -163,7 +164,7 @@ void showByCategory(enum category c) {
 	
 }
 
-void managerCatalogMenu(){
+void managerCatalogMenu(){//now useless...
 	int choice;
 	do {
 		showProducts();
@@ -242,19 +243,15 @@ void addProduct(){
 
 void removeProductMenu(){
 	int serial;
-	do {
-		puts("Enter a product's serial number to delete, 0 to EXIT");
-		scanf("%d", &serial);
+	puts("Enter a product's serial number to delete, 0 to EXIT");
+	scanf("%d", &serial);
 
-		if (isProductExsist(serial)){
-			removeProduct(serial);
-			puts("Product removed successfully");
-		}
-		else if(serial != 0)
-			puts("A product with this serial number doesn't exist.");
-		
-	} while (serial != 0);
-
+	if (isProductExsist(serial)){
+		removeProduct(serial);
+		puts("Product removed successfully");
+	}
+	else
+		puts("A product with this serial number doesn't exist.");
 }
 
 //removes a product from catalog, does not check if product exist
@@ -305,8 +302,9 @@ void removeProduct(int serial) {
 
 enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 	Product tempProduct;
-	if (!isProductExsist(serial))
+	if (!isProductExsist(serial)) {
 		return FALSE;
+	}
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb+");
 	if (!fpointer) {
 		puts("Cannot open the file");
@@ -325,8 +323,9 @@ enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 	}
 	else return FALSE;
 	
-	if (tempProduct.quantity < 0)
+	if (tempProduct.quantity < 0) {
 		return FALSE;
+	}
 	
 
 	fseek(fpointer, -(int)sizeof(Product), SEEK_CUR);

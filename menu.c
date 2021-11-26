@@ -47,10 +47,6 @@ void Menu() {
 
 }
 
-
-
-
-
 //-----------------------------MANAGER-MENU-SECTION-------------------------//
 
 /// <summary>
@@ -148,34 +144,77 @@ void viewCatalogManager() {
 void updateInventoryMenu() {
 	int choice;
 
-	enum option { ADD_PRODUCT = 1, REMOVE_PRODUCT = 2, UPDATE_PRODUCT = 3, EXIT = 4 };
+	enum option { ADD_PRODUCT = 1, REMOVE_PRODUCT = 2, UPDATE_PRODUCT_QUANTITY = 3, CHANGE_PRODUCT_PRICE = 4,EXIT = 5 };
 	do {
 		system("cls");
 		puts(BOLDCYAN"\t\t\t\t\t*****UPDATE INVENTORY*****\n"RESET);
+		showProducts();
 		puts("Choose one of the following options:");
-		puts("\n(1) Add New Product To Inventory .\n(2) Remove Product From Inventory.\n(3) Update Product Info.\n(4) Go back.\n");
+		puts("\n(1) Add New Product To Inventory .\n(2) Remove Product From Inventory.\n(3) Update Product's Quantity.\n(4) Change Product's Price.\n(5) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
 
 		case ADD_PRODUCT:
+			addProduct();
 			break;
 
 		case REMOVE_PRODUCT:
+			removeProductMenu();
+			Sleep(1500);//waits x seconds, is in windows.h
 			break;
 
-		case UPDATE_PRODUCT:
+		case UPDATE_PRODUCT_QUANTITY:
+			updateProductQuantityMenu();
+			Sleep(1500);
+			break;
+
+		case CHANGE_PRODUCT_PRICE:
+			changeProductPriceMenu();
+			Sleep(1500);
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			printf(BOLDYELLOW"Good Work ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
+}
+
+void updateProductQuantityMenu() {
+	int serial;
+	int quantity;
+	puts("Enter the serial number of the product you want to change:");
+	scanf("%d", &serial);
+	getchar();
+	puts("Enter the new quantity for the product:");
+	scanf("%d", &quantity);
+	getchar();
+	if (changeProductQuantity(serial, REPLACE, quantity))
+		puts(BOLDGREEN"Changed successfully."RESET);
+	else
+		puts(BOLDRED"Wrong Serial / Quantity less then zero"RESET);
+}
+
+void changeProductPriceMenu() {
+	int serial;
+	double price;
+	puts("Enter the serial number of the product you want to change:");
+	scanf("%d", &serial);
+	getchar();
+	puts("Enter the new price for the product:");
+	scanf("%lf", &price);
+	getchar();
+	if (changeProductPrice(serial,price))
+		puts(BOLDGREEN"Changed successfully."RESET);
+	else
+		puts(BOLDRED"Wrong Serial / Price less then or equal to zero"RESET);
 }
 
 void UpdateOrdersMenu() {
@@ -412,7 +451,6 @@ void addProductMenu(User loged_User) {
 	} while (choice != EXIT);
 }
 
-
 //------------------------Auxiliary Functions--------------//
 
 /// <summary>
@@ -428,13 +466,7 @@ void ShowProductsByCategory() {
 	showByCategory(choice);
 }
 
-
-
-
-
 ///-------Costumer Functions--------///
-
-
 
 void addProductToCartMenu(User loged_User) {
 	int productSerial=0;
@@ -488,7 +520,6 @@ void addProductToCartMenu(User loged_User) {
 ///Remove product from the cart, and update the product quantity in stock.
 /// </summary>
 /// <returns></returns>
-
 void removeProductFromCart(User loged_User) {
 	char* temp[50];
 	int serial_number = 0;

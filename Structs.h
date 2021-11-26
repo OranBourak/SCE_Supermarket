@@ -27,11 +27,12 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
+#include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-enum Bool { FALSE, TRUE };
+//enum Bool { FALSE , TRUE };//looks like windows.h has them?
 enum Type { MANAGER, CUSTOMER, CLUB };
 enum category { FRUITS, VEGETABLES, DRINKS, MEAT, FARM };
 enum Status{APPENDING, APPROVED, CANCELD};

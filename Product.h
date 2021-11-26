@@ -29,7 +29,7 @@ void showByCategory(enum category);
 
 //manager only
 void managerCatalogMenu();
-void addProduct();
+void addProduct();//add color
 void removeProductMenu();
 void removeProduct(int);
 enum CHANGE_MODE{ADD,REPLACE};
