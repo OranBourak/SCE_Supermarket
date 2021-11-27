@@ -34,17 +34,20 @@ void viewCatalogManager();
 void updateInventoryMenu();
 
 void updateProductQuantityMenu();
+
 void changeProductPriceMenu();
 
 void UpdateOrdersMenu();
 
+void updateOrderByManager(enum Status pickStatus);
+
+/*
 /// <summary>
 /// UPDATE PRODUCT MENU 
 /// </summary>
 /// <returns></returns>
 void UpdateProductMemu();
-
-
+*/
 
 //-----------------------------COSTUMER-MENU-SECTION-------------------------//
 

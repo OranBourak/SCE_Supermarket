@@ -9,23 +9,31 @@
 //create order for the client
 void Create_Order(User user);//has to be broken down,
 
-// the function change the status of the order 
+//Changes an order status in the database [no checks here]
+//If canceled, returns the products to inventory
 void changeOrderStatus(int orderId,enum Status newStatus);
 
+//Gets the user's user name by its order id
 char * getOrderUsername(int orderId);
 
+//Gets the order's status by its order id
 enum Status getOrderStatus(int orderId);
 
+//Checks in an order exists in database by its order id
 enum Bool doesOrderExist(int orderId);
+
 //check id, phone number and credit card validation (10 digits)
 //enum Bool check_validation(unsigned long long num);//not sure, no harm
 
-//print the order
+//Print an order
 void printOrder(Order order);
-//CHECK
 
-//prints all order of a user
-void printUserOrders(User logedUser);
+//Prints all orders of a given user
+void printUserOrders(User logedUser);//format it by status
+
+//--------------so far so good---------------
+
+void printOrdersByStatus(enum Status pickStatus);
 
 //MERGE BELOW
 // print the order Appending 

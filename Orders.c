@@ -1,7 +1,7 @@
 #include "Orders.h"
 
 
-/*
+/* OLD 
 void Create_Order(char* username)
 {
 	FILE* Orders;
@@ -139,25 +139,34 @@ void Create_Order(char* username)
 		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
 }
 */
+
 void Create_Order(User user) {
 	FILE* fpointer = NULL;
 	Order tempOrder;
 	
 	fpointer = fopen(CARTS_FILENAME, "rb");
-	//add file check
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+
 	while (fread(&tempOrder.orderCart,sizeof(Cart),1,fpointer)){
-		if (!strcmp(tempOrder.orderCart.userName, user.userName))
+		if (!strcmp(tempOrder.orderCart.userName, user.userName))//Found user's cart
 			break;
 	}
-	//now we have the cart inside temp order
+	//now we have the cart inside tempOrder.
 	fclose(fpointer);
 	fpointer = fopen(ORDERS_FILENAME, "ab");
-	//add file check
-	
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+
 	fseek(fpointer, 0, SEEK_END);
-	tempOrder.orderId = (int)(ftell(fpointer) / sizeof(Order)) + 1;
+	tempOrder.orderId = (int)(ftell(fpointer) / sizeof(Order)) + 1;//Give an order id based on database size.
 	fseek(fpointer, 0, SEEK_SET);
 
+	//Name, ID, Credit card, Address ,Phone number input.
 	char nameAddress[MAX_SIZE];
 	char num_check[MAX_SIZE];
 	int check = 0;
@@ -199,11 +208,14 @@ void Create_Order(User user) {
 		check = atoi(num_check);
 	}
 	tempOrder.phoneNumber = check;
+	
+	//Calculate the price of the cart and status always starts APPENDING.
 	tempOrder.orderPrice = getCartPrice(user);
 	tempOrder.status = APPENDING;
 
 	fwrite(&tempOrder, sizeof(Order), 1, fpointer);
 	fclose(fpointer);
+	
 	if (empty_the_cart(user)) {
 		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
 		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
@@ -212,7 +224,8 @@ void Create_Order(User user) {
 	else
 		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
 }
-/*
+
+/* OLD change_order_status, and NOT USED check_validation
  void change_order_status(char* username,enum Status status)
 {
 	 User user;
@@ -440,6 +453,30 @@ enum Bool doesOrderExist(int orderId) {
 		 if (!strcmp(logedUser.userName,tempOrder.orderCart.userName)){
 			 printOrder(tempOrder);
 		 }
+	 }
+	 fclose(fpointer);
+ }
+
+ void printOrdersByStatus(enum Status pickStatus) {
+	 Order tempOrder;
+	 FILE* fpointer;
+	 
+	 fpointer = fopen(ORDERS_FILENAME, "rb");//test open files
+	 if (fpointer == NULL){
+		 fprintf(stderr, "\n Error open orders");
+		 exit(1);
+	 }
+	 
+	 //Headline changes based on picked status
+	 /*
+	 if (pickStatus == APPENDING) puts("APPENDING");
+	 if (pickStatus == APPROVED) puts("APPROVED");
+	 if (pickStatus == CANCELD) puts("CANCELD");
+	 */
+
+	 while (fread(&tempOrder, sizeof(Order), 1, fpointer)){
+		 if (tempOrder.status == pickStatus)
+			 printOrder(tempOrder);
 	 }
 	 fclose(fpointer);
  }

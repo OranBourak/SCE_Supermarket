@@ -47,7 +47,7 @@ void Menu() {
 
 }
 
-//-----------------------------MANAGER-MENU-SECTION-------------------------//
+//-----------------------------MANAGER-MENU-SECTION---------------------------
 
 /// <summary>
 /// MANAGER MENU SYSTEM
@@ -220,46 +220,78 @@ void changeProductPriceMenu() {
 void UpdateOrdersMenu() {
 	int choice;
 
-	enum option { SHOW_ORDER_BY_STATUS = 1, UPDATE_ORDER = 2, EXIT = 3 };
+	enum option { SHOW_PAST_ORDERS = 1, APPROVE_ORDER = 2, CANCEL_ORDER = 3,EXIT = 4 };
 	do {
 		system("cls");
 		puts(BOLDCYAN"\t\t\t\t\t*****UPDATE ORDERS*****\n"RESET);
+		puts(BOLDCYAN"\t\t\t*****Orders Appending*****\n"RESET);
+		printOrdersByStatus(APPENDING);
 		puts("Choose one of the following options:");
-		puts("\n(1) Show Orders By Status .\n(2) Update Order.\n(3) Go back.\n");
+		puts("\n(1) Show Past Orders [approved and canceled] .\n(2) Approve an Order.\n(3) Cancel an Order.\n(4) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
 
-		case SHOW_ORDER_BY_STATUS:
-			puts(BOLDCYAN"\t\t\t\t\t*****Orders Appending*****\n"RESET);
-			//print_order_details_Appending();
-			puts(BOLDCYAN"\t\t\t\t\t*****Orders Approved*****\n"RESET);
-			//print_order_details_Approved();
-			puts(BOLDCYAN"\t\t\t\t\t*****Orders Canceld*****\n"RESET);
-			//print_order_details_Canceld();
+		case SHOW_PAST_ORDERS:
+			system("cls");
+			puts(BOLDGREEN"\t\t\t*****Orders Approved*****\n"RESET);
+			printOrdersByStatus(APPROVED);
+			puts(BOLDRED"\t\t\t*****Orders Canceled*****\n"RESET);
+			printOrdersByStatus(CANCELD);
+			
+			puts("Press any key to get back...");
 			getchar();
-
 			break;
 
-		case UPDATE_ORDER:
+		case APPROVE_ORDER:
+			updateOrderByManager(APPROVED);
+			Sleep(1500);
+			break;
 
+		case CANCEL_ORDER:
+			updateOrderByManager(CANCELD);
+			Sleep(1500);
 			break;
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
 }
 
+void updateOrderByManager(enum Status pickStatus) {
+	int orderId;
+	puts("Enter the Order Serial number you want to update:");
+	scanf("%d", &orderId);
+	if (!doesOrderExist(orderId)) {
+		puts(BOLDRED"Order does not exist."RESET);
+		return;
+	}
+
+	if (getOrderStatus(orderId) != APPENDING) {
+		puts(BOLDRED"You can only change Appending orders"RESET);
+		return;
+	}
+	//if passed all test, updates the order.
+	changeOrderStatus(orderId, pickStatus);
+	
+	if(pickStatus == APPROVED) puts(BOLDGREEN"Order Approved"RESET);
+	if(pickStatus == CANCELD) puts(BOLDGREEN"Order Canceled"RESET);
+}
+
+/*FUNCTION NOT IN USE*/
 /// <summary>
 /// UPDATE PRODUCT MENU 
 /// </summary>
 /// <returns></returns>
+/*
 void UpdateProductMemu() {
 	int choice;
 
@@ -289,9 +321,9 @@ void UpdateProductMemu() {
 		}
 	} while (choice != EXIT);
 }
+*/
 
-//-----------------------------COSTUMER-MENU-SECTION-------------------------//
-
+//-----------------------------COSTUMER-MENU-SECTION--------------------------
 
 /// <summary>
 /// CUSTOMER MENU SYSTEM
@@ -348,9 +380,9 @@ void customerMenu(User loged_User) {
 	} while (choice != EXIT);
 }
 
-/// <summary>
-/// view catalog menu for manager
-///Displays the options to the customer and activates the requested function
+// view catalog menu for manager
+// Displays the options to the customer and activates the requested function
+
 /// </summary>
 /// <param name="username">Using username in Add product function</param>
 /// <returns></returns>
@@ -390,10 +422,12 @@ void viewCatalogCustomer(User loged_User) {
 			break;
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -540,11 +574,7 @@ void clubMemberMenu(User* loged_User) {
 	} while (choice != EXIT);
 }
 
-
-
-
-
-//------------------------Auxiliary Functions--------------//
+//-----------------------------Auxiliary Functions----------------------------
 
 /// <summary>
 /// Prints menu for the costumer/manager
@@ -559,7 +589,7 @@ void ShowProductsByCategory() {
 	showByCategory(choice);
 }
 
-///-------Costumer Functions--------///
+//-----------------------------Costumer Functions-----------------------------
 
 void addProductToCartMenu(User loged_User) {
 	int productSerial=0;
@@ -658,7 +688,6 @@ void cancelOrderByCustomer(User loged_User) {
 	puts(BOLDGREEN"Order Canceled"RESET);
 }
 
-
 void changeMembership(User* loged_User)
 {
 	FILE* fpointer = fopen(USERS_FILENAME, "rb+");
@@ -681,8 +710,6 @@ void changeMembership(User* loged_User)
 	fseek(fpointer, -(int)sizeof(User), SEEK_CUR);
 	fwrite(&temp, sizeof(User), 1, fpointer);
 	fclose(fpointer);
-
-			
 
 }
 
