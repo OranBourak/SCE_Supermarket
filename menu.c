@@ -634,7 +634,7 @@ void addProductToCartMenu(User loged_User) {
 			puts(RED"Invalid input....please try again."RESET);
 			continue;
 		}
-		else if (isProductExsist(productSerial))
+		else if (isProductExist(productSerial))
 			flag = 0;
 		else
 			puts(RED"Invalid serial number....pleas try again."RESET);
@@ -675,18 +675,22 @@ void removeProductFromCart(User loged_User) {
 	char* temp[50];
 	int serial_number = 0;
 	int quantity = 0;
+
 	puts("Enter the serial number of the product you want to remove:");
 	gets(temp);
 	serial_number = atoi(temp);
-	if (atoi(temp)&& isProductExsist(serial_number)) {
-		quantity = remove_Product_From_Cart(loged_User.userName, serial_number);
-		if (!quantity) {
-			puts(RED"Invalid input...The serial number you entered is not in the cart."RESET);
-			printf("Press ENTER to continue...");
-			getchar();
+	if (serial_number>0 && is_product_exist_in_cart(serial_number,loged_User.userName)){
+		puts("Enter the quantity you want to remove:");
+		gets(temp);
+		quantity = atoi(temp);
+		if (quantity > 0) {
+			remove_product_quantity_in_Cart(loged_User.userName, serial_number,quantity);
 		}
+		
 		else
-			changeProductQuantity(serial_number, ADD, quantity);//Adds the quantity to the available stock.
+			puts(RED"Invalid input....please try again."RESET);
+			
+	
 	}
 	else {
 		puts(RED"Invalid input....please try again."RESET);

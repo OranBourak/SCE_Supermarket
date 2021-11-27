@@ -22,7 +22,7 @@ Product getProductBySerial(int serialNumber);
 /// Receives serial number and check if there is a product in the catalog with this serial number
 ///if the product exist return True, otherwise return false.
 /// </summary>
-enum Bool isProductExsist(int serialNumber);
+enum Bool isProductExist(int serialNumber);
 
 //customer only
 void customerCatalogMenu();

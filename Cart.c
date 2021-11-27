@@ -169,17 +169,61 @@ enum Bool empty_the_cart(User loged_user)
 	return FALSE;
 }
 
-//int change_product_quantity_in_Cart(char* userName, int serialNumber,int quantity)
-//{
-//	Cart temp, temp2;
-//	int quantity = 0;
-//	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
-//	if (fpointer == NULL) {
-//		fprintf(stderr, "\nERROR OPENING FILE\n");
-//		exit(1);
-//	}
-//	while (fread(&temp, sizeof(Cart), 1, fpointer)) {//Find the cart by user name and read the cart to temp parameter.
-//		if (!strcmp(temp.userName, userName))
-//			break;
-//	}
-//	}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="userName"></param>
+/// <param name="serialNumber"></param>
+/// <param name="quantity">quantity to remove</param>
+/// <returns></returns>
+void remove_product_quantity_in_Cart(char* userName, int serialNumber,int quantity)
+{
+	Cart temp;
+	int quantity1;
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+	while (fread(&temp, sizeof(Cart), 1, fpointer)) //Find the cart by user name and read the cart to temp parameter.
+		if (!strcmp(temp.userName, userName)) 
+			break;
+	
+	for (int i = 0; i < temp.productCounter; i++)//change the product quantity
+		if (temp.productsInCart[i].serialNumber == serialNumber) {
+			if (temp.productsInCart[i].quantity - quantity <= 0) {//if product quantity in cart is smaller than the quantity to remove
+				fclose(fpointer);
+				quantity1=remove_Product_From_Cart(userName, serialNumber);
+				changeProductQuantity(serialNumber, ADD, quantity1);
+				return;
+			}
+			else {
+				temp.productsInCart[i].quantity -= quantity;
+				changeProductQuantity(serialNumber, ADD, quantity);//update the quantity in stock
+				fseek(fpointer, -(int)sizeof(Cart), SEEK_CUR);
+				fwrite(&temp, sizeof(Cart), 1, fpointer);
+				fclose(fpointer);
+			}
+		}
+}
+
+
+enum Bool is_product_exist_in_cart(int serial,char* userName) {
+	Cart temp;
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENIN FILE\n");
+		exit(1);
+	}
+	while (fread(&temp, sizeof(Cart), 1, fpointer))
+		if (!strcmp(temp.userName,userName)) {
+			fclose(fpointer);
+			break;
+		}
+
+	for (int i = 0; i < temp.productCounter; i++)
+		if (temp.productsInCart[i].serialNumber == serial)
+			return TRUE;
+	return FALSE;
+}

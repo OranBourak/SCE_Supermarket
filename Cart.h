@@ -42,7 +42,8 @@ enum Bool empty_the_cart(User loged_user);//empty all product from cart
 /// <returns></returns>
 double getCartPrice(User userName);
 
-int change_product_quantity_in_Cart(char* userName, int serialNumber, int quantity);
+void remove_product_quantity_in_Cart(char* userName, int serialNumber, int quantity);
 
+enum Bool is_product_exist_in_cart(int serial, char* userName);
 
 

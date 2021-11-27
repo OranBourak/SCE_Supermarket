@@ -64,7 +64,7 @@ Product getProductBySerial(int serialNumber){//what if serial number dosent exis
 		}
 }
 
-enum Bool isProductExsist(int serialNumber){
+enum Bool isProductExist(int serialNumber){
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENIN FILE\n");
@@ -245,7 +245,7 @@ void removeProductMenu(){
 	puts("Enter a product's serial number to delete, 0 to EXIT");
 	scanf("%d", &serial);
 
-	if (isProductExsist(serial)){
+	if (isProductExist(serial)){
 		removeProduct(serial);
 		puts("Product removed successfully");
 	}
@@ -301,7 +301,7 @@ void removeProduct(int serial) {
 
 enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 	Product tempProduct;
-	if (!isProductExsist(serial)) {
+	if (!isProductExist(serial)) {
 		return FALSE;
 	}
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb+");
@@ -337,7 +337,7 @@ enum Bool changeProductQuantity(int serial, enum CHANGE_MODE m, int quantity){
 
 enum Bool changeProductPrice(int serial, double newPrice) {
 	Product tempProduct;
-	if (!isProductExsist(serial) || newPrice<=0)
+	if (!isProductExist(serial) || newPrice<=0)
 		return FALSE;
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb+");
 	if (!fpointer) {
@@ -384,7 +384,7 @@ enum Bool isProductSerialValid(char * serial) {
 		puts("This serial number isn't valid");
 		return FALSE;
 	}
-	if (isProductExsist(atoi(serial))){
+	if (isProductExist(atoi(serial))){
 		puts("This serial number already exists");
 		return FALSE;
 	}
