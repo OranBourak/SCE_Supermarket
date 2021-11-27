@@ -29,7 +29,7 @@ enum Bool doesOrderExist(int orderId);
 void printOrder(Order order);
 
 //Prints all orders of a given user
-void printUserOrders(User logedUser);//format it by status
+void printUserOrdersByStatus(User logedUser,enum Status pickStatus);//format it by status
 
 //--------------so far so good---------------
 

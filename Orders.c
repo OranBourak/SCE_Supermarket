@@ -440,9 +440,9 @@ enum Bool doesOrderExist(int orderId) {
 	 printf("----------------------------------------------------------------- - \n");
  }
 
- void printUserOrders(User logedUser) {
+ void printUserOrdersByStatus(User logedUser, enum Status pickStatus) {
 	 Order tempOrder;
-	 
+	 int counter = 0;
 	 FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
 	 if (fpointer == NULL) {
 		 fprintf(stderr, "\nERROR OPENING FILE\n");
@@ -450,11 +450,13 @@ enum Bool doesOrderExist(int orderId) {
 	 }
 
 	 while (fread(&tempOrder,sizeof(Order),1,fpointer)){
-		 if (!strcmp(logedUser.userName,tempOrder.orderCart.userName)){
+		 if (!strcmp(logedUser.userName,tempOrder.orderCart.userName) && tempOrder.status == pickStatus){
 			 printOrder(tempOrder);
+			 counter++;
 		 }
 	 }
 	 fclose(fpointer);
+	 if (counter == 0) puts("\t\t\t\tNONE\n");
  }
 
  void printOrdersByStatus(enum Status pickStatus) {

@@ -477,9 +477,16 @@ void viewOrdersMenu(User loged_User) {
 		system("cls");
 		
 		printf(BOLDCYAN"\t\t\t\t\t*****VIEW ORDERS*****\n"RESET);
-		printUserOrders(loged_User);//print costumer's orders
+		
+		puts(BOLDCYAN"\t\t\t*****Orders Appending*****\n"RESET);
+		printUserOrdersByStatus(loged_User,APPENDING);
+		puts(BOLDGREEN"\t\t\t*****Orders Approved*****\n"RESET);
+		printUserOrdersByStatus(loged_User, APPROVED);
+		puts(BOLDRED"\t\t\t*****Orders Canceled*****\n"RESET);
+		printUserOrdersByStatus(loged_User, CANCELD);
+		
 		puts("Choose one of the following options:");
-		puts("\n(1) Cancel an Order [Only If appended].\n(2) Go back.\n");
+		puts("\n(1) Cancel an Order [Only If appending].\n(2) Go back.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
