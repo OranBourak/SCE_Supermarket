@@ -453,7 +453,8 @@ void viewOrdersMenu(User loged_User) {
 		getchar();
 		switch (choice) {
 		case CANCEL_ORDER:
-			//make function to change with IF
+			cancelOrderByCustomer(loged_User);
+			Sleep(1500);
 			break;
 
 		case EXIT:
@@ -637,6 +638,27 @@ void removeProductFromCart(User loged_User) {
 		printf("Press any key to continue...");
 		getchar();
 	}
+}
+
+void cancelOrderByCustomer(User loged_User) {
+	int orderId;
+	puts("Enter the Order Serial number you want to cancel:");
+	scanf("%d", &orderId);
+	if(!doesOrderExist(orderId)){ 
+		puts(BOLDRED"Order does not exist."RESET);
+		return;
+	}
+	if (strcmp(loged_User.userName, getOrderUsername(orderId))) {//checks if order belongs to user
+		puts(BOLDRED"Not your order, cannot change."RESET);
+		return;
+	}
+	if (getOrderStatus(orderId) != APPENDING) {
+		puts(BOLDRED"You can only change Appending orders"RESET);
+		return;
+	}
+	//if passed all test, cancels customer order.
+	changeOrderStatus(orderId, CANCELD);
+	puts(BOLDGREEN"Order Canceled"RESET);
 }
 
 

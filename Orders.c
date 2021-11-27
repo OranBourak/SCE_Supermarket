@@ -315,6 +315,83 @@ void Create_Order(User user) {
 	 return	FALSE;
  }
  */
+
+void changeOrderStatus(int orderId, enum Status newStatus) {
+	Order tempOrder;
+	
+	FILE* fpointer = fopen(ORDERS_FILENAME, "rb+");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+	
+	while (fread(&tempOrder, sizeof(Order), 1, fpointer)){
+		if (tempOrder.orderId == orderId)
+			break;
+	}
+	
+	tempOrder.status = newStatus;
+	//if cancel return items to inventory
+	fseek(fpointer, -(int)sizeof(Order), SEEK_CUR);
+	fwrite(&tempOrder, sizeof(Order), 1, fpointer);
+	fclose(fpointer);
+}
+
+char* getOrderUsername(int orderId) {
+	Order tempOrder;
+
+	FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+
+	while (fread(&tempOrder, sizeof(Order), 1, fpointer)) {
+		if (tempOrder.orderId == orderId) {
+			fclose(fpointer);
+			return tempOrder.orderCart.userName;
+		}
+	}
+	fclose(fpointer);
+}
+
+enum Status getOrderStatus(int orderId){
+	Order tempOrder;
+
+	FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+
+	while (fread(&tempOrder, sizeof(Order), 1, fpointer)) {
+		if (tempOrder.orderId == orderId) {
+			fclose(fpointer);
+			return tempOrder.status;
+		}
+	}
+	fclose(fpointer);
+}
+
+enum Bool doesOrderExist(int orderId) {
+	Order tempOrder;
+
+	FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
+	if (fpointer == NULL) {
+		fprintf(stderr, "\nERROR OPENING FILE\n");
+		exit(1);
+	}
+
+	while (fread(&tempOrder, sizeof(Order), 1, fpointer)) {
+		if (tempOrder.orderId == orderId) {
+			fclose(fpointer);
+			return TRUE;
+		}
+	}
+	fclose(fpointer);
+	return FALSE;
+}
+
  void printOrder(Order order){
 	 puts("___________________________________________________________________ _");
 	 printf(" * Order Serial: %d\n", order.orderId);
@@ -343,8 +420,13 @@ void Create_Order(User user) {
 
  void printUserOrders(User logedUser) {
 	 Order tempOrder;
+	 
 	 FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
-	 //add fpointer check
+	 if (fpointer == NULL) {
+		 fprintf(stderr, "\nERROR OPENING FILE\n");
+		 exit(1);
+	 }
+
 	 while (fread(&tempOrder,sizeof(Order),1,fpointer)){
 		 if (!strcmp(logedUser.userName,tempOrder.orderCart.userName)){
 			 printOrder(tempOrder);
@@ -353,7 +435,7 @@ void Create_Order(User user) {
 	 fclose(fpointer);
  }
 
-/*
+ /*
  void print_order_details_Appending()
  {
 	 FILE* fpointer;

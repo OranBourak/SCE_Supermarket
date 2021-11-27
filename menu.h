@@ -75,8 +75,6 @@ void addProductMenu(User loged_User);
 
 void viewOrdersMenu(User loged_User);
 
-void clubMemberMenu(User* loged_User);
-
 //------------------------Auxiliary Functions--------------//
 
 /// <summary>
@@ -96,4 +94,4 @@ void addProductToCartMenu(User loged_User);
 /// <returns></returns>
 void removeProductFromCart(User loged_User);
 
-changeMembership(User* loged_User);
+void cancelOrderByCustomer(User loged_User);

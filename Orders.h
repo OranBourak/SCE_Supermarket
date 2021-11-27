@@ -8,12 +8,13 @@
 
 //create order for the client
 void Create_Order(User user);//has to be broken down,
-//CHECK
 
 // the function change the status of the order 
-void change_order_status(char* username);
+void changeOrderStatus(int orderId,enum Status newStatus);
 /*MAKE*/
-
+char * getOrderUsername(int orderId);
+enum Status getOrderStatus(int orderId);
+enum Bool doesOrderExist(int orderId);
 //check id, phone number and credit card validation (10 digits)
 //enum Bool check_validation(unsigned long long num);//not sure, no harm
 
@@ -21,6 +22,7 @@ void change_order_status(char* username);
 void printOrder(Order order);
 //CHECK
 
+//prints all order of a user
 void printUserOrders(User logedUser);
 
 //MERGE BELOW
