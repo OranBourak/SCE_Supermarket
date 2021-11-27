@@ -333,7 +333,7 @@ void customerMenu(User loged_User) {
 			break;
 		
 		case CLUB_MEMBER:
-			//make function to change
+			clubMemberMenu(&loged_User);
 			break;
 
 		case CONTACT_US:
@@ -500,6 +500,52 @@ void addProductMenu(User loged_User) {
 	} while (choice != EXIT);
 }
 
+void clubMemberMenu(User* loged_User) {
+	int choice;
+	enum option { CHANGE_MEMBERSHIP = 1, SPECIALS = 2, EXIT = 3 };
+
+	do {
+		system("cls");
+		printf(BOLDCYAN"\t\t\t\t\t*****CLUB MEMBER*****\n"RESET);
+		puts("Choose one of the following options:");
+
+		if (loged_User->userType == CLUB)//Club member options
+			puts("\n(1) Cancel membership.\n(2) This week's specials\n(3) Go back.\n");
+
+		else
+			puts("\n(1) Join membership.\n(2) This week's specials\n(3) Go back.\n");
+
+		scanf("%d", &choice);
+		getchar();
+
+		switch (choice) {
+		case CHANGE_MEMBERSHIP:
+			changeMembership(loged_User);
+			puts(BOLDBLUE"The process was completed successfully"RESET);
+			Sleep(1500);
+			break;
+
+
+		case SPECIALS:
+			printf(BOLDYELLOW"Coming soon..... :)\n"RESET);
+			Sleep(1500);
+			break;
+
+		case EXIT:
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			break;
+
+		default:
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			break;
+		}
+	} while (choice != EXIT);
+}
+
+
+
+
+
 //------------------------Auxiliary Functions--------------//
 
 /// <summary>
@@ -591,6 +637,34 @@ void removeProductFromCart(User loged_User) {
 		printf("Press any key to continue...");
 		getchar();
 	}
+}
+
+
+changeMembership(User* loged_User)
+{
+	FILE* fpointer = fopen(USERS_FILENAME, "rb+");
+	User temp;
+
+	while (fread(&temp, sizeof(User), 1, fpointer))
+		if (!strcmp(temp.userName, loged_User->userName)) {
+			break;
+		}
+
+	if (temp.userType == CLUB) {
+		temp.userType = CUSTOMER;
+		loged_User->userType = CUSTOMER;//UPDATE THE LOGED USER LOCALIY
+	}
+	else {
+		temp.userType = CLUB;
+		loged_User->userType = CLUB;//UPDATE THE LOGED USER LOCALIY
+	}
+
+	fseek(fpointer, -(int)sizeof(User), SEEK_CUR);
+	fwrite(&temp, sizeof(User), 1, fpointer);
+	fclose(fpointer);
+
+			
+
 }
 
 
