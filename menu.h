@@ -93,3 +93,5 @@ void addProductToCartMenu(User loged_User);
 /// </summary>
 /// <returns></returns>
 void removeProductFromCart(User loged_User);
+
+void cancelOrderByCustomer(User loged_User);
