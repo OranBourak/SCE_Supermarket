@@ -34,13 +34,15 @@ void Menu() {
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
-		printf("Press any key to continue...");
+		printf("Press ENTER to continue...");
 		getchar();
 		scanf("%c", &temp_key);
 	} while (choice != EXIT);
@@ -81,10 +83,12 @@ void managerMenu(User loged_User) {
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -127,10 +131,12 @@ void viewCatalogManager() {
 			break;
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -239,7 +245,7 @@ void UpdateOrdersMenu() {
 			puts(BOLDRED"\t\t\t*****Orders Canceled*****\n"RESET);
 			printOrdersByStatus(CANCELD);
 			
-			puts("Press any key to get back...");
+			printf("Press ENTER to continue...");
 			getchar();
 			break;
 
@@ -371,10 +377,12 @@ void customerMenu(User loged_User) {
 		
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -394,6 +402,7 @@ void viewCatalogCustomer(User loged_User) {
 		puts(BOLDCYAN"\t\t\t\t\t*****VIEW CATALOG*****\n"RESET);
 		showProducts();//prints the catalog
 	do {
+
 		puts("Choose one of the following options:");
 		puts("\n(1) Sort by price.\n(2) Choose category.\n(3) Add product to cart.\n(4) Refresh Page\n(5) Go back.\n");
 		scanf("%d", &choice);
@@ -443,7 +452,7 @@ void viewCartMenu(User loged_User) {
 	do {
 		system("cls");
 		printf(BOLDCYAN"\t\t\t\t\t*****VIEW CART*****\n"RESET);
-		printCartInfo(getCartByUser(loged_User.userName));//print costumer cart
+		printCartInfo(getCartByUser(loged_User.userName),loged_User);//print costumer cart
 		puts("Choose one of the following options:");
 		puts("\n(1) Remove Product From Cart.\n(2) Proceed To Checkout.\n(3) Go back.\n");
 		scanf("%d", &choice);
@@ -452,19 +461,25 @@ void viewCartMenu(User loged_User) {
 
 		case REMOVE_PRODUCT:
 			removeProductFromCart(loged_User);
-			printCartInfo(getCartByUser(loged_User.userName));//print costumer cart
 			break;
 
 		case PROCEED_TO_CHECKOUT:
-			Create_Order(loged_User);//check
+			if (getCartByUser(loged_User.userName).productCounter != 0)//check if the cart is not empty
+				Create_Order(loged_User);//check
+			else {
+				puts(BOLDRED"You cannot complete an order with empty cart."RESET);
+				Sleep(1500);
+			}
 			break;
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -497,10 +512,12 @@ void viewOrdersMenu(User loged_User) {
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -530,10 +547,12 @@ void addProductMenu(User loged_User) {
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -572,10 +591,12 @@ void clubMemberMenu(User* loged_User) {
 
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
 			break;
 
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
 			break;
 		}
 	} while (choice != EXIT);
@@ -661,7 +682,7 @@ void removeProductFromCart(User loged_User) {
 		quantity = remove_Product_From_Cart(loged_User.userName, serial_number);
 		if (!quantity) {
 			puts(RED"Invalid input...The serial number you entered is not in the cart."RESET);
-			printf("Press any key to continue...");
+			printf("Press ENTER to continue...");
 			getchar();
 		}
 		else
@@ -669,7 +690,7 @@ void removeProductFromCart(User loged_User) {
 	}
 	else {
 		puts(RED"Invalid input....please try again."RESET);
-		printf("Press any key to continue...");
+		printf("Press ENTER to continue...");
 		getchar();
 	}
 }

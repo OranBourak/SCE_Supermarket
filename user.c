@@ -88,7 +88,7 @@ void signUp() {
 		gets(new_user.userName);
 		if (isNameTaken(new_user.userName)) {
 			puts(RED"\nThe username you selected is already taken...please try again\n"RESET);
-			printf("Press any key to continue...");
+			printf("Press ENTER to continue...");
 			scanf("%c", &temp_key);
 			getchar();
 			system("cls");//clear terminal screen
@@ -183,16 +183,43 @@ enum Bool isPasswordLegal(char* user_password) {
 }
 void ContactUs()
 {
+	int choice;
+	do
+	{
+		system("cls");
+		printf(BOLDYELLOW"\t\t\t\t\t*****Contact Us*****\n");
+		printf("\t\t\t\t\t About Sami market\n");
+		printf("Email:ramzi@sami.com\n");
+		printf("Phone:08-8765456\n");
+		printf("The address:Ashdod, bnay brit 5/6\n"RESET);
+	
+		puts("\nChoose one of the following options:");
+		puts("(1) Leave a message.\n(2)Go back\n");
+		scanf("%d", &choice);
+		getchar();
+	
+		switch (choice)
+		{
+		case 1:
+			leaveAmessage();
+			break;
+		case 2:
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			Sleep(1500);
+			break;
+		default:
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			Sleep(1500);
+			break;
+		}
+	} while (choice!=2);
+
+}
+
+void leaveAmessage() {
 	char name[MAX_SIZE], email[MAX_SIZE], phone[MAX_SIZE], message[MAX_SIZE];
 	int check = 0;
-	system("cls");
-	printf(BOLDYELLOW"\t\t\t\t\t*****Contact Us*****\n");
-	printf("\t\t\t\t\t About Sami market\n");
-	printf("Email:ramzi@sami.com\n");
-	printf("Phone:08-8765456\n");
-	printf("The address:Ashdod, bnay brit 5/6\n");
-
-	printf("\n*****Leave a message*****\n");
+	printf(BOLDCYAN"\n*****Leave a message*****\n"RESET);
 	printf(BOLDBLUE"If you encounter any problems,fill the following form and we'll get back to you with a complete solution \n"RESET);
 	printf("Enter your name:\n");
 	gets(name);
@@ -201,7 +228,7 @@ void ContactUs()
 	puts("Enter your phone number: ");
 	gets(phone);
 	check = atoi(phone);
-	while (strlen(phone)!=10 || check == 0)
+	while (strlen(phone) != 10 || check == 0)
 	{
 		printf(RED"wrong phone please try again with 10 digits only:\n"RESET);
 		scanf("%s", &phone);
@@ -210,7 +237,8 @@ void ContactUs()
 	}
 	puts("Enter the problem description:");
 	gets(message);
-	
+
 	puts(BOLDMAGENTA"\n\n\n\n\t\t****Thank you for contacting us and we'll get back to you within 48 hours with a reply****"RESET);
+	puts("Press ENTER to continue.\n");
 	getchar();
 }

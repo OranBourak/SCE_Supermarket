@@ -6,7 +6,7 @@
 #include "Orders.h"
 
 
-void printCartInfo(Cart cart);
+void printCartInfo(Cart cart,User loged_User);
 
 /// <summary>
 /// Adding product to cart.
@@ -42,7 +42,7 @@ enum Bool empty_the_cart(User loged_user);//empty all product from cart
 /// <returns></returns>
 double getCartPrice(User userName);
 
-
+int change_product_quantity_in_Cart(char* userName, int serialNumber, int quantity);
 
 
 

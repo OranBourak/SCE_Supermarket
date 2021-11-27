@@ -1,6 +1,6 @@
 #include "Cart.h"
 
-void printCartInfo(Cart cart)
+void printCartInfo(Cart cart, User loged_User)
 {
 	printf(BOLDYELLOW"             *****  MY CART ***** \n");
 	printf("----------------------------------------------------------------- - \n");
@@ -8,7 +8,14 @@ void printCartInfo(Cart cart)
 	printf("----------------------------------------------------------------- - \n");
 	for (int i = 0; i < cart.productCounter; i++) 
 		printProduct(cart.productsInCart[i]);
-	printf("----------------------------------------------------------------- - \n"RESET);
+	printf("----------------------------------------------------------------- - \n");
+	if (loged_User.userType == CLUB) {
+		printf(WHITE"						Cart Price: %.2lf\n", getCartPrice(loged_User) / 0.9);
+		printf(WHITE"				Total Price after discount: %.2lf\n", getCartPrice(loged_User));
+	}
+	else
+		printf(WHITE"				Total Price after discount: %.2lf\n", getCartPrice(loged_User));
+	printf(BOLDYELLOW"----------------------------------------------------------------- - \n"RESET);
 }
 
 
@@ -161,3 +168,18 @@ enum Bool empty_the_cart(User loged_user)
 	fclose(fpointer);
 	return FALSE;
 }
+
+//int change_product_quantity_in_Cart(char* userName, int serialNumber,int quantity)
+//{
+//	Cart temp, temp2;
+//	int quantity = 0;
+//	FILE* fpointer = fopen(CARTS_FILENAME, "rb+");
+//	if (fpointer == NULL) {
+//		fprintf(stderr, "\nERROR OPENING FILE\n");
+//		exit(1);
+//	}
+//	while (fread(&temp, sizeof(Cart), 1, fpointer)) {//Find the cart by user name and read the cart to temp parameter.
+//		if (!strcmp(temp.userName, userName))
+//			break;
+//	}
+//	}

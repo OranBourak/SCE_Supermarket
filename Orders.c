@@ -218,7 +218,7 @@ void Create_Order(User user) {
 	
 	if (empty_the_cart(user)) {
 		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
-		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
+		printf(BOLDMAGENTA"\nPress ENTER to continue..."RESET);
 		getchar();
 	}
 	else
