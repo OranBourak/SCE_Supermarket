@@ -307,11 +307,8 @@ void customerMenu(User loged_User) {
 		system("cls");
 		printf(BOLDCYAN"\t\t\t\t\t*****CUSTOMER MENU*****\n"RESET);
 		printf(BOLDBLUE"Hello %s, How can we help you today?\n\n"RESET, loged_User.userName );
-		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) View Orders.\n");
-		//IF
-		puts("(5) Club Member.\n");
+		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) View Orders.\n(5) Club Member.\n(6) Contact Us\n(7) Sign Out.\n");
 
-		puts("(6) Contact Us\n(7) Sign Out.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {

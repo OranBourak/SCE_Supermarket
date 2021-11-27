@@ -191,7 +191,8 @@ void ContactUs()
 	printf("Email:ramzi@sami.com\n");
 	printf("Phone:08-8765456\n");
 	printf("The address:Ashdod, bnay brit 5/6\n");
-	printf("*****Leave a message*****\n");
+
+	printf("\n*****Leave a message*****\n");
 	printf(BOLDBLUE"If you encounter any problems,fill the following form and we'll get back to you with a complete solution \n"RESET);
 	printf("Enter your name:\n");
 	gets(name);
@@ -210,6 +211,6 @@ void ContactUs()
 	puts("Enter the problem description:");
 	gets(message);
 	
-	puts("\n\n\n\n\t\t****Thank you for contacting us and we'll get back to you within 48 hours with a reply****");
+	puts(BOLDMAGENTA"\n\n\n\n\t\t****Thank you for contacting us and we'll get back to you within 48 hours with a reply****"RESET);
 	getchar();
 }
