@@ -232,11 +232,11 @@ void UpdateOrdersMenu() {
 
 		case SHOW_ORDER_BY_STATUS:
 			puts(BOLDCYAN"\t\t\t\t\t*****Orders Appending*****\n"RESET);
-			print_order_details_Appending();
+			//print_order_details_Appending();
 			puts(BOLDCYAN"\t\t\t\t\t*****Orders Approved*****\n"RESET);
-			print_order_details_Approved();
+			//print_order_details_Approved();
 			puts(BOLDCYAN"\t\t\t\t\t*****Orders Canceld*****\n"RESET);
-			print_order_details_Canceld();
+			//print_order_details_Canceld();
 			getchar();
 
 			break;
@@ -302,12 +302,16 @@ void customerMenu(User loged_User) {
 	int choice;
 
 
-	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, CLUB_MEMBER = 4, CONTACT_US = 5, EXIT = 6 };
+	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, VIEW_ORDERS = 4, CLUB_MEMBER = 5, CONTACT_US = 6, EXIT = 7 };
 	do {
 		system("cls");
 		printf(BOLDCYAN"\t\t\t\t\t*****CUSTOMER MENU*****\n"RESET);
 		printf(BOLDBLUE"Hello %s, How can we help you today?\n\n"RESET, loged_User.userName );
-		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) Club Member.\n(5) Contact Us\n(6) Sign Out.\n");
+		puts("\n(1) View Catalog.\n(2) View Cart.\n(3) Add Product To Cart.\n(4) View Orders.\n");
+		//IF
+		puts("(5) Club Member.\n");
+
+		puts("(6) Contact Us\n(7) Sign Out.\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
@@ -323,11 +327,19 @@ void customerMenu(User loged_User) {
 		case ADD_PRODUCT:
 			addProductMenu(loged_User);
 			break;
-		case CLUB_MEMBER:
+		
+		case VIEW_ORDERS:
+			viewOrdersMenu(loged_User);
 			break;
+		
+		case CLUB_MEMBER:
+			//make function to change
+			break;
+
 		case CONTACT_US:
 			ContactUs();
 			break;
+		
 		case EXIT:
 			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
 			break;
@@ -413,7 +425,35 @@ void viewCartMenu(User loged_User) {
 			break;
 
 		case PROCEED_TO_CHECKOUT:
-			Create_Order(loged_User.userName);
+			Create_Order(loged_User);//check
+			break;
+
+		case EXIT:
+			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			break;
+
+		default:
+			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);
+			break;
+		}
+	} while (choice != EXIT);
+}
+
+void viewOrdersMenu(User loged_User) {
+	int choice;
+	enum option { CANCEL_ORDER = 1, EXIT = 2 };
+	do {
+		system("cls");
+		
+		printf(BOLDCYAN"\t\t\t\t\t*****VIEW ORDERS*****\n"RESET);
+		printUserOrders(loged_User);//print costumer's orders
+		puts("Choose one of the following options:");
+		puts("\n(1) Cancel an Order [Only If appended].\n(2) Go back.\n");
+		scanf("%d", &choice);
+		getchar();
+		switch (choice) {
+		case CANCEL_ORDER:
+			//make function to change with IF
 			break;
 
 		case EXIT:

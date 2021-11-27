@@ -1,9 +1,7 @@
-
 #include "Orders.h"
-#include "Structs.h"
-#include "Cart.h"
 
 
+/*
 void Create_Order(char* username)
 {
 	FILE* Orders;
@@ -140,8 +138,82 @@ void Create_Order(char* username)
 	else
 		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
 }
+*/
+void Create_Order(User user) {
+	FILE* fpointer = NULL;
+	Order tempOrder;
+	
+	fpointer = fopen(CARTS_FILENAME, "rb");
+	//add file check
+	while (fread(&tempOrder.orderCart,sizeof(Cart),1,fpointer)){
+		if (!strcmp(tempOrder.orderCart.userName, user.userName))
+			break;
+	}
+	//now we have the cart inside temp order
+	fclose(fpointer);
+	fpointer = fopen(ORDERS_FILENAME, "ab");
+	//add file check
+	
+	fseek(fpointer, 0, SEEK_END);
+	tempOrder.orderId = (int)(ftell(fpointer) / sizeof(Order)) + 1;
+	fseek(fpointer, 0, SEEK_SET);
 
- void change_order_status(char* username)
+	char nameAddress[MAX_SIZE];
+	char num_check[MAX_SIZE];
+	int check = 0;
+	printf("Enter full name:\n");
+	gets(tempOrder.customer_full_name);
+	printf("Enter ID [10 digits]:\n");
+	gets(num_check);
+	check = atoi(num_check);
+	while (strlen(num_check) != 10 || check == 0)
+	{
+		printf("Invalid input...The ID number must consist of 10 digits:\n");
+		gets(num_check);
+		check = atoi(num_check);
+	}
+
+	tempOrder.customer_id = check;
+
+	printf("Enter credit card [10 digits]:\n");
+	gets(num_check);
+	check = atoi(num_check);
+	while (strlen(num_check) != 10 || check == 0)
+	{
+		printf("Invalid input...The credit card must consist of 10 digits:\n");
+		gets(num_check);
+		check = atoi(num_check);
+	}
+	tempOrder.customer_credit_card = check;
+	printf("Enter address:\n");
+	gets(nameAddress);
+	strcpy(tempOrder.customer_address, nameAddress);
+
+	printf("Enter phone number [10 digits]:\n");
+	gets(&num_check);
+	check = atoi(num_check);
+	while (strlen(num_check) != 10 || check == 0)
+	{
+		printf("Invalid input...The phone number must consist of 10 digits:\n");
+		gets(&num_check);
+		check = atoi(num_check);
+	}
+	tempOrder.phoneNumber = check;
+	tempOrder.orderPrice = getCartPrice(user);
+	tempOrder.status = APPENDING;
+
+	fwrite(&tempOrder, sizeof(Order), 1, fpointer);
+	fclose(fpointer);
+	if (empty_the_cart(user.userName)) {
+		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
+		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
+		getchar();
+	}
+	else
+		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
+}
+/*
+ void change_order_status(char* username,enum Status status)
 {
 	 User user;
 	 Order order;
@@ -242,38 +314,46 @@ void Create_Order(char* username)
 		 return TRUE;
 	 return	FALSE;
  }
-
- void print_order(Order order)
- {
-	 char tempName[MAX_SIZE];
-	 char tempAddre[MAX_SIZE];
-	 int i = 0;
-	 strcpy(tempName, order.customer_full_name);
-	 strcpy(tempAddre, order.customer_address);
-	 printf("id: %ld\n", order.customer_id);//print id
-	 printf("Name: %s\n", tempName);//print name
-	 printf("Credit card: %ld\n", order.customer_credit_card);//print card
-	 printf("Phone number: %ld\n", order.phoneNumber);//print phone
-	 printf("Address: %s\n", tempAddre);//print address
-	 printf("Total price: %.2lf\n",order.orderPrice );//print total price
+ */
+ void printOrder(Order order){
+	 puts("___________________________________________________________________ _");
+	 printf(" * Order Serial: %d\n", order.orderId);
+	 printf(" * Id: %ld\n", order.customer_id);//print id
+	 printf(" * Name: %s\n", order.customer_full_name);//print name
+	 printf(" * Credit card: %ld\n", order.customer_credit_card);//print card
+	 printf(" * Phone number: %ld\n", order.phoneNumber);//print phone
+	 printf(" * Address: %s\n", order.customer_address);//print address
+	 
 	 if (order.status == 0)//test for status
-	 {
-		 printf("Status: Appending\n");
-	 }
+		 printf(" * Status: Appending\n");
 	 else if(order.status==1)
-	 {
-		 printf("Status: Approved\n");
-	 }
-	 else
-	 {
-		 printf("Status: Canceld\n");
-	 }
-	 for (int i = 0; i < order.counter_cart_list; i++)
-	 {
-		 printProduct(order.cart_list[i]);
-	 }
+		 printf(" * Status: Approved\n");
+	 else    
+		 printf(" * Status: Canceled\n");
+
+	 printf("---------------------PRODUCTS-IN-CART---------------------------- - \n");
+	 printf("S.N.|         NAME          |  QUANTITY |    PRICE    | CATEGORY \n");
+	 printf("----------------------------------------------------------------- - \n");
+	 for (int i = 0; i < order.orderCart.productCounter; i++)
+		 printProduct(order.orderCart.productsInCart[i]);
+	 printf("----------------------------------------------------------------- - \n");
+	 printf(" * Total price: %.2lf\n",order.orderPrice );//print total price
+	 printf("----------------------------------------------------------------- - \n");
  }
 
+ void printUserOrders(User logedUser) {
+	 Order tempOrder;
+	 FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
+	 //add fpointer check
+	 while (fread(&tempOrder,sizeof(Order),1,fpointer)){
+		 if (!strcmp(logedUser.userName,tempOrder.orderCart.userName)){
+			 printOrder(tempOrder);
+		 }
+	 }
+	 fclose(fpointer);
+ }
+
+ 
  void print_order_details_Appending()
  {
 	 FILE* fpointer;
@@ -285,7 +365,7 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	/* printf("Orders awaiting confirmation:\n");*/
+	// printf("Orders awaiting confirmation:\n");
 	 while(fread(&temp,sizeof(Order),1,fpointer))
 	 {
 		 if (temp.status == 0)
@@ -306,7 +386,7 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	 /*printf("Orders are confirmed:\n");*/
+	 //printf("Orders are confirmed:\n");
 	 while (fread(&temp, sizeof(Order), 1, fpointer))
 	 {
 		 if (temp.status == 1)
@@ -327,7 +407,7 @@ void Create_Order(char* username)
 	 }
 
 	 Order temp;
-	 /*printf("Orders are canceled:\n");*/
+	 //printf("Orders are canceled:\n");
 	 while (fread(&temp, sizeof(Order), 1, fpointer))
 	 {
 		 if (temp.status == 2)
@@ -355,3 +435,4 @@ void Create_Order(char* username)
 		 fclose(fpointer);
 	 }
  }
+ 

@@ -1,7 +1,7 @@
 #include "User.h"
 #include "Cart.h"
 #include "Orders.h"
-//#include "Product.h"
+#include "Product.h"
 /*initialize all data files */
 void initFiles(); 
 

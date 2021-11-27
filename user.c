@@ -1,6 +1,7 @@
 #include "User.h"
-#include <string.h>
+//#include "Cart.h"
 #include"Orders.h"
+#include <string.h>
 /* Maybe change variable names to be more clear? */
 
 

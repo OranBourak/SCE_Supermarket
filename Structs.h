@@ -3,7 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define MAX_SIZE 50
 #define MAX_Products_In_Cart 10
-
+#define CLUB_MEMBER_PRICE_AFTER_DISCOUNT 0.9
 #define PRODUCTS_FILENAME "products_database.bin"
 #define USERS_FILENAME "users_database.bin"
 #define ORDERS_FILENAME "orders_database.bin"
@@ -58,20 +58,19 @@ typedef struct Cart {
 
 }Cart;
 
-struct Order
-{
-	char userName[MAX_SIZE]; //customer website User name
+typedef struct Order{
+	int orderId;
+	Cart orderCart;
+	//char userName[MAX_SIZE]; //customer website User name
+	//Product  cart_list[MAX_Products_In_Cart]; //add products list and quantity
+	//unsigned int counter_cart_list;
 	enum Status status;//Order's status
-	Product  cart_list[MAX_Products_In_Cart]; //add products list and quantity
+	double orderPrice;
+	
 	char customer_full_name[MAX_SIZE];
 	unsigned long int customer_id;
 	unsigned long int customer_credit_card;//10 digits
 	char customer_address[MAX_SIZE];
-	float orderPrice;
-	unsigned int counter_cart_list;
 	unsigned long int phoneNumber;// 10 digits exactly
-	
 
-	
-
-}typedef Order;
+} Order;

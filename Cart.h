@@ -1,7 +1,9 @@
 #pragma once
-#include "Structs.h"
-#include "Product.h"
 
+#include "Structs.h"
+#include "User.h"
+#include "Product.h"
+#include "Orders.h"
 
 
 void printCartInfo(Cart cart);
@@ -31,7 +33,13 @@ Cart getCartByUser(char* user_name);
 
 enum Bool empty_the_cart(Cart* cart);//empty all product from cart
 
-
+/// <summary>
+/// Return the Cart's total price 
+///if the costumer is Club member return the price with 10% discount.
+/// </summary>
+/// <param name="userName"></param>
+/// <returns></returns>
+double getCartPrice(User userName);
 
 
 

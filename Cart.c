@@ -114,6 +114,32 @@ Cart getCartByUser(char* user_name)
 	}
 }
 
+
+/// <summary>
+/// Return the Cart's total price 
+///if the costumer is Club member return the price with 10% discount.
+/// </summary>
+/// <param name="userName"></param>
+/// <returns></returns>
+double getCartPrice(User userName)
+{
+	FILE* fpointer = fopen(CARTS_FILENAME, "rb");
+	Cart temp;
+	double sum = 0;
+	while (fread(&temp, sizeof(Cart), 1, fpointer))
+	{
+		if (!strcmp(temp.userName, userName.userName)) {
+			fclose(fpointer);
+			for (int i = 0; i < temp.productCounter; i++) {
+				sum += temp.productsInCart[i].productPrice * temp.productsInCart[i].quantity;
+			}
+			if (userName.userType == CLUB)
+				return sum * CLUB_MEMBER_PRICE_AFTER_DISCOUNT;
+			return sum;
+		}
+	}
+}
+
 enum Bool empty_the_cart(User loged_user)
 {	
 	Cart tempCart;

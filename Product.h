@@ -1,5 +1,8 @@
 #pragma once
 #include "Structs.h"
+#include "User.h"
+#include "Cart.h"
+#include "Orders.h"
 
 /*Printing all products that contains in the catalog*/
 void showProducts();

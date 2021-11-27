@@ -1,8 +1,10 @@
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include "Structs.h"
 #include "User.h"
-#include "Orders.h"
 #include "Product.h"
+#include "Cart.h"
+#include "Orders.h"
 
 /// <summary>
 /// MAIN MENU function
@@ -70,6 +72,8 @@ void viewCartMenu(User loged_User);
 /// </summary>
 /// <returns></returns>
 void addProductMenu(User loged_User);
+
+void viewOrdersMenu(User loged_User);
 
 //------------------------Auxiliary Functions--------------//
 

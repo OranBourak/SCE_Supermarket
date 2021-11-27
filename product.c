@@ -1,6 +1,5 @@
 #define NUM_OF_CATEGORIES 5
 #include "Product.h"
-#include "Cart.h"
 
 
 /*Printing all products that contains in the catalog*/
