@@ -662,7 +662,7 @@ void cancelOrderByCustomer(User loged_User) {
 }
 
 
-changeMembership(User* loged_User)
+void changeMembership(User* loged_User)
 {
 	FILE* fpointer = fopen(USERS_FILENAME, "rb+");
 	User temp;
