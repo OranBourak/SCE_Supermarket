@@ -32,7 +32,7 @@ void remove_Product_From_All_Carts(int serialNumber);
 /// <returns></returns>
 Cart getCartByUser(char* user_name);
 
-enum Bool empty_the_cart(Cart* cart);//empty all product from cart
+enum Bool empty_the_cart(User loged_user);//empty all product from cart
 
 /// <summary>
 /// Return the Cart's total price 

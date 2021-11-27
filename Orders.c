@@ -204,7 +204,7 @@ void Create_Order(User user) {
 
 	fwrite(&tempOrder, sizeof(Order), 1, fpointer);
 	fclose(fpointer);
-	if (empty_the_cart(user.userName)) {
+	if (empty_the_cart(user)) {
 		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
 		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
 		getchar();
@@ -331,10 +331,19 @@ void changeOrderStatus(int orderId, enum Status newStatus) {
 	}
 	
 	tempOrder.status = newStatus;
-	//if cancel return items to inventory
 	fseek(fpointer, -(int)sizeof(Order), SEEK_CUR);
 	fwrite(&tempOrder, sizeof(Order), 1, fpointer);
 	fclose(fpointer);
+	
+	if (newStatus == CANCELD) {
+		int currentSerial;
+		int itemQuantity;
+		for (int i = 0; i < tempOrder.orderCart.productCounter; i++) {
+			currentSerial = tempOrder.orderCart.productsInCart[i].serialNumber;
+			itemQuantity = tempOrder.orderCart.productsInCart[i].quantity;
+			changeProductQuantity(currentSerial,ADD,itemQuantity);
+		}
+	}
 }
 
 char* getOrderUsername(int orderId) {
