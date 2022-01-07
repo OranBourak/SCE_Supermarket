@@ -1,156 +1,16 @@
 #include "Orders.h"
 
-
-/* OLD 
-void Create_Order(char* username)
-{
-	FILE* Orders;
-	FILE* carts_file;
-	FILE* fpointerU;
-	Cart cart;
-	Order order;
-	Product orderp;
-	User user;
-
-	Orders = fopen(ORDERS_FILENAME, "rb+");
-	if (Orders == NULL)
-	{
-		fprintf(stderr, "\n Error open orders");
-		exit(1);
-	}
-	carts_file = fopen(CARTS_FILENAME, "rb+"); // open file with carts 
-	if (carts_file == NULL)
-	{
-		fprintf(stderr, "\n Error open orders");
-		exit(1);
-	}
-	fpointerU = fopen(USERS_FILENAME, "rb+");
-	if (fpointerU == NULL)
-	{
-		fprintf(stderr, "\n Error open orders");
-		exit(1);
-	}
-
-	while (fread(&cart, sizeof(Cart), 1, carts_file)) //copy to cart all the data from cart file
-	{
-		if (!strcmp(cart.userName, username))
-		{
-			fclose(carts_file);
-			break;
-		}
-	}
-	while (fread(&user, sizeof(User), 1, fpointerU)) //test for club member
-	{
-		if (!strcmp(user.userName, username))
-		{
-			fclose(carts_file);
-			break;
-		}
-	}
-
-	
-	order.counter_cart_list = cart.productCounter;
-	strcpy(order.userName, cart.userName);
-	for (int i = 0; i < order.counter_cart_list; i++) //copy the products from cart to the order
-	{
-		strcpy(order.cart_list[i].productName, cart.productsInCart[i].productName);
-		order.cart_list[i].productPrice = cart.productsInCart[i].productPrice;
-		order.cart_list[i].product_category = cart.productsInCart[i].product_category;
-		order.cart_list[i].quantity = cart.productsInCart[i].quantity;
-		order.cart_list[i].serialNumber = cart.productsInCart[i].serialNumber;
-
-	}
-	char nameAddress[MAX_SIZE];
-	char num_check[MAX_SIZE];
-	int check = 0;
-	printf("Enter full name:\n");
-	gets(order.customer_full_name);
-	printf("Enter ID [10 digits]:\n");
-	gets(num_check);
-	check = atoi(num_check);
-	while (strlen(num_check) != 10 ||check==0)
-	{
-		printf("Invalid input...The ID number must consist of 10 digits:\n");
-		gets(num_check);
-		check = atoi(num_check);
-	}
-	
-	order.customer_id = check;
-	
-	printf("Enter credit card [10 digits]:\n");
-	gets(num_check);
-	check = atoi(num_check);
-	while (strlen(num_check) != 10 || check == 0)
-	{
-		printf("Invalid input...The credit card must consist of 10 digits:\n");
-		gets(num_check);
-		check = atoi(num_check);
-	}
-	order.customer_credit_card = check;
-	printf("Enter address:\n");
-	gets(nameAddress);
-	strcpy(order.customer_address, nameAddress);
-	
-
-	
-	printf("Enter phone number [10 digits]:\n");
-	gets(&num_check);
-	check = atoi(num_check);
-	while (strlen(num_check) != 10 || check == 0)
-	{
-		printf("Invalid input...The phone number must consist of 10 digits:\n");
-		gets(&num_check);
-		check = atoi(num_check);
-	}
-	order.phoneNumber = check;
-	order.orderPrice = 0;
-	if(user.userType==2)//if user club
-	{
-		float sumReduction = 0;
-		for (int i = 0; i < order.counter_cart_list; i++)
-		{
-			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
-
-		}
-		sumReduction = 100 / 10 * order.orderPrice;
-		order.orderPrice -= sumReduction;
-	}
-	else//if user not club
-	{
-		for (int i = 0; i < order.counter_cart_list; i++)
-		{
-			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
-
-		}
-	}
-	order.status = APPENDING;
-
-	fwrite(&order, sizeof(Order), 1, Orders);
-
-	fclose(Orders);
-	fclose(carts_file);
-	fclose(fpointerU);
-	if (empty_the_cart(username)) {
-		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
-		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
-		getchar();
-	}
-	else
-		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
-}
-*/
-
 void Create_Order(User user) {
 	FILE* fpointer = NULL;
 	Order tempOrder;
-	
+
 	fpointer = fopen(CARTS_FILENAME, "rb");
 	if (fpointer == NULL) {
 		fprintf(stderr, "\nERROR OPENING FILE\n");
 		exit(1);
 	}
 
-	while (fread(&tempOrder.orderCart,sizeof(Cart),1,fpointer)){
+	while (fread(&tempOrder.orderCart, sizeof(Cart), 1, fpointer)) {
 		if (!strcmp(tempOrder.orderCart.userName, user.userName))//Found user's cart
 			break;
 	}
@@ -208,14 +68,14 @@ void Create_Order(User user) {
 		check = atoi(num_check);
 	}
 	tempOrder.phoneNumber = check;
-	
+
 	//Calculate the price of the cart and status always starts APPENDING.
 	tempOrder.orderPrice = getCartPrice(user);
 	tempOrder.status = APPENDING;
 
 	fwrite(&tempOrder, sizeof(Order), 1, fpointer);
 	fclose(fpointer);
-	
+
 	if (empty_the_cart(user)) {
 		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
 		printf(BOLDMAGENTA"\nPress ENTER to continue..."RESET);
@@ -224,110 +84,6 @@ void Create_Order(User user) {
 	else
 		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
 }
-
-/* OLD change_order_status, and NOT USED check_validation
- void change_order_status(char* username,enum Status status)
-{
-	 User user;
-	 Order order;
-	 FILE* fpointerU;
-	 FILE* fpointerO;
-	 int choice=2;
-	 fpointerU = fopen(USERS_FILENAME, "rb+"); //open users file
-	 if (fpointerU == NULL) {
-		 fprintf(stderr, "\nERROR OPENING FILE\n");
-		 exit(1);
-	 }
-	 fpointerO = fopen(ORDERS_FILENAME, "rb+"); // open orders file
-	 if (fpointerO == NULL) {
-		 fprintf(stderr, "\nERROR OPENING FILE\n");
-		 exit(1);
-	 }
-	 fread(&order, sizeof(Order), 1, fpointerO);
-
-	 while (fread(&user, sizeof(User), 1, fpointerU)) { //searching the user that we want on data base
-		 {
-			 if (!strcmp(user.userName, username))
-				 break;
-		 }
-	 }
-	 while (fread(&order, sizeof(Order), 1, fpointerU)) {//Find the order by user name 
-		 {
-			 if (!strcmp(order.userName, username))
-				 break;
-		 }
-	 }
-	 if (order.status == APPENDING) //if the order still appending
-	 {
-		 if (user.userType == MANAGER) // if the user is manager
-		 {
-
-			 printf("Would you like to cancel or approve the order\nPress 1 to approve or 2 to cancel\n");
-			 scanf("%d", &choice);
-			 while (choice != 1 || choice != 2)
-			 {
-				 if (choice == 1)
-				 {
-					 order.status = APPROVED;
-					 break;
-				 }
-				 if (choice == 2)
-				 {
-					 order.status = CANCELD;
-					 break;
-				 }
-				 else
-					 printf("You entered wrong answer, please try again\n");
-
-			 }
-
-		 }
-
-		 else
-		 {
-			 
-			 while (choice != 1 || choice != 2)
-			 {
-				 printf("Would you like to cancel your order?\nPress 1 for yes or 2 for no\n");
-				 scanf("%d", &choice);
-
-				 if (choice == 1) {
-					 order.status = CANCELD;
-					 break;
-				 }
-
-				 if (choice == 2)
-					 break;
-				 
-				 else
-					 printf("You entered wrong answer, please try again\n");
-
-			 }
-
-
-		 }
-	 }
-	  else
-		 printf("there is no appending order\n");
-
-
-	 fclose(fpointerO);
-	 fclose(fpointerU);
-}
-
- enum Bool check_validation(unsigned long long num)
- {
-	 int counter = 1;
-	 while (num / 10 != 0)
-	 {
-		 num /= 10;
-		 counter++;
-	 }
-	 if (counter == 10)
-		 return TRUE;
-	 return	FALSE;
- }
- */
 
 void changeOrderStatus(int orderId, enum Status newStatus) {
 	Order tempOrder;
@@ -414,7 +170,7 @@ enum Bool doesOrderExist(int orderId) {
 	return FALSE;
 }
 
- void printOrder(Order order){
+void printOrder(Order order){
 	 puts("___________________________________________________________________ _");
 	 printf(" * Order Serial: %d\n", order.orderId);
 	 printf(" * Id: %ld\n", order.customer_id);//print id
@@ -440,7 +196,7 @@ enum Bool doesOrderExist(int orderId) {
 	 printf("----------------------------------------------------------------- - \n");
  }
 
- void printUserOrdersByStatus(User logedUser, enum Status pickStatus) {
+void printUserOrdersByStatus(User logedUser, enum Status pickStatus) {
 	 Order tempOrder;
 	 int counter = 0;
 	 FILE* fpointer = fopen(ORDERS_FILENAME, "rb");
@@ -459,7 +215,7 @@ enum Bool doesOrderExist(int orderId) {
 	 if (counter == 0) puts("\t\t\t\tNONE\n");
  }
 
- void printOrdersByStatus(enum Status pickStatus) {
+void printOrdersByStatus(enum Status pickStatus) {
 	 Order tempOrder;
 	 FILE* fpointer;
 	 
@@ -483,8 +239,252 @@ enum Bool doesOrderExist(int orderId) {
 	 fclose(fpointer);
  }
 
- /*
- void print_order_details_Appending()
+ /* OLD VERSION */
+/* 
+void Create_Order(char* username)
+{
+	FILE* Orders;
+	FILE* carts_file;
+	FILE* fpointerU;
+	Cart cart;
+	Order order;
+	Product orderp;
+	User user;
+
+	Orders = fopen(ORDERS_FILENAME, "rb+");
+	if (Orders == NULL)
+	{
+		fprintf(stderr, "\n Error open orders");
+		exit(1);
+	}
+	carts_file = fopen(CARTS_FILENAME, "rb+"); // open file with carts
+	if (carts_file == NULL)
+	{
+		fprintf(stderr, "\n Error open orders");
+		exit(1);
+	}
+	fpointerU = fopen(USERS_FILENAME, "rb+");
+	if (fpointerU == NULL)
+	{
+		fprintf(stderr, "\n Error open orders");
+		exit(1);
+	}
+
+	while (fread(&cart, sizeof(Cart), 1, carts_file)) //copy to cart all the data from cart file
+	{
+		if (!strcmp(cart.userName, username))
+		{
+			fclose(carts_file);
+			break;
+		}
+	}
+	while (fread(&user, sizeof(User), 1, fpointerU)) //test for club member
+	{
+		if (!strcmp(user.userName, username))
+		{
+			fclose(carts_file);
+			break;
+		}
+	}
+
+
+	order.counter_cart_list = cart.productCounter;
+	strcpy(order.userName, cart.userName);
+	for (int i = 0; i < order.counter_cart_list; i++) //copy the products from cart to the order
+	{
+		strcpy(order.cart_list[i].productName, cart.productsInCart[i].productName);
+		order.cart_list[i].productPrice = cart.productsInCart[i].productPrice;
+		order.cart_list[i].product_category = cart.productsInCart[i].product_category;
+		order.cart_list[i].quantity = cart.productsInCart[i].quantity;
+		order.cart_list[i].serialNumber = cart.productsInCart[i].serialNumber;
+
+	}
+	char nameAddress[MAX_SIZE];
+	char num_check[MAX_SIZE];
+	int check = 0;
+	printf("Enter full name:\n");
+	gets(order.customer_full_name);
+	printf("Enter ID [10 digits]:\n");
+	gets(num_check);
+	check = atoi(num_check);
+	while (strlen(num_check) != 10 ||check==0)
+	{
+		printf("Invalid input...The ID number must consist of 10 digits:\n");
+		gets(num_check);
+		check = atoi(num_check);
+	}
+
+	order.customer_id = check;
+
+	printf("Enter credit card [10 digits]:\n");
+	gets(num_check);
+	check = atoi(num_check);
+	while (strlen(num_check) != 10 || check == 0)
+	{
+		printf("Invalid input...The credit card must consist of 10 digits:\n");
+		gets(num_check);
+		check = atoi(num_check);
+	}
+	order.customer_credit_card = check;
+	printf("Enter address:\n");
+	gets(nameAddress);
+	strcpy(order.customer_address, nameAddress);
+
+
+
+	printf("Enter phone number [10 digits]:\n");
+	gets(&num_check);
+	check = atoi(num_check);
+	while (strlen(num_check) != 10 || check == 0)
+	{
+		printf("Invalid input...The phone number must consist of 10 digits:\n");
+		gets(&num_check);
+		check = atoi(num_check);
+	}
+	order.phoneNumber = check;
+	order.orderPrice = 0;
+	if(user.userType==2)//if user club
+	{
+		float sumReduction = 0;
+		for (int i = 0; i < order.counter_cart_list; i++)
+		{
+			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
+
+		}
+		sumReduction = 100 / 10 * order.orderPrice;
+		order.orderPrice -= sumReduction;
+	}
+	else//if user not club
+	{
+		for (int i = 0; i < order.counter_cart_list; i++)
+		{
+			order.orderPrice += cart.productsInCart[i].productPrice * cart.productsInCart[i].quantity;
+
+		}
+	}
+	order.status = APPENDING;
+
+	fwrite(&order, sizeof(Order), 1, Orders);
+
+	fclose(Orders);
+	fclose(carts_file);
+	fclose(fpointerU);
+	if (empty_the_cart(username)) {
+		printf(BOLDGREEN "\nYour order has been received and sent for manager approval ...\nThe status of the order will be updated within 48 hours." RESET);
+		printf(BOLDMAGENTA"\nPress any key to continue..."RESET);
+		getchar();
+	}
+	else
+		printf(BOLDRED "Something went wrong with the system please try later..." RESET);
+}
+*/
+
+/* OLD change_order_status, and NOT USED check_validation
+void change_order_status(char* username,enum Status status)
+{
+	 User user;
+	 Order order;
+	 FILE* fpointerU;
+	 FILE* fpointerO;
+	 int choice=2;
+	 fpointerU = fopen(USERS_FILENAME, "rb+"); //open users file
+	 if (fpointerU == NULL) {
+		 fprintf(stderr, "\nERROR OPENING FILE\n");
+		 exit(1);
+	 }
+	 fpointerO = fopen(ORDERS_FILENAME, "rb+"); // open orders file
+	 if (fpointerO == NULL) {
+		 fprintf(stderr, "\nERROR OPENING FILE\n");
+		 exit(1);
+	 }
+	 fread(&order, sizeof(Order), 1, fpointerO);
+
+	 while (fread(&user, sizeof(User), 1, fpointerU)) { //searching the user that we want on data base
+		 {
+			 if (!strcmp(user.userName, username))
+				 break;
+		 }
+	 }
+	 while (fread(&order, sizeof(Order), 1, fpointerU)) {//Find the order by user name
+		 {
+			 if (!strcmp(order.userName, username))
+				 break;
+		 }
+	 }
+	 if (order.status == APPENDING) //if the order still appending
+	 {
+		 if (user.userType == MANAGER) // if the user is manager
+		 {
+
+			 printf("Would you like to cancel or approve the order\nPress 1 to approve or 2 to cancel\n");
+			 scanf("%d", &choice);
+			 while (choice != 1 || choice != 2)
+			 {
+				 if (choice == 1)
+				 {
+					 order.status = APPROVED;
+					 break;
+				 }
+				 if (choice == 2)
+				 {
+					 order.status = CANCELD;
+					 break;
+				 }
+				 else
+					 printf("You entered wrong answer, please try again\n");
+
+			 }
+
+		 }
+
+		 else
+		 {
+
+			 while (choice != 1 || choice != 2)
+			 {
+				 printf("Would you like to cancel your order?\nPress 1 for yes or 2 for no\n");
+				 scanf("%d", &choice);
+
+				 if (choice == 1) {
+					 order.status = CANCELD;
+					 break;
+				 }
+
+				 if (choice == 2)
+					 break;
+
+				 else
+					 printf("You entered wrong answer, please try again\n");
+
+			 }
+
+
+		 }
+	 }
+	  else
+		 printf("there is no appending order\n");
+
+
+	 fclose(fpointerO);
+	 fclose(fpointerU);
+}
+
+ enum Bool check_validation(unsigned long long num)
+ {
+	 int counter = 1;
+	 while (num / 10 != 0)
+	 {
+		 num /= 10;
+		 counter++;
+	 }
+	 if (counter == 10)
+		 return TRUE;
+	 return	FALSE;
+ }
+ */
+
+/*
+void print_order_details_Appending()
  {
 	 FILE* fpointer;
 	 fpointer = fopen(ORDERS_FILENAME, "rb");//test open files

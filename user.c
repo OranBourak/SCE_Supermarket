@@ -4,10 +4,7 @@
 #include <string.h>
 /* Maybe change variable names to be more clear? */
 
-
-
-
-//start menu, only login or register, no option to exit at this stage(made problems)
+//Seems like a dead function
 User startMenu() {
 	int choice;
 	User logedUser;
@@ -32,7 +29,7 @@ User startMenu() {
 	} while (TRUE);
 }
 
-//checks users details in order to login
+// Checks users details in order to login
 enum Bool login(User* user) {
 	FILE* fpointer;
 	User login_data;
@@ -53,16 +50,18 @@ enum Bool login(User* user) {
 		int	a = strcmp(comparing_user.userName, login_data.userName);
 		int	b = strcmp(comparing_user.password, login_data.password);
 		if (!(a || b)) {
-			puts("Login successfully.");
+			puts(BOLDGREEN"Login successfully."RESET);
 			strcpy(user->userName, comparing_user.userName);//this returns to startMenu the users name
 			user->userType = comparing_user.userType;//this returns to startMenu the users type
 			fclose(fpointer);
+			Sleep(1500);
 			return TRUE;
 			//break;
 		}
 		if (feof(fpointer)) {
-			puts("Wrong user name or password.");
+			puts(BOLDRED"Wrong user name or password."RESET);
 			fclose(fpointer);
+			Sleep(1500);
 			return FALSE;
 			//break;
 		}
@@ -70,7 +69,7 @@ enum Bool login(User* user) {
 	fclose(fpointer); //I think if here cannot be reached
 }
 
-// adds user signing up to users databse
+// Adds a user by signing up to users databse
 void signUp() {
 	FILE* fpointer;
 	char temp_key;
@@ -87,18 +86,23 @@ void signUp() {
 		puts("Please enter user name [cannot be an existing name]:");
 		gets(new_user.userName);
 		if (isNameTaken(new_user.userName)) {
-			puts(RED"\nThe username you selected is already taken...please try again\n"RESET);
-			printf("Press ENTER to continue...");
-			scanf("%c", &temp_key);
-			getchar();
+			puts(RED"\nThe username is already taken...please try again\n"RESET);
+			Sleep(1500);
 			system("cls");//clear terminal screen
 		}
 
 	} while(isNameTaken(new_user.userName));
 	
+	system("cls");//clear terminal screen
+
 	do {//password check
 		puts("\nPlease enter user password:[must contain at least 6 charcters  and include  number and letter]");
 		gets(new_user.password);
+		if (!isPasswordLegal(new_user.password)) {
+			puts(RED"\nThe password is not legal...please try again\n"RESET);
+			Sleep(1500);
+			system("cls");//clear terminal screen
+		}
 	} while (!isPasswordLegal(new_user.password));
 	
 	new_user.userType = managerSignUp();
@@ -125,6 +129,7 @@ enum Type managerSignUp(){//works
 	char managerCode[MAX_SIZE];
 
 	do {
+		system("cls");//clear terminal screen
 		puts("\nDo you want to sign-up as a manager? y/n:");
 		scanf("%c", &choice);
 		getchar();//clean enter
@@ -134,13 +139,18 @@ enum Type managerSignUp(){//works
 			getchar();//clean enter
 			if (!strcmp(managerCode, MANAGER_CODE))
 				return MANAGER;
-			else puts(RED"\nWrong code"RESET);
+			else {
+				puts(RED"\nWrong code"RESET);
+				Sleep(1500);
+			}
 		}
 		else if (choice == 'n')
 			return CUSTOMER;
-		else puts(RED"\nInvalid option, please enter y/n"RESET);
-	} while (TRUE);//I maybe dont need it,lets save. YES NO NEED
-	//while (choice != 'y' || choice != 'n') saved
+		else {
+			puts(RED"\nInvalid option, please enter y/n"RESET);
+			Sleep(1500);
+		}
+	} while (TRUE);//funny
 }
 
 //check if username taken
@@ -181,6 +191,7 @@ enum Bool isPasswordLegal(char* user_password) {
 		return FALSE;
 	return TRUE;//passed in this stage all checks
 }
+
 void ContactUs()
 {
 	int choice;
@@ -204,8 +215,8 @@ void ContactUs()
 			leaveAmessage();
 			break;
 		case 2:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 		default:
 			printf(BOLDRED"You entered a wrong input. Please try again\n"RESET);

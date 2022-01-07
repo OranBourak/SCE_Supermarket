@@ -6,24 +6,13 @@
 #include "Cart.h"
 #include "Orders.h"
 
-/// <summary>
-/// MAIN MENU function
-/// </summary>
+
 void Menu();
 
-//-----------------------------MANAGER-MENU-SECTION-------------------------//
-
-/// <summary>
-/// MANAGER MENU SYSTEM
-///Displays the options to the manager and activates the requested function
-/// </summary>
-/// <param name="loged_User"></param>
+// MANAGER MENU 
 void managerMenu(User loged_User);
 
-/// <summary>
-///view catalog menu for manager
-///Displays the options to the customer and activates the requested function
-/// </summary>
+//MANAGER View Catalog
 void viewCatalogManager();
 
 /// <summary>

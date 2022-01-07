@@ -1,7 +1,6 @@
 #define NUM_OF_CATEGORIES 5
 #include "Product.h"
 
-
 /*Printing all products that contains in the catalog*/
 void showProducts(){
 	Product tempProduct;
@@ -86,7 +85,7 @@ void customerCatalogMenu(){
 	showByCategory(MEAT);
 }
 
-//Prints all products in catalog by ascending price
+// Prints all products in catalog by ascending price
 void showByPrice() {
 	//PART 1: getting the number of products in catalog.
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");
@@ -126,7 +125,7 @@ void showByPrice() {
 	free(tempCatalog);
 }
 
-//Used by qsort() in showByPrice()
+// Used by qsort() in showByPrice()
 int priceCompare(const void*a, const void*b) {
 	Product* L = (Product*)a;
 	Product* R = (Product*)b;
@@ -359,7 +358,6 @@ enum Bool changeProductPrice(int serial, double newPrice) {
 	fclose(fpointer);
 	return TRUE;
 }
-
 
 int getProductQuantity(int serial) {
 	FILE* fpointer = fopen(PRODUCTS_FILENAME, "rb");

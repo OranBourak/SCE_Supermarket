@@ -1,8 +1,5 @@
 #include "menu.h"
 
-/// <summary>
-/// MAIN MENU function
-/// </summary>
 void Menu() {
 	enum choice { REGISTER = 1, SIGN_IN = 2, EXIT = 3 };
 	int choice;
@@ -14,13 +11,12 @@ void Menu() {
 		printf("   Welcome to Sami Supermarket\n");
 		printf("***********************************\n\n"RESET);
 
-		printf("(1). Register\n(2). Sign in\n(3). Exit the system\n");
+		printf("[1] Register\n[2] Sign in\n[3] Exit the system\n");
 		scanf("%d", &choice);
 		getchar();
 		switch (choice) {
 		case REGISTER:
 			signUp();
-			
 			break;
 
 		case SIGN_IN:
@@ -33,7 +29,7 @@ void Menu() {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			printf(BOLDYELLOW"Have a Good Day!\n"RESET);
 			Sleep(1500);
 			break;
 
@@ -42,20 +38,17 @@ void Menu() {
 			Sleep(1500);
 			break;
 		}
-		printf("Press ENTER to continue...");
-		getchar();
-		scanf("%c", &temp_key);
+		//printf("Press ENTER to continue...");
+		//getchar();
+		//scanf("%c", &temp_key);
 	} while (choice != EXIT);
 
 }
 
 //-----------------------------MANAGER-MENU-SECTION---------------------------
 
-/// <summary>
-/// MANAGER MENU SYSTEM
-///Displays the options to the manager and activates the requested function
-/// </summary>
-/// <param name="loged_User"></param>
+// MANAGER MENU SYSTEM
+// Displays the options to the manager and activates the requested function
 void managerMenu(User loged_User) {
 	int choice;
 
@@ -95,10 +88,8 @@ void managerMenu(User loged_User) {
 
 }
 
-/// <summary>
-///view catalog menu for manager
-///Displays the options to the customer and activates the requested function
-/// </summary>
+//view catalog menu for manager
+//Displays the options to the customer and activates the requested function
 void viewCatalogManager() {
 	int choice;
 
@@ -130,8 +121,8 @@ void viewCatalogManager() {
 			showProducts();//prints the catalog
 			break;
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -142,11 +133,8 @@ void viewCatalogManager() {
 	} while (choice != EXIT);
 }
 
-/// <summary>
-/// Update inventory func:
-///prints the options for the manager and activates the requested function
-/// </summary>
-/// <returns></returns>
+// Update inventory func:
+//prints the options for the manager and activates the requested function
 void updateInventoryMenu() {
 	int choice;
 
@@ -181,8 +169,8 @@ void updateInventoryMenu() {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Good Work ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Good Work ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -260,8 +248,8 @@ void UpdateOrdersMenu() {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -292,11 +280,7 @@ void updateOrderByManager(enum Status pickStatus) {
 	if(pickStatus == CANCELD) puts(BOLDGREEN"Order Canceled"RESET);
 }
 
-/*FUNCTION NOT IN USE*/
-/// <summary>
-/// UPDATE PRODUCT MENU 
-/// </summary>
-/// <returns></returns>
+/* FUNCTION NOT IN USE */
 /*
 void UpdateProductMemu() {
 	int choice;
@@ -331,14 +315,10 @@ void UpdateProductMemu() {
 
 //-----------------------------COSTUMER-MENU-SECTION--------------------------
 
-/// <summary>
-/// CUSTOMER MENU SYSTEM
-///Displays the options to the customer and activates the requested function
-/// </summary>
-/// <returns></returns>
+// CUSTOMER MENU SYSTEM
+//Displays the options to the customer and activates the requested function
 void customerMenu(User loged_User) {
 	int choice;
-
 
 	enum option { VIEW_CATALOG = 1, VIEW_CART = 2, ADD_PRODUCT = 3, VIEW_ORDERS = 4, CLUB_MEMBER = 5, CONTACT_US = 6, EXIT = 7 };
 	do {
@@ -388,12 +368,7 @@ void customerMenu(User loged_User) {
 	} while (choice != EXIT);
 }
 
-// view catalog menu for manager
-// Displays the options to the customer and activates the requested function
-
-/// </summary>
-/// <param name="username">Using username in Add product function</param>
-/// <returns></returns>
+// Using username in Add product function
 void viewCatalogCustomer(User loged_User) {
 	int choice;
 
@@ -430,8 +405,8 @@ void viewCatalogCustomer(User loged_User) {
 			showProducts();//prints the catalog
 			break;
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -442,10 +417,7 @@ void viewCatalogCustomer(User loged_User) {
 	} while (choice != EXIT);
 }
 
-/// <summary>
-/// VIEW CART MENU FOR CUSTOMER USE
-/// </summary>
-/// <returns></returns>
+// VIEW CART MENU FOR CUSTOMER USE
 void viewCartMenu(User loged_User) {
 	int choice;
 	enum option { REMOVE_PRODUCT = 1, PROCEED_TO_CHECKOUT = 2, EXIT = 3 };
@@ -473,8 +445,8 @@ void viewCartMenu(User loged_User) {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -511,8 +483,8 @@ void viewOrdersMenu(User loged_User) {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -523,10 +495,7 @@ void viewOrdersMenu(User loged_User) {
 	} while (choice != EXIT);
 }
 
-/// <summary>
-/// ADD PRODUCT MENU FOR COSTUMER
-/// </summary>
-/// <returns></returns>
+// ADD PRODUCT MENU FOR COSTUMER
 void addProductMenu(User loged_User) {
 	int choice;
 
@@ -546,8 +515,8 @@ void addProductMenu(User loged_User) {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -590,8 +559,8 @@ void clubMemberMenu(User* loged_User) {
 			break;
 
 		case EXIT:
-			printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
-			Sleep(1500);
+			//printf(BOLDYELLOW"Goodbye ! :)\n"RESET);
+			//Sleep(1500);
 			break;
 
 		default:
@@ -604,11 +573,8 @@ void clubMemberMenu(User* loged_User) {
 
 //-----------------------------Auxiliary Functions----------------------------
 
-/// <summary>
-/// Prints menu for the costumer/manager
-///use 'showByCategory' function from Product.h
-/// </summary>
-/// <returns></returns>
+// Prints menu for the costumer/manager
+// use 'showByCategory' function from Product.h
 void ShowProductsByCategory() {
 	int choice;
 	puts("\nChoose one of the categories:[0-4]");
@@ -667,10 +633,8 @@ void addProductToCartMenu(User loged_User) {
 	addProductToCart(loged_User.userName, productSerial, quantity);
 }
 
-/// <summary>
-///Remove product from the cart, and update the product quantity in stock.
-/// </summary>
-/// <returns></returns>
+
+//Remove product from the cart, and update the product quantity in stock.
 void removeProductFromCart(User loged_User) {
 	char* temp[50];
 	int serial_number = 0;

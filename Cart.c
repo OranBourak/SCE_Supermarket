@@ -14,7 +14,7 @@ void printCartInfo(Cart cart, User loged_User)
 		printf(WHITE"				Total Price after discount: %.2lf\n", getCartPrice(loged_User));
 	}
 	else
-		printf(WHITE"				Total Price after discount: %.2lf\n", getCartPrice(loged_User));
+		printf(WHITE"						Total Price: %.2lf\n", getCartPrice(loged_User));
 	printf(BOLDYELLOW"----------------------------------------------------------------- - \n"RESET);
 }
 

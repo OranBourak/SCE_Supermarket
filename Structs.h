@@ -61,9 +61,6 @@ typedef struct Cart {
 typedef struct Order{
 	int orderId;
 	Cart orderCart;
-	//char userName[MAX_SIZE]; //customer website User name
-	//Product  cart_list[MAX_Products_In_Cart]; //add products list and quantity
-	//unsigned int counter_cart_list;
 	enum Status status;//Order's status
 	double orderPrice;
 	
